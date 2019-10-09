@@ -7,7 +7,7 @@ class Home extends MY_Controller {
 
     public function index() {
 
-            
+
             ///**CABECERA**///              
             $this->load->view('vhcabecera');            
             

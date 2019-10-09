@@ -17,7 +17,6 @@ class Login extends CI_Controller {
         
         ///**LOGIN**///
         $this->load->model('Login_model');
-//        $this->load->view('login'); //cambio
         
         $this->form_validation->set_rules('email', 'Email', 'required');
         $this->form_validation->set_rules('password', 'Password', 'required|callback_verifica');
@@ -26,7 +25,6 @@ class Login extends CI_Controller {
             
             $this->load->view('login');
         } else {
-//            $this->load->view('home');
             redirect('home');
         }
     }

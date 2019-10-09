@@ -21,12 +21,11 @@ class Login_model extends CI_Model {
 
             if(password_verify($password, $row->password)){ //Verifico la contraseña coincide con la de la db
                 $usuactual = array('user_data'=>array(
-//                    $first_name => $row -> first_name,
-//                    $last_name => $row -> last_name,
-                    $email =>  $row-> email,
-                    $password => $row -> password)                    
+                    "first_name" => $row->first_name,
+                    "last_name" => $row->last_name,
+                    "email" =>  $row->email,
+                    "password" => $row->password),
                 );
-                
             $this->session->set_userdata($usuactual);
             return TRUE;
             
