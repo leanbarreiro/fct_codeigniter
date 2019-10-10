@@ -5,60 +5,89 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Admin extends MY_Controller {
     
     
-    public function index() {
-
-
-        ///**CABECERA**///           
-        $this->load->view('vhcabecera');
-
-
-        ///**MENÚ**///
-        $this->load->model("Modmenu");
-        $this->load->view('vcabmenu'); 
-        $data=$this->Modmenu->mGetMenuItem();                            
-        foreach ($data as $value) {
-            $datos = array('Nombre' => $value['nombre'], 'Url' => $value['url']);                     
-            $this->load->view('velemenu', $datos);
-        };                       
-        $this->load->view('vpiemenu');
-
-
-        ///**TABLA**///
+    public function __construct (){
+        
+        parent::__construct ();
+        
+        
         $this->load->model("Modtabla");
         $datat= $this->Modtabla->mGetTabla();
-        $this->load->view('tabla/vcabtabla');
-
-        $this->load->view('tabla/vdatoscab');
-
+        $strvista = $this->load->view('tabla/vcabtabla', '', TRUE);
+               
+        
+         $strvista .= $this->load->view('tabla/vdatoscab', '', TRUE);
+         
+         
         foreach ($datat as $value) {
             $datost = array('Id' => $value['id'], 'Nombre' => $value['nombre'], 'Url' => $value['url']);
+            
 
-            $this->load->view('tabla/vdatos', $datost);
+        $strvista .=   $this->load->view('tabla/vdatos', $datost, TRUE);
 
-        };  
-        $this->load->view('tabla/vfintabla');
+       };  
+        $strvista .= $this->load->view('tabla/vfintabla', '', TRUE);
 
+        
+        
+        $this->cargaTemplate($strvista);
 
-        ///**PIE DE PÁGINA**///            
-        $this->load->view('vbcierre');
+    }
+    
 
+    public function index() {
+        
 
-        ///**Alertas**///
-        $addok = $this->session->flashdata('addok');
-        $updateok = $this->session->flashdata('updateok');
-        $deleteok = $this->session->flashdata('deleteok');
-        if($addok == 'bien') {
-            $this->load->view('alertaadd');           
-        }
-        if($updateok == 'bien') {               
-            $this->load->view('alertaupdate');           
-        }
-        if($deleteok == 'bien') {
-            $this->load->view('alertadelete');           
-        }            
-        /****************************/
-
-        $this->load->view('fin');
+//        ///**CABECERA**///           
+//        $this->load->view('vhcabecera');
+//
+//
+//        ///**MENÚ**///
+//        $this->load->model("Modmenu");
+//        $this->load->view('vcabmenu'); 
+//        $data=$this->Modmenu->mGetMenuItem();                            
+//        foreach ($data as $value) {
+//            $datos = array('Nombre' => $value['nombre'], 'Url' => $value['url']);                     
+//            $this->load->view('velemenu', $datos);
+//        };                       
+//        $this->load->view('vpiemenu');
+//
+//
+//        ///**TABLA**///
+//        $this->load->model("Modtabla");
+//        $datat= $this->Modtabla->mGetTabla();
+//        $this->load->view('tabla/vcabtabla');
+//
+//        $this->load->view('tabla/vdatoscab');
+//
+//        foreach ($datat as $value) {
+//            $datost = array('Id' => $value['id'], 'Nombre' => $value['nombre'], 'Url' => $value['url']);
+//
+//            $this->load->view('tabla/vdatos', $datost);
+//
+//        };  
+//        $this->load->view('tabla/vfintabla');
+//
+//
+//        ///**PIE DE PÁGINA**///            
+//        $this->load->view('vbcierre');
+//
+//
+//        ///**Alertas**///
+//        $addok = $this->session->flashdata('addok');
+//        $updateok = $this->session->flashdata('updateok');
+//        $deleteok = $this->session->flashdata('deleteok');
+//        if($addok == 'bien') {
+//            $this->load->view('alertaadd');           
+//        }
+//        if($updateok == 'bien') {               
+//            $this->load->view('alertaupdate');           
+//        }
+//        if($deleteok == 'bien') {
+//            $this->load->view('alertadelete');           
+//        }            
+//        /****************************/
+//
+//        $this->load->view('fin');
 
     }
 

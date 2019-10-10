@@ -16,8 +16,7 @@ class Modtabla extends CI_Model {
         $this->load->database();
         $sql = $this->db->query('SELECT id, nombre, url FROM menu');
                
-        return $sql->result_array();
-        
+        return $sql->result_array();       
     }
     
    public function mUpdateTabla($newdatos) {
