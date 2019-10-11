@@ -155,6 +155,9 @@
 .center-v {
   align-items: center;
 }
+.center-vusu {
+   align-items: top;
+}
 .child {
 /*  background: #60e0b0;*/
   padding: .2rem;
@@ -271,4 +274,19 @@ div .alerta {
     line-height: 40px;
     color: #fff;
     font-size: 16px;
+}
+
+.btn-small {
+    margin-right: 2%;
+    background: #3dbd99;
+    text-decoration: none;
+    border: 0px;
+    border-radius: 2px;
+/*    display: block;*/
+    height: 20px;
+    width: 100px;
+    text-align: center;
+    margin: 0 auto;
+    color: #fff;
+    font-size: 14px;
 }

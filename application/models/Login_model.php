@@ -4,6 +4,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Login_model extends CI_Model { 
     
+    
+     /**
+     * @param $email, $password type String
+     * @return boolean
+     * Comprueba si el usuario existe en la db 
+     */
     public function login($email, $password) {
         
         $this->load->database();
@@ -27,17 +33,11 @@ class Login_model extends CI_Model {
                     "password" => $row->password),
                 );
             $this->session->set_userdata($usuactual);
-            return TRUE;
-            
+            return TRUE;           
             }           
-        }
-        
+        }        
         $this->session->set_userdata($usuactual);
-//        $this->session->set_flashdata('loginok', 'incorrecto');
-        return FALSE;
-        
-    }
-    
-    
+        return FALSE;        
+    }       
 }
 

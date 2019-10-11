@@ -8,6 +8,11 @@ class Modmenu extends CI_Model {
         parent::__construct();
     }
     
+     /**
+     * @param 
+     * @return 
+      * Consulta en la db los items del menú
+     */
     public function mGetMenuItem() {
       
         $this->load->database();

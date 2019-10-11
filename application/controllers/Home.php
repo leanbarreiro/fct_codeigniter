@@ -7,9 +7,9 @@ class Home extends MY_Controller {
     
     public function __construct (){
         
-          parent::__construct ();
-          
-         $str = $this->load->view('vhome','',TRUE);
+        parent::__construct ();
+         
+        $str = $this->load->view('vhome','',TRUE);
         $this->cargaTemplate($str);
         
     }

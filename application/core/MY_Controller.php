@@ -4,25 +4,21 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class MY_CONTROLLER extends CI_Controller {
       
     
-//    public function __construct (){
-//      parent::__construct ();
-//      
-//     $this->estalogueado();
-//    }
-    
-//    public function __construct ($vistaACargar){
     public function __construct (){
       parent::__construct ();
       
      $this->estalogueado();
-//     $this->cargaTemplate($vistaACargar);
+     
     }
     
-
-
+    /**
+     * @param 
+     * @return
+     * Comprueba si el usuario está logueado
+     */
     function estalogueado() { //El usuario está o no registrado?
         $CI =& get_instance();
-        
+     
         $usuario = $CI->session->userdata('user_data');
         
         if(!isset($usuario)) {
@@ -31,7 +27,12 @@ class MY_CONTROLLER extends CI_Controller {
         }
     }
     
-    // Funcion publica para pintar la página
+   
+     /**
+     * @param $vista type string
+     * @return 
+     * Pinta la página actual
+     */
     public function cargaTemplate($vista) {
         
         
@@ -53,13 +54,36 @@ class MY_CONTROLLER extends CI_Controller {
         
         
         ///**VISTA A CARGAR**///
-//        $this->load->view($vista);
+//        $this->load->view($vista);            
+        echo $vista;
             
-            echo $vista;
-        
 
         ///**PIE DE PÁGINA**///
-        echo $this->load->view('vbcierre','',true);      
+        echo $this->load->view('vbcierre','',true);
+               
+        ///**Alertas**///
+        $addok = $this->session->flashdata('addok');
+        $updateok = $this->session->flashdata('updateok');
+        $deleteok = $this->session->flashdata('deleteok');
+        $repassok = $this->session->flashdata('repassok');
+        if($addok == 'bien') {
+            $this->load->view('alertaadd');           
+        }
+        if($updateok == 'bien') {               
+            $this->load->view('alertaupdate');           
+        }
+        if($deleteok == 'bien') {
+            $this->load->view('alertadelete');           
+        }
+        if($repassok == 'mal') {
+            $this->load->view('alertapassdiferentes');           
+        }
+        if($repassok == 'bien') {
+            $this->load->view('alertapassiguales');           
+        }
+        /****************************/
+
+        echo $this->load->view('fin','',true);
         
     }
 }

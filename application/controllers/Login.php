@@ -1,11 +1,9 @@
 <?php
 
 defined('BASEPATH') OR exit('No direct script access allowed');
-
-//class Login extends CI_Controller {           
+          
 class Login extends CI_Controller {
-   
-   
+     
     public function index() {
                 
         
@@ -29,11 +27,21 @@ class Login extends CI_Controller {
         }
     }
     
-    
+   
     ///**FUNCIONES**///
+    /**
+     * @param 
+     * @return 
+     * Llama a la función login en el modelo para vericar el usuario
+     */
     public function verifica() {    
         $email = $this->input->post('email');
         $password = $this->input->post('password');
+        
+        /**Crear hash de prueba**/
+        $opciones = ['cost' => 12];
+        $passhash = password_hash('123456', PASSWORD_DEFAULT, $opciones);
+        /***********************/
 
         if($this->Login_model->login($email, $password)){ 
             

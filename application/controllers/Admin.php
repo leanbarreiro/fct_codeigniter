@@ -13,22 +13,17 @@ class Admin extends MY_Controller {
         $this->load->model("Modtabla");
         $datat= $this->Modtabla->mGetTabla();
         $strvista = $this->load->view('tabla/vcabtabla', '', TRUE);
-               
-        
-         $strvista .= $this->load->view('tabla/vdatoscab', '', TRUE);
-         
-         
+                       
+        $strvista .= $this->load->view('tabla/vdatoscab', '', TRUE);
+                  
         foreach ($datat as $value) {
             $datost = array('Id' => $value['id'], 'Nombre' => $value['nombre'], 'Url' => $value['url']);
             
-
         $strvista .=   $this->load->view('tabla/vdatos', $datost, TRUE);
 
        };  
         $strvista .= $this->load->view('tabla/vfintabla', '', TRUE);
-
-        
-        
+       
         $this->cargaTemplate($strvista);
 
     }
@@ -92,8 +87,11 @@ class Admin extends MY_Controller {
     }
 
     ////////////FUNCIONES/////////////
-
-    ///**FUNCIÓN ACTUALIZAR**///
+    /**
+     * @param 
+     * @return 
+     *Llama a la función mUpdateTabla() 
+     */
     public function updateTable() {
 
         $datnew=$_POST;
@@ -111,9 +109,12 @@ class Admin extends MY_Controller {
                 $this->Modtabla->mUpdateTabla($datnew);                    
         }
     }
-        
-               
-    ///**FUNCIÓN AÑADIR**///
+                      
+    /**
+     * @param 
+     * @return 
+     * Añade una fila en la tabla
+     */
     public function addTable() {
         if (!empty($_POST['nomform']) && !empty($_POST['urlform']) && isset($_POST['nomform']) && isset($_POST['urlform']) ) {
 

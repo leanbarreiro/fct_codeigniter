@@ -7,9 +7,11 @@ class Modtabla extends CI_Model {
     public function __construct() {
         parent::__construct();
     }
+    
     /**
      * @param 
      * @return $sql->result_array() type Array
+     * Consulta a la db los datos para el menú     
      */
     public function mGetTabla() {
       
@@ -18,7 +20,12 @@ class Modtabla extends CI_Model {
                
         return $sql->result_array();       
     }
-    
+       
+    /**
+     * @param $newdatos type array
+     * @return 
+      * Actualiza la tabla (borra y modifica) 
+     */
    public function mUpdateTabla($newdatos) {
  
         $array = array();
@@ -57,11 +64,14 @@ class Modtabla extends CI_Model {
             if ($numRegistrosUP > 0) { 
                 $this->session->set_flashdata('updateok', 'bien');
         }
-        
         redirect('admin');            
         }
        
-    
+    /**
+     * @param $newd type array
+     * @return 
+      * Realiza el insert en la db 
+     */    
     public function mAddTabla($newd) {
                
             $sql = "INSERT INTO menu (nombre, url) VALUES ( '".$newd["nomform"]."' ,'".$newd["urlform"]."' )";

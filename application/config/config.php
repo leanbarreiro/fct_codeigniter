@@ -1,6 +1,10 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+/*Se llama a esta función para evitar un error de tipo 'Cannot modify header information - headers already sent by'*/
+ob_start();
+
+
 /*
 |--------------------------------------------------------------------------
 | Base Site URL
