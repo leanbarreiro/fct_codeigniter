@@ -4,19 +4,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 //class Home extends CI_Controller {
 class Home extends MY_Controller { 
    
-    
-    public function __construct (){
-        
-        parent::__construct ();
-         
-        $str = $this->load->view('vhome','',TRUE);
-        $this->cargaTemplate($str);
-        
-    }
 
 
     public function index() {
 
+        $str = $this->load->view('vhome','',TRUE);
+        $this->cargaTemplate($str);
         
 //            ///**CABECERA**///              
 //            $this->load->view('vhcabecera');            

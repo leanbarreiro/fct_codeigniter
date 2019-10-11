@@ -14,7 +14,7 @@ class Login extends CI_Controller {
         
         
         ///**LOGIN**///
-        $this->load->model('Login_model');
+
         
         $this->form_validation->set_rules('email', 'Email', 'required');
         $this->form_validation->set_rules('password', 'Password', 'required|callback_verifica');
@@ -39,10 +39,11 @@ class Login extends CI_Controller {
         $password = $this->input->post('password');
         
         /**Crear hash de prueba**/
-        $opciones = ['cost' => 12];
-        $passhash = password_hash('123456', PASSWORD_DEFAULT, $opciones);
+//        $opciones = ['cost' => 12];
+//        $passhash = password_hash('123456', PASSWORD_DEFAULT, $opciones);
         /***********************/
 
+        $this->load->model('Login_model');
         if($this->Login_model->login($email, $password)){ 
             
             redirect('home');

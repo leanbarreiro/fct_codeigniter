@@ -5,10 +5,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Admin extends MY_Controller {
     
     
-    public function __construct (){
-        
-        parent::__construct ();
-        
+
+    public function index() {
         
         $this->load->model("Modtabla");
         $datat= $this->Modtabla->mGetTabla();
@@ -25,13 +23,6 @@ class Admin extends MY_Controller {
         $strvista .= $this->load->view('tabla/vfintabla', '', TRUE);
        
         $this->cargaTemplate($strvista);
-
-    }
-    
-
-    public function index() {
-        
-
 //        ///**CABECERA**///           
 //        $this->load->view('vhcabecera');
 //
@@ -94,7 +85,9 @@ class Admin extends MY_Controller {
      */
     public function updateTable() {
 
-        $datnew=$_POST;
+        
+        $datnew = $this->input->post();
+        
         foreach ($datnew as $value) {
             $estavacio = "";
             if (!empty($value) && isset($value) ) {

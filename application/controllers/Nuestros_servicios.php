@@ -5,19 +5,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Nuestros_servicios extends MY_Controller {
     
     
-    public function __construct (){
-        
-          parent::__construct ();
-          
-         $str = $this->load->view('vservicios','',TRUE);
-        $this->cargaTemplate($str);
-        
-    }
-    
     
     public function index() {
 
 
+        $str = $this->load->view('vservicios','',TRUE);
+        $this->cargaTemplate($str);
+        
 //        ///**CABECERA**///  
 //        $this->load->view('vhcabecera');                
 //

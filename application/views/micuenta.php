@@ -29,7 +29,7 @@
             <br><br>
             <span>NUEVA contraseña:</span>
             <input type="password" name="newpass"/>
-            <span> (De al menos 8 caracteres)</span>
+            <span> (De al menos 6 caracteres)</span>
             <br><br>
             <input id="btncam" type="submit" value="Cambiar" name="camsubmit" class="btn-small"/>
         </form>
