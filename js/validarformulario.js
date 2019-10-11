@@ -27,18 +27,21 @@ function validarInputLista() {
 }
 
 
-function enviar(){
-	var formulario = document.getElementById("myform");	
-	var dato = formulario[0];
-        var clave1 = document.repassword.clave1.value;
-        var clave2 = document.repassword.clave2.value;
- 
-	if (dato.value=="enviar" && clave1 == clave2){
-		alert("Enviando el formulario");
-		formulario.submit();
-		return true;
-	} else {
-		alert("No se envía el formulario");
-		return false;
-	}
+function validar(){
+
+        params = Validar.arguments;
+        var f = params[0];
+        
+//        pass = document.getElementById(pass);        
+//        repass = document.getElementById(repass);
+//        newpass = document.getElementById(newpass);
+//        
+//	if (dato.value=="enviar" && clave1 == clave2){
+//		alert("Enviando el formulario");
+//		formulario.submit();
+//		return true;
+//	} else {
+//		alert("No se envía el formulario");
+//		return false;
+//	}
 }

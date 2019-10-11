@@ -19,7 +19,7 @@
             </tbody>
         </table>
         <br><br><br><br>
-        <form id="myform" action="http://web/index.php/micuenta/cambiarpass" name="repassword" method="POST">
+        <form id="myform" onsubmit="return validar(this, 'pass','repass','newpass')" action="http://web/index.php/micuenta/cambiarpass" name="formupass" method="POST">
             <h3>Cambiar contraseña</h3>
             <span>Contraseña actual:</span>
             <input type="password" name="pass"/>

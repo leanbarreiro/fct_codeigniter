@@ -21,19 +21,18 @@ class Micuenta extends MY_Controller {
         
         $datos = $this->input->post();
         
-        if ( $datos['pass'] == $datos['repass'] AND (!empty($datos['newpass'])) ) { //Comprobamos que el pass coincida con el campo "repetir" y 
-                                                                                    //que la contraseña nueva no venga vacía.
-            $newpass = $datos['newpass'];           
-        }
-        
-        if ( $this->Micuenta_model->changepass($newpass) AND strlen($newpass)>=6 ){ //Comprobamos que la contraseña nueva tenga almenos 8 caracteres.
-                               
+        if ( $datos['pass'] == $datos['repass'] 
+                AND (!empty($datos['newpass'])) 
+                AND strlen($datos['newpass'])>=6 ) { //Comprobamos que el pass coincida con el campo "repetir" y 
+                                                        //que la contraseña nueva no venga vacía y que tenga almenos 8 caracteres.
+            $newpass = $datos['newpass'];
+            $this->Micuenta_model->changepass($newpass);                  
             $this->session->set_flashdata('repassok', 'bien');
             redirect('micuenta');
         } else {
             
             $this->session->set_flashdata('repassok', 'mal');
             redirect('micuenta');
-        }       
+        }
     }
 }
