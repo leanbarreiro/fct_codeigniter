@@ -27,6 +27,7 @@ class Login_model extends CI_Model {
 
             if(password_verify($password, $row->password)){ //Verifico la contraseña coincide con la de la db
                 $usuactual = array('user_data'=>array(
+                    "id" => $row->user_id,
                     "first_name" => $row->first_name,
                     "last_name" => $row->last_name,
                     "email" =>  $row->email,

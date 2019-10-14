@@ -5,9 +5,10 @@ class MY_CONTROLLER extends CI_Controller {
       
     
     public function __construct (){
-      parent::__construct ();
+        parent::__construct ();
       
-     $this->estalogueado();
+        $this->load->library('session');
+        $this->estalogueado();
      
     }
     
@@ -86,4 +87,27 @@ class MY_CONTROLLER extends CI_Controller {
         echo $this->load->view('fin','',true);
         
     }
+    
+}
+
+class Usuario {
+       
+//    public function __construct (){
+//                  
+//            $usudatos = array (
+//            "Id" => $_SESSION->session->user_data['id'],
+//            "Nombre" => $_SESSION->session->user_data['first_name'],
+//            "Apellido" => $_SESSION->session->user_data['last_name'],
+//            "Email" => $_SESSION->session->user_data['email'],
+//            "Password" => $_SESSION->session->user_data['password']         
+//        );            
+//    }
+//    
+//    
+//    public function getDatosEmpleado () {
+//        
+// 
+// 
+//        return $usudatos;
+//    }
 }

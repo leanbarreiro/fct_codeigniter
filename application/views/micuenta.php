@@ -1,4 +1,5 @@
 
+<section>
 <div class="right center-h center-vusu">
     <div class="child">
         <h2>Datos de <?php echo $this->session->user_data['first_name'];?></h2>
@@ -19,19 +20,24 @@
             </tbody>
         </table>
         <br><br><br><br>
-        <form id="myform" onsubmit="return validar(this, 'pass','repass','newpass')" action="http://web/index.php/micuenta/cambiarpass" name="formupass" method="POST">
-            <h3>Cambiar contraseña</h3>
-            <span>Contraseña actual:</span>
-            <input type="password" name="pass"/>
-            <br><br>
-            <span>Repite contraseña:</span>
-            <input type="password" name="repass"/>
-            <br><br>
-            <span>NUEVA contraseña:</span>
-            <input type="password" name="newpass"/>
-            <span> (De al menos 6 caracteres)</span>
-            <br><br>
-            <input id="btncam" type="submit" value="Cambiar" name="camsubmit" class="btn-small"/>
-        </form>
+        <div class="contenedor-form">
+            <form id="myform" action="http://web/index.php/micuenta/cambiarpass" name="formupass" method="POST">
+                <h3>Cambiar contraseña</h3>
+                <span>Contraseña actual:</span>
+                <input type="password" name="pass" id="pass"/>
+                <br><br>
+                <span>Repite contraseña:</span>
+                <input type="password" name="repass" id="repass"/>
+                <br><br>
+                <span>Nueva contraseña:</span>
+                <input type="password" name="newpass" id="newpass"/>
+                <span> (De al menos 6 caracteres)</span>
+                <br><br>
+                <span id="error" style='color:red'></span>
+                <br><br>
+                <input id="btncam" type="submit" value="Cambiar" name="camsubmit" class="btn-small"/>
+            </form>
+        </div>
     </div>
 </div>
+</section>

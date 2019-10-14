@@ -10,53 +10,62 @@
    -webkit-flex-flow: row;
            flex-flow: row;
    }
-#main > .right {
+
+   #main > section {
    margin: 4px;
-   padding: 20px;
+   padding: 5px;
    padding-left: 5%;
 /*   border: 1px solid #8888bb;*/
-   border-radius: 5pt;
+   border-radius: 7pt;
 /*   background: #dbffe2;*/
-   -webkit-flex: 1 6 75%;
-           flex: 1 6 75%;
+   -webkit-flex: 1 6 80%;
+           flex: 1 6 80%;
    -webkit-order: 2;
            order: 2;
    }
-  
-
-#main > .cssmenu {
+   
+   #main > nav {
    margin: 4px;
    padding: 5px;
 /*   border: 1px solid #8888bb;*/
    border-radius: 5pt;
 /*   background: #dbffe2;*/
-   -webkit-flex: 1 6 25%;
-           flex: 1 6 25%;
+   -webkit-flex: 1 6 20%;
+           flex: 1 6 20%;
    -webkit-order: 1;
            order: 1;
    }
+    
+header, footer {
+     display: block;
+     margin: 4px;
+     padding: 5px;
+     min-height: 80px;
+/*        border: 1px solid #eebb55;*/
+     border-radius: 7pt;
+/*        background: #ffeebb;*/
+     }
    
- @media all and (max-width: 640px) {
+
+  @media all and (max-width: 640px) {
+  
    #main, #page {
     -webkit-flex-flow: column;
             flex-flow: column;
    }
-   
-      #main > .cssmenu, #main > .right{
+
+   #main > section, #main > nav, #main > aside {
     /* Return them to document order */
     -webkit-order: 0;
             order: 0;
    }
   
-   #main > .cssmenu {
+   #main > nav, #main > aside, header, footer {
     min-height: 50px;
     max-height: 50px;
    }
- }
-/*#cssmenu #imenu{
-    margin-top: 30%;
-}*/
-/*#cssmenu,*/
+  }
+
 #cssmenu ul,
 #cssmenu ul li,
 #cssmenu ul ul {
@@ -82,31 +91,11 @@
   z-index: 599;
   cursor: default;
 }
-#cssmenu ul ul {
-  margin-top: 1px;
-  visibility: hidden;
-  position: absolute;
-  top: 1px;
-  left: 99%;
-  z-index: 598;
-  width: 100%;
-}
-#cssmenu ul ul li {
-  float: none;
-}
-#cssmenu ul ul ul {
-  top: 1px;
-  left: 99%;
-}
-#cssmenu ul li:hover > ul {
-  visibility: visible;
-}
+
 #cssmenu ul li {
   float: none;
 }
-#cssmenu ul ul li {
-  font-weight: normal;
-}
+
 /* Custom CSS Styles */
 #cssmenu {
   font-family: 'Lato', sans-serif;
@@ -143,26 +132,7 @@
   background: #f6f6f6;
 }
 
-/*Principal*/
-.right{
-    display: flex;
-    align-items: start;
-}
-
-.center-h {
-  justify-content: center;
-}
-.center-v {
-  align-items: center;
-}
-.center-vusu {
-   align-items: top;
-}
-.child {
-/*  background: #60e0b0;*/
-  padding: .2rem;
-}
-.right h1 {
+ h1 {
     font-size: 500%;
 }
 
@@ -176,7 +146,7 @@ table {
 }
 
 th, td {
-  text-align: left;
+  text-align: center;
   padding: 8px;
 }
 
@@ -289,4 +259,8 @@ div .alerta {
     margin: 0 auto;
     color: #fff;
     font-size: 14px;
+}
+.contenedor-form{
+    display: flex;
+    justify-content: center;
 }

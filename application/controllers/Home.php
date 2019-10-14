@@ -7,6 +7,8 @@ class Home extends MY_Controller {
 
 
     public function index() {
+        
+//        $prueba = new Usuario();
 
         $str = $this->load->view('vhome','',TRUE);
         $this->cargaTemplate($str);
@@ -37,4 +39,3 @@ class Home extends MY_Controller {
                                    
     }
 }
-?>

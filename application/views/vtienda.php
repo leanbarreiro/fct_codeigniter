@@ -1,4 +1,6 @@
 
-<div class="right">
-    <h1>Tienda</h1>
-</div>
+<section>
+    <div class="right">
+        <h1>Tienda</h1>
+    </div>
+</section>

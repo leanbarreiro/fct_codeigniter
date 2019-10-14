@@ -22,7 +22,7 @@ class Admin extends MY_Controller {
        };  
         $strvista .= $this->load->view('tabla/vfintabla', '', TRUE);
        
-        $this->cargaTemplate($strvista);
+        $this->cargaTemplate($strvista);       
 //        ///**CABECERA**///           
 //        $this->load->view('vhcabecera');
 //
