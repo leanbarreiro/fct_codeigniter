@@ -1,7 +1,7 @@
 
-jQuery("#list").jqGrid({
+$("#list").jqGrid({
     
-    url: 'adminjq/cargarDatosTabla',
+    url: 'adminjq/cargarDatosTabla?q=2',
     datatype: 'json',
     height: 250,
     colNames:['Id','Nombre', 'Url'],
@@ -16,13 +16,36 @@ jQuery("#list").jqGrid({
     sortname: 'id',
     viewrecords: true,
     sortorder: "desc",
-    caption: "Tabla de Items del Menú"
+    multiselect: true,
+//    multikey: "ctrlKey",
+    caption: "Tabla de Items del Menú",
+    editurl:"someurl.php"
 });
 
-
-jQuery("#list").jqGrid('navGrid','#pager',{
-    edit:false, add:false, del:false
+$("#cm1").click( function() {
+	var s;
+	s = jQuery("#list").jqGrid('getGridParam','selarrrow');
+	alert(s);
 });
 
+$("#cm1s").click( function() {
+	jQuery("#list").jqGrid('setSelection',"13");
+});
 
-  
+$("#list").jqGrid('navGrid','#pager',
+    {}, //options
+    {height:280,reloadAfterSubmit:false}, // edit options
+    {height:280,reloadAfterSubmit:false}, // add options
+    {reloadAfterSubmit:false}, // del options
+    {sopt:['cn','bw','eq','ne','lt','gt','ew']} // search options
+);
+
+//$("#list").jqGrid('navGrid','#pager',{add:false,edit:false,del:false},
+//	{}, // edit parameters
+//	{}, // add parameters
+//	{reloadAfterSubmit:false} //delete parameters
+//);
+//$("#list").jqGrid('inlineNav',"#pager");
+
+
+
