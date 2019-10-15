@@ -213,11 +213,28 @@ div .alerta {
     align-items: center;
 }
 .login_content {
+    position: relative;
     text-align: center;
     margin: 0 0 10rem 0;
 }
 
-.home__title {
+.login_content span {
+    font-family: 'Lato', sans-serif;
+    color: #333;
+}
+
+.login_content input {
+    position: relative;
+    height: 40px;
+    width: 400px;
+    text-align: center;
+    margin: .5rem;
+    font-size: 16px;
+    font-weight: 500;
+    margin: 2rem 0 2rem 0
+}
+
+.login_content .home_title {
     color: #008080;
     font-size: 80px;
     font-weight: 600;
