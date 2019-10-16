@@ -6,94 +6,110 @@ class Modtablajq extends CI_Model {
     
     public function __construct() {
         parent::__construct();
+        
+//        $this->load->database();
     }
     
-    /**
+    /** Descarga datos de la tabla
      * @param 
      * @return $sql->result_array() type Array
      * Consulta a la db los datos para el menú     
      */
-    public function getTabla() {
-      
-        $this->load->database();
-        $sql = $this->db->query("SELECT id, nombre, url FROM menu");
-//       $sql = $this->db->query("SELECT id, nombre, url FROM menu ORDER BY '".$sidx."' '".$sord."' LIMIT '".$start."' , '".$limit.'"');
-
-               
+    public function getTabla($sidx, $sord, $start, $limit) { 
+        
+        $q = "SELECT id, nombre, url FROM menu ORDER BY ".$sidx.' '.$sord.' LIMIT '.$start.' , '.$limit.'';
+        $sql = $this->db->query($q);
+             
         return $sql->result_array();       
     }
     
+     /** Consulta el número de items totales
+     * @param 
+     * @return $sql->result_array() type Array
+     * Consulta a la db los datos para el menú     
+     */
     public function getNumItems() {
 
-        $this->load->database();
         $sql = $this->db->query('SELECT COUNT(*) AS count FROM menu');
                
         return $sql->result_array();
     }
     
+    /** Busqueda de items en db
+     * @param 
+     * @return $sql->result_array() type Array
+     * Consulta a la db un items con ciertas caracteristicas     
+     */
+    public function getItemsSearch($sField, $sString, $sOper) {       
+        
+        $s = 'SELECT id, nombre, url FROM menu WHERE';
+        $s .= ' '.(strtolower($sField)).' ';
+        
+        switch ($sOper) { /*Controlamos el operador que nos envía la tabla*/
+            case 'eq':
+                $sOper = "=";
+                $b = true;
+                break;
+            case 'ne': 
+                $sOper = "!=";
+                $b = true;
+                break;
+            case 'lt':
+                $sOper = "<";
+                $b = true;
+                break;
+            case 'gt':
+                $sOper = ">";
+                $b = true;
+                break;
+            case 'bw': 
+                $sOper = "LIKE";
+                $b = false;
+                $s .= $sOper;
+                $s .= " '".$sString."%'"; 
+                break;
+            case 'ew': 
+                $sOper = "LIKE";
+                $b = false;
+                $s .= $sOper;
+                $s .= " '%".$sString."'"; 
+                break;
+            case 'cn': 
+                $sOper = "LIKE";
+                $b = false;
+                $s .= $sOper;
+                $s .= " '%".$sString."%'"; 
+                break;
+        }
+        
+        if ($b === true) {
+            $s .= $sOper;
+            $s .= " '".$sString."'"; 
+        }
+             
+        $sql = $this->db->query($s);
+
+        return $sql->result_array();
+    }
     
-       
-//    /**
-//     * @param $newdatos type array
-//     * @return 
-//      * Actualiza la tabla (borra y modifica) 
-//     */
-//   public function mUpdateTabla($newdatos) {
-// 
-//        $array = array();
-//        
-//        foreach($newdatos as $dato => $valor){
-//
-//            if (substr($dato, 0, 7) == "nombre:"){
-//                $valorID = substr($dato, 7);
-//                $array[$valorID]["Nombre"] = $valor;
-//            }
-//
-//            if (substr($dato, 0, 4) == "url:"){
-//                $valorID = substr($dato, 4);
-//                $array[$valorID]["URL"] = $valor;
-//            }
-//            
-//            if (substr($dato, 0, 7) == "borrar:"){
-//                $valID = substr($dato, 7);
-//                $array[$valID]["Borrar"] = $valor;
-//                
-//                $sql = 'DELETE FROM menu WHERE id = '.$valID; 
-//                $this->db->query($sql);
-//                
-//            }  
-//            $numRegistrosDEL = $this->db->affected_rows();
-//            if ($numRegistrosDEL > 0) { 
-//                $this->session->set_flashdata('deleteok', 'bien');
-//           } 
-//        }
-//        foreach($array as $id => $datos){
-//            $sql = "UPDATE menu SET nombre = '" .$datos["Nombre"]. "', url ='" .$datos["URL"]. "' Where Id = " .$id;                
-//            $this->db->query($sql);                   
-//        }
-//        
-//        $numRegistrosUP = $this->db->affected_rows();
-//            if ($numRegistrosUP > 0) { 
-//                $this->session->set_flashdata('updateok', 'bien');
-//        }
-//        redirect('admin');            
-//        }
-//       
-//    /**
-//     * @param $newd type array
-//     * @return 
-//      * Realiza el insert en la db 
-//     */    
-//    public function mAddTabla($newd) {
-//               
-//            $sql = "INSERT INTO menu (nombre, url) VALUES ( '".$newd["nomform"]."' ,'".$newd["urlform"]."' )";
-//            $this->db->query($sql);
-//                        
-//            $numRegistros = $this->db->affected_rows();
-//            if ($numRegistros > 0) { //Comprobamos si la nos devuelven filas modificadas en la db.
-//                $this->session->set_flashdata('addok', 'bien');
-//            } 
-//            redirect('admin');   
-//        }                           
-    } 
+    public function addTablaMenu($newd) {
+
+        $sql = "INSERT INTO menu (nombre, url) VALUES ( '".$newd["Nombre"]."' ,'".$newd["Url"]."' )";
+        $this->db->query($sql);      
+    }
+    
+    public function editTablaMenu($newd) {
+        
+         $sql = "UPDATE menu SET nombre = '" .$newd["Nombre"]. "', url ='" .$newd["Url"]. "' Where Id = " .$newd['Id'];                
+         $this->db->query($sql);         
+    }
+    
+    public function delTablaMenu($newd) {
+        
+         $sql = 'DELETE FROM menu WHERE id = '.$newd['Id']; 
+         $this->db->query($sql);
+    }
+             
+                     
+} 
 

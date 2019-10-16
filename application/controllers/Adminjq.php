@@ -23,16 +23,35 @@ class Adminjq extends MY_Controller {
         $limit = $_GET['rows']; //Obtenemos el número de filas  para la cuadricula
         $sidx = $_GET['sidx'];  //Obtenemos fila de índice (clic del usu para ordenar)
         $sord = $_GET['sord'];  //Obtener la dirección
-    
         
-        if (!$sidx) { //Si el índice es falso le damos le valor de 1
+        $start = $limit*$page - $limit;
+    
+        if (!$sidx) { //Si el índice es false le damos le valor de 1
             $sidx = 1; 
         }
         
-        //Pedimos los datos 
-        $numitems = $this->Modtablajq->getNumItems();
+        /**Filtro de Busqueda**/
         
-        $count = ($numitems[0]['count']);
+        $search = $_GET['_search'];
+   
+        if ($search === "true") { /*Si buscamos datos especificos*/
+            
+            $sField = $_GET['searchField'];
+            $sString = $_GET['searchString'];
+            $sOper = $_GET['searchOper'];
+            
+            $sql = $this->Modtablajq->getItemsSearch($sField, $sString, $sOper);
+
+            $count = count($sql);
+     
+        } elseif ($search === "false") { /*Si se carga la tabla entera*/
+            
+            $sql = $this->Modtablajq->getTabla($sidx, $sord, $start, $limit); // Pesimos los datos a la db
+            $numitems = $this->Modtablajq->getNumItems();
+            $count = ($numitems[0]['count']);                                  
+        } 
+            
+        /**********************/
         
         if( $count > 0 ) {                       //Comprobamos si el número de registros es mayor que 0
             $total_pages = ceil($count/$limit); //Si es así, calculamos el número de páginas
@@ -44,10 +63,8 @@ class Adminjq extends MY_Controller {
             $page = $total_pages;
         }
         
-        $start = $limit*$page - $limit;
-        
-        $sql = $this->Modtablajq->getTabla();   // Pesimos los datos a la db
-        
+//        $start = $limit*$page - $limit;
+     
         $returnData += ['page' => $page];
         $returnData += ['total' => $total_pages];
         $returnData += ['records' => $count];
@@ -67,4 +84,31 @@ class Adminjq extends MY_Controller {
         echo json_encode($respuesta);
          
     }
+    
+    public function gestionTablaMenu() {
+        
+       if (!empty($_POST['Nombre']) && !empty($_POST['Url']) && isset($_POST['Nombre']) && isset($_POST['Url']) ) {
+           
+           $datanew = $_POST; 
+           
+            switch ($_POST['oper']) {
+                case 'add':                 /*Añadir*/                            
+                    $this->Modtablajq->addTablaMenu($datanew);
+                    break;
+                case 'edit':                /*Modificar*/          
+                    $this->Modtablajq->editTablaMenu($datanew);
+                    break;
+                case 'del':                 /*Borrar*/           
+                    $this->Modtablajq->delTablaMenu($datanew);
+                    break;
+            }
+       }
+//       } elseif( !empty($_POST['Id']) && isset($_POST['Id'])) {
+//           switch ($_POST['oper']) {
+//               case 'del':                 /*Borrar*/           
+//                    $this->Modtablajq->delTablaMenu($datanew);
+//                    break;
+//            }  
+//       }
+    }  
 }
