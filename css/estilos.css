@@ -54,15 +54,14 @@ header, footer {
             flex-flow: column;
    }
 
-   #main > section, #main > nav, #main > aside {
-    /* Return them to document order */
-    -webkit-order: 0;
-            order: 0;
+   #main > section, #main > nav {
+        -webkit-order: 0;
+                order: 0;
    }
   
-   #main > nav, #main > aside, header, footer {
-    min-height: 50px;
-    max-height: 50px;
+   #main > nav, header, footer {
+        min-height: 50px;
+        max-height: 50px;
    }
   }
 
@@ -147,8 +146,11 @@ table {
 }
 
 th, td {
-  text-align: center;
-  padding: 8px;
+    text-align: center;
+    padding: 8px;
+    font-family: 'Lato', sans-serif;
+    font-size: 16px;
+    
 }
 
 thead {
@@ -198,7 +200,6 @@ div .alerta {
 .nomusu {
     font-weight: 700;  
 }
-
 
 /*Login*/
 
@@ -283,6 +284,11 @@ div .alerta {
     justify-content: center;
 }
 
-/*.ui-pg-table tr td .ui-pg-selbox {
-    min-height: 20;
-}*/
+#pager select {
+    height: 25px;
+    padding: 4px 0 4px 0;
+}
+#pager input {
+    height: 15px;
+    padding: 4px 0 4px 0;
+}
