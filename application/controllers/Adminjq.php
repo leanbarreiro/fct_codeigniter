@@ -6,109 +6,105 @@ class Adminjq extends MY_Controller {
     public function __construct() {
         parent::__construct();
         
+        //Carga el modelo
         $this->load->model("Modtablajq");
     }
 
     public function index() {
         
+        //Carga la vista y la enviamos al controlador principal
         $str = $this->load->view('tabla/tablajq','',TRUE);
         $this->cargaTemplate($str);
     }
     
+    /**Carga los datos en la tabla.
+    * @param
+    * @return  echo JSON
+    * Pide los datos a la db y los carga en la tabla.     
+    */
     public function cargarDatosTabla() {
-        
-        $returnData = array();
-        
-        $page = $_GET['page'];  //Obtenemos la página solicitada
-        $limit = $_GET['rows']; //Obtenemos el número de filas  para la cuadricula
-        $sidx = $_GET['sidx'];  //Obtenemos fila de índice (clic del usu para ordenar)
-        $sord = $_GET['sord'];  //Obtener la dirección
-        
-        $start = $limit*$page - $limit;
-    
-        if (!$sidx) { //Si el índice es false le damos le valor de 1
-            $sidx = 1; 
-        }
-        
-        /**Filtro de Busqueda**/
-        
-        $search = $_GET['_search'];
-   
-        if ($search === "true") { /*Si buscamos datos especificos*/
-            
-            $sField = $_GET['searchField'];
-            $sString = $_GET['searchString'];
-            $sOper = $_GET['searchOper'];
-            
-            $sql = $this->Modtablajq->getItemsSearch($sField, $sString, $sOper);
-
-            $count = count($sql);
-     
-        } elseif ($search === "false") { /*Si se carga la tabla entera*/
-            
-            $sql = $this->Modtablajq->getTabla($sidx, $sord, $start, $limit); // Pesimos los datos a la db
-            $numitems = $this->Modtablajq->getNumItems();
-            $count = ($numitems[0]['count']);                                  
-        } 
-            
-        /**********************/
-        
-        if( $count > 0 ) {                       //Comprobamos si el número de registros es mayor que 0
-            $total_pages = ceil($count/$limit); //Si es así, calculamos el número de páginas
-        } else {
-            $total_pages = 0;                   //Si no, lo ponemos a 0
-        }
-
-        if ($page > $total_pages) {
-            $page = $total_pages;
-        }
-        
-//        $start = $limit*$page - $limit;
-     
-        $returnData += ['page' => $page];
-        $returnData += ['total' => $total_pages];
-        $returnData += ['records' => $count];
-        
+               
+        //Obtenemos las variables del GET usando los filtros XSS Y creamos 
+        //una instancia del tipo stdClass para la respuesta JSON    
+        $pagina = $this->input->get('page', TRUE);
+        $limite = $this->input->get('rows', TRUE);
+        $sidx = $this->input->get('sidx', TRUE);
+        $sord = $this->input->get('sord', TRUE);
+        $search = $this->input->get('_search', TRUE);      
         $respuesta = new stdClass();
-        $respuesta->page = $page;
+        
+        //Calculamos valor del inicio de paginación
+        $start = $limite * $pagina - $limite;
+    
+        //Si el índice es false le damos le valor de 1
+        if (!$sidx) { $limite = 1; }
+        
+        //Comprobamos $_GET['_search'],si es true se realializa una busqueda especifica 
+        //ó si es false cargamos la tabla entera
+         if ($search === "true") { 
+            
+            $sField = $this->input->get('searchField', TRUE);
+            $sString = $this->input->get('searchString', TRUE);
+            $sOper = $this->input->get('searchOper', TRUE);
+            
+            //Pedimos los datos a la db
+            $sql = $this->Modtablajq->getItemsSearch($sField,$sString,$sOper);
+            $count = count($sql);
+    
+           } elseif ($search === "false") {  
+            
+            // Pedimos los datos a la db
+            $sql = $this->Modtablajq->getTabla($sidx, $sord, $start, $limite);
+            //Calculamos el número de items
+//            $numitems = $this->Modtablajq->getNumItems();
+            $count = count($sql);                                 
+        } 
+
+        //Si el número de registros es mayor a 0 calculamos el número de páginas.
+        if( $count > 0 ) {          
+            $total_pages = ceil($count/$limite); 
+        } else { $total_pages = 0; } 
+        
+        //Si la pagina es mayor al total de las mismas las igualamos.
+        if ($pagina > $total_pages) {$pagina = $total_pages;}
+
+        //Se guardan en el objeto $repuesta de tipo "stdClass" los valores para montar la tabla.
+        $respuesta->page = $pagina;
         $respuesta->total = $total_pages;
         $respuesta->records = $count;
-        
-        $i=0;
+
         foreach ($sql as $key => $row) {
-            $respuesta->rows[$i]['id']=$row["id"];
-            $respuesta->rows[$i]['cell'] = array($row["id"],$row["nombre"],$row["url"]);
-            $i++;
+            
+            $respuesta->rows[$key]['id']=$row["id"];
+            $respuesta->rows[$key]['cell'] = array($row["id"],$row["nombre"],$row["url"]);
         }
-       
-        echo json_encode($respuesta);
-         
+        
+       //Códificamos a JSON
+        echo json_encode($respuesta);      
     }
     
+    /**Gestiona el crud de la tabla.
+    * @param
+    * @return  echo JSON
+    * Busca, añade, modifica y borra.     
+    */
     public function gestionTablaMenu() {
         
-       if (!empty($_POST['Nombre']) && !empty($_POST['Url']) && isset($_POST['Nombre']) && isset($_POST['Url']) ) {
-           
-           $datanew = $_POST; 
-           
-            switch ($_POST['oper']) {
-                case 'add':                 /*Añadir*/                            
-                    $this->Modtablajq->addTablaMenu($datanew);
-                    break;
-                case 'edit':                /*Modificar*/          
-                    $this->Modtablajq->editTablaMenu($datanew);
-                    break;
-                case 'del':                 /*Borrar*/           
-                    $this->Modtablajq->delTablaMenu($datanew);
-                    break;
-            }
+       //Recogemos los datos del post usando los filtros XSS 
+       $arraypost = $this->input->post(array('id','nombre','url') ,TRUE);
+       $oper = $this->input->post('oper', TRUE);
+   
+       //Administra la llamada a las funciones dependiendo del valor del $oper
+       switch ($oper) {
+           case 'add':
+                $this->Modtablajq->addTablaMenu($arraypost);
+                 break;
+           case 'edit':
+                $this->Modtablajq->editTablaMenu($arraypost);
+                 break;
+           case 'del':
+                $this->Modtablajq->delTablaMenu($arraypost['id']);
+                 break;
        }
-//       } elseif( !empty($_POST['Id']) && isset($_POST['Id'])) {
-//           switch ($_POST['oper']) {
-//               case 'del':                 /*Borrar*/           
-//                    $this->Modtablajq->delTablaMenu($datanew);
-//                    break;
-//            }  
-//       }
     }  
 }

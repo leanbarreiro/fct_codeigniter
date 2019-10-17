@@ -8,9 +8,9 @@ $(document).ready(function() {
         height: 250,
         colNames:['Id','Nombre', 'Url'],
         colModel:[
-            {name:'Id',index:'Id', width:100, align:"right", sorttype:"text", editable:true, editoptions:{readonly:true,size:30}},
-            {name:'Nombre',index:'Nombre', align:"center", width:200, editable:true, editoptions:{size:30}},
-            {name:'Url',index:'Url', align:"center", width:400, editable:true, editoptions:{size:30}}             		
+            {name:'id',index:'id', width:100, align:"right", sorttype:"text", editable:true},
+            {name:'nombre',index:'nombre', align:"center", width:200, editable:true},
+            {name:'url',index:'url', align:"center", width:400, editable:true}             		
         ],
         rowNum: 10,
         rowList:[5,10,20,30],
@@ -26,11 +26,11 @@ $(document).ready(function() {
     });
 
     $("#list").jqGrid('navGrid','#pager',
-        {},                                                         //options
-        {height:260,reloadAfterSubmit:true,closeAfterEdit:true},    // edit options
-        {height:260,reloadAfterSubmit:true,closeAfterAdd:true},     // add options
-        {height:260,reloadAfterSubmit:true},     // del options
-        {sopt:['eq','ne','lt','gt','bw','ew','cn']}                 // search options
+        {},                                                                                     //options
+        {height:260,readonly:true,size:30,reloadAfterSubmit:true,closeAfterEdit:false},         // edit options
+        {height:260,size:30,reloadAfterSubmit:true,closeAfterAdd:true},                         // add options
+        {height:260,size:30,reloadAfterSubmit:true},                                            // del options
+        {sopt:['eq','ne','lt','gt','bw','ew','cn'],closeAfterSearch:true}                       // search options
     );
     
 

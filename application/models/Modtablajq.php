@@ -7,7 +7,6 @@ class Modtablajq extends CI_Model {
     public function __construct() {
         parent::__construct();
         
-//        $this->load->database();
     }
     
     /** Descarga datos de la tabla
@@ -42,74 +41,94 @@ class Modtablajq extends CI_Model {
      */
     public function getItemsSearch($sField, $sString, $sOper) {       
         
-        $s = 'SELECT id, nombre, url FROM menu WHERE';
-        $s .= ' '.(strtolower($sField)).' ';
+        //Se guarda la consulta en consulta
+        $consulta = 'SELECT id, nombre, url FROM menu WHERE';
+        $consulta .= ' '.(strtolower($sField)).' ';
         
-        switch ($sOper) { /*Controlamos el operador que nos envía la tabla*/
+        /*Controlamos el operador que nos envía la tabla*/
+        switch ($sOper) { 
             case 'eq':
                 $sOper = "=";
-                $b = true;
+                $bandera = true;
                 break;
             case 'ne': 
                 $sOper = "!=";
-                $b = true;
+                $bandera = true;
                 break;
             case 'lt':
                 $sOper = "<";
-                $b = true;
+                $bandera = true;
                 break;
             case 'gt':
                 $sOper = ">";
-                $b = true;
+                $bandera = true;
                 break;
             case 'bw': 
                 $sOper = "LIKE";
-                $b = false;
-                $s .= $sOper;
-                $s .= " '".$sString."%'"; 
+                $bandera = false;
+                $consulta .= $sOper;
+                $consulta .= " '".$sString."%'"; 
                 break;
             case 'ew': 
                 $sOper = "LIKE";
-                $b = false;
-                $s .= $sOper;
-                $s .= " '%".$sString."'"; 
+                $bandera = false;
+                $consulta .= $sOper;
+                $consulta .= " '%".$sString."'"; 
                 break;
             case 'cn': 
                 $sOper = "LIKE";
-                $b = false;
-                $s .= $sOper;
-                $s .= " '%".$sString."%'"; 
+                $bandera = false;
+                $consulta .= $sOper;
+                $consulta .= " '%".$sString."%'"; 
                 break;
         }
         
-        if ($b === true) {
-            $s .= $sOper;
-            $s .= " '".$sString."'"; 
+        if ($bandera === true) {
+            $consulta .= $sOper;
+            $consulta .= " '".$sString."'"; 
         }
-             
-        $sql = $this->db->query($s);
+        
+        //Realiza la consulta     
+        $sql = $this->db->query($consulta);
 
         return $sql->result_array();
     }
     
+     /** Añade un item a la db.
+     * @param $newd type Array
+     * @return 
+     * Añade a la db     
+     */
     public function addTablaMenu($newd) {
 
-        $sql = "INSERT INTO menu (nombre, url) VALUES ( '".$newd["Nombre"]."' ,'".$newd["Url"]."' )";
+        $sql = "INSERT INTO menu (nombre, url) VALUES ( '".$newd["nombre"]."' ,'".$newd["url"]."' )";
         $this->db->query($sql);      
     }
     
+     /** Modifica datos en la db.
+     * @param $newd type Array
+     * @return 
+     * Edita en la db     
+     */
     public function editTablaMenu($newd) {
         
-         $sql = "UPDATE menu SET nombre = '" .$newd["Nombre"]. "', url ='" .$newd["Url"]. "' Where Id = " .$newd['Id'];                
+         $sql = "UPDATE menu SET nombre = '" .$newd["nombre"]. "', url ='" .$newd["url"]. "' Where Id = " .$newd['id'];                
          $this->db->query($sql);         
     }
     
+     /** Borra filas en la db.
+     * @param $newd type String
+     * @return 
+     * Separa el string que recibe en un array y lo recorre borrando en la db     
+     */
     public function delTablaMenu($newd) {
         
-         $sql = 'DELETE FROM menu WHERE id = '.$newd['Id']; 
-         $this->db->query($sql);
-    }
-             
-                     
+        $idsdel = explode(',',$newd);
+        
+        foreach ($idsdel as $value) {
+            $sql = 'DELETE FROM menu WHERE id = '.$value;
+            $this->db->query($sql);
+        }
+    }                
 } 
 
