@@ -49,6 +49,7 @@ class Adminjq extends MY_Controller {
             
             //Pedimos los datos a la db
             $sql = $this->Modtablajq->getItemsSearch($sField,$sString,$sOper);
+            $numitems = $this->Modtablajq->getNumItems();
             $count = count($sql);
     
            } elseif ($search === "false") {  
@@ -75,12 +76,12 @@ class Adminjq extends MY_Controller {
 
         foreach ($sql as $key => $row) {
             
-            $respuesta->rows[$key]['id']=$row["id"];
+            $respuesta->rows[$key]['id'] = $row["id"];
             $respuesta->rows[$key]['cell'] = array($row["id"],$row["nombre"],$row["url"]);
         }
         
        //Códificamos a JSON
-        echo json_encode($respuesta);      
+        echo json_encode($respuesta);
     }
     
     /**Gestiona el crud de la tabla.

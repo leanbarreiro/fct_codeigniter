@@ -5,7 +5,7 @@ $(document).ready(function() {
 
         url: 'adminjq/cargarDatosTabla',
         datatype: 'json',
-        height: 250,
+        height: 280,
         colNames:['Id','Nombre', 'Url'],
         colModel:[
             {name:'id',index:'id', width:100, align:"right", sorttype:"text", editoptions:{readonly:true,size:30}},
@@ -17,10 +17,12 @@ $(document).ready(function() {
         pager: '#pager',
         sortname: 'id',
         viewrecords: true,
+        rownumbers: true,
 //        loadonce:true,
         sortorder: "asc",
-        multiselect: true,
+       multiselect: true,
 //        multikey: "ctrlKey",
+//        treeGrid: true,
         caption: "Tabla de Items del Menú",
         editurl:"adminjq/gestionTablaMenu"
     });

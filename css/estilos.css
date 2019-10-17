@@ -35,8 +35,18 @@
    -webkit-order: 1;
            order: 1;
    }
-    
-header, footer {
+
+.header-padre {
+    display: flex;
+    flex-direction: row-reverse;
+    margin: 20px;
+}
+.header-content {
+
+}
+
+   
+footer {
      display: block;
      margin: 4px;
      padding: 5px;
@@ -106,9 +116,10 @@ header, footer {
 #cssmenu ul a:link,
 #cssmenu ul a:visited {
   display: block;
-  color: #848889;
+  color: #1f3e2c;
   text-decoration: none;
-  font-weight: 300;
+  font-weight: 400;
+  font-size: 1.2rem;
 }
 #cssmenu > ul {
   float: none;
@@ -198,7 +209,9 @@ div .alerta {
 }
 
 .nomusu {
-    font-weight: 700;  
+    font-weight: 900;
+    font-size: .9rem;
+    margin: 2px;
 }
 
 /*Login*/
@@ -271,9 +284,9 @@ div .alerta {
     text-decoration: none;
     border: 0px;
     border-radius: 2px;
-/*    display: block;*/
+/*   display: block;*/
     height: 20px;
-    width: 100px;
+    width: 100%;
     text-align: center;
     margin: 0 auto;
     color: #fff;
@@ -291,4 +304,15 @@ div .alerta {
 #pager input {
     height: 15px;
     padding: 4px 0 4px 0;
+}
+.ui-jqgrid-titlebar {
+        background: #3dbd99;
+}
+
+ui-widget-header {
+    background: #3dbd99;
+}
+
+.CaptionTD, .DataTD, .navButton, .EditButton, .DelTable > tbody > tr > td {
+     background: #A8F3DE;
 }

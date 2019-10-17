@@ -10,5 +10,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <link rel="STYLESHEET" type="text/css" href="<?php base_url()?>/css/estilos.css"/>      
 </head>
 <body>
-    <header></header>
+    <header>
+        <div class="header-padre">
+            <div class="header-content">
+               <label>Hola, </label>
+                <p class="nomusu"><?php echo $this->session->user_data['first_name'];?></p>
+                <p class="nomusu"><?php echo $this->session->user_data['last_name'];?></p>
+                <a href="http://web/index.php/login"><input type="button" value="Salir" name="Salir" class="btn-small"/></a>
+            </div>
+        </div>
+    </header>
     <div id="main">
