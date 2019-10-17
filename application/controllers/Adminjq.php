@@ -56,13 +56,13 @@ class Adminjq extends MY_Controller {
             // Pedimos los datos a la db
             $sql = $this->Modtablajq->getTabla($sidx, $sord, $start, $limite);
             //Calculamos el número de items
-//            $numitems = $this->Modtablajq->getNumItems();
+            $numitems = $this->Modtablajq->getNumItems();
             $count = count($sql);                                 
         } 
 
         //Si el número de registros es mayor a 0 calculamos el número de páginas.
         if( $count > 0 ) {          
-            $total_pages = ceil($count/$limite); 
+            $total_pages = ceil($numitems[0]['count']/$limite); 
         } else { $total_pages = 0; } 
         
         //Si la pagina es mayor al total de las mismas las igualamos.
