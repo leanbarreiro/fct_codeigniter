@@ -1,12 +1,13 @@
 @import url(http://fonts.googleapis.com/css?family=Lato:300,400,700);
 
+/*GENERALES*/
 #main {
    min-height: 800px;
    margin: 0px;
    padding: 0px;
    margin-top: 1rem;
    display: -webkit-flex;
-   display:         flex;
+   display: flex;
    -webkit-flex-flow: row;
            flex-flow: row;
    }
@@ -14,47 +15,68 @@
    #main > section {
    margin: 4px;
    padding: 5px;
-   padding-left: 2rem;
-/*   border: 1px solid #8888bb;*/
+/*   padding-left: 2rem;*/
    border-radius: 7pt;
-/*   background: #dbffe2;*/
    -webkit-flex: 1 6 80%;
            flex: 1 6 80%;
    -webkit-order: 2;
            order: 2;
+   display: flex;
+/*   justify-content: space-around;*/
+/*   align-items: center;*/
    }
    
    #main > nav {
    margin: 4px;
    padding: 5px;
-/*   border: 1px solid #8888bb;*/
    border-radius: 5pt;
-/*   background: #dbffe2;*/
    -webkit-flex: 1 6 20%;
            flex: 1 6 20%;
    -webkit-order: 1;
            order: 1;
    }
 
-.header-padre {
-    display: flex;
-    flex-direction: row-reverse;
-    margin: 20px;
-}
-.header-content {
-
-}
-
-   
-footer {
+footer, header {
      display: block;
      margin: 4px;
      padding: 5px;
      min-height: 80px;
-/*        border: 1px solid #eebb55;*/
-     border-radius: 7pt;
-/*        background: #ffeebb;*/
-     }
+ }
+ 
+ 
+.header-padre {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 20px;
+}
+.header-content {
+    align-items: center;
+    margin-left: 3%;
+    margin-right: 3%;
+}
+
+.logo {
+    font-family: 'Lato', sans-serif;
+    font-size: 60px;
+}
+.sublogo {
+    font-family: 'Lato', sans-serif;
+    font-size: 20px;
+}
+
+.footer-padre {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.footer-content {
+}
+
+.copyrigth {
+    font-family: 'Lato', sans-serif;
+    font-size: 15px;
+}
    
 
   @media all and (max-width: 640px) {
@@ -79,7 +101,7 @@ footer {
 #cssmenu ul li,
 #cssmenu ul ul {
   list-style: none;
-  margin: 3% 3% 3% 3%;
+  margin: 1% 2% 1% 2%;
   padding: 0;
   border: 0;
 }
@@ -105,7 +127,6 @@ footer {
   float: none;
 }
 
-/* Custom CSS Styles */
 #cssmenu {
   font-family: 'Lato', sans-serif;
   font-size: 20px;
@@ -128,6 +149,7 @@ footer {
   background: #fff;
 }
 #cssmenu > ul > li {
+  border: 0.3px solid #d7d8da;
   border-left: 3px solid #d7d8da;
 }
 #cssmenu > ul > li > a {
@@ -212,6 +234,7 @@ div .alerta {
     font-weight: 900;
     font-size: .9rem;
     margin: 2px;
+    font-family: 'Lato', sans-serif;
 }
 
 /*Login*/

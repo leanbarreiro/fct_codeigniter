@@ -6,6 +6,12 @@
         <script type="text/javascript" src="<?php base_url()?>/js/validarformulario.js"></script>
 <!--<script type="text/javascript" src="<?php base_url()?>/js/scripts.js"></script>
 <script type="text/javascript" src="<?php base_url()?>/js/validarformulario.js"></script>-->
-<footer></footer>
+        <footer>
+            <div class="footer-padre">
+                <div class="footer-content">
+                    <span class="copyrigth">&#9400; Leandro Barreiro 2019 &#9400;</span>
+                </div>
+            </div>
+        </footer>
 </body>
 </html>

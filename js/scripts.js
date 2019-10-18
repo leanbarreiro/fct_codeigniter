@@ -18,21 +18,19 @@ $(document).ready(function() {
         sortname: 'id',
         viewrecords: true,
         rownumbers: true,
-//        loadonce:true,
         sortorder: "asc",
-       multiselect: true,
-//        multikey: "ctrlKey",
-//        treeGrid: true,
-        caption: "Tabla de Items del Menú",
+        multiselect: true,
+        caption: "Tabla de items del Menú",
         editurl:"adminjq/gestionTablaMenu"
     });
-
+    
+    //Llamamos al 'navigator' y le pasamos las opciones en cada caso especifico
     $("#list").jqGrid('navGrid','#pager',
-        {},                                                                 //options
-        {height:260,reloadAfterSubmit:true,closeAfterEdit:false},           // edit options
-        {height:260,reloadAfterSubmit:true,closeAfterAdd:true},             // add options
-        {width: 460,height:260,reloadAfterSubmit:true},                     // del options
-        {sopt:['eq','ne','lt','gt','bw','ew','cn'],closeAfterSearch:true}   // search options
+        {},                                                                 //optiones generales
+        {height:260,reloadAfterSubmit:true,closeAfterEdit:false},           //opc. de edición
+        {height:260,reloadAfterSubmit:true,closeAfterAdd:true},             //opc. de añadido
+        {width: 460,height:260,reloadAfterSubmit:true},                     //opc. de borrado
+        {sopt:['eq','ne','lt','gt','bw','ew','cn'],closeAfterSearch:true}   //opc. de busqueda
     );
     
 

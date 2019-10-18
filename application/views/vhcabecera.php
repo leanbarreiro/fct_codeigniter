@@ -13,6 +13,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <header>
         <div class="header-padre">
             <div class="header-content">
+                <span class="logo">FCT</span>
+                <span class="sublogo">daw</span>
+            </div>
+            <div class="header-content">
                <label>Hola, </label>
                 <p class="nomusu"><?php echo $this->session->user_data['first_name'];?></p>
                 <p class="nomusu"><?php echo $this->session->user_data['last_name'];?></p>

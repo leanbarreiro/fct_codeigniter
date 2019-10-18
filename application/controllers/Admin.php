@@ -21,59 +21,61 @@ class Admin extends MY_Controller {
        };  
         $strvista .= $this->load->view('tabla/vfintabla', '', TRUE);
        
-        $this->cargaTemplate($strvista);       
-//        ///**CABECERA**///           
-//        $this->load->view('vhcabecera');
-//
-//
-//        ///**MENÚ**///
-//        $this->load->model("Modmenu");
-//        $this->load->view('vcabmenu'); 
-//        $data=$this->Modmenu->mGetMenuItem();                            
-//        foreach ($data as $value) {
-//            $datos = array('Nombre' => $value['nombre'], 'Url' => $value['url']);                     
-//            $this->load->view('velemenu', $datos);
-//        };                       
-//        $this->load->view('vpiemenu');
-//
-//
-//        ///**TABLA**///
-//        $this->load->model("Modtabla");
-//        $datat= $this->Modtabla->mGetTabla();
-//        $this->load->view('tabla/vcabtabla');
-//
-//        $this->load->view('tabla/vdatoscab');
-//
-//        foreach ($datat as $value) {
-//            $datost = array('Id' => $value['id'], 'Nombre' => $value['nombre'], 'Url' => $value['url']);
-//
-//            $this->load->view('tabla/vdatos', $datost);
-//
-//        };  
-//        $this->load->view('tabla/vfintabla');
-//
-//
-//        ///**PIE DE PÁGINA**///            
-//        $this->load->view('vbcierre');
-//
-//
-//        ///**Alertas**///
-//        $addok = $this->session->flashdata('addok');
-//        $updateok = $this->session->flashdata('updateok');
-//        $deleteok = $this->session->flashdata('deleteok');
-//        if($addok == 'bien') {
-//            $this->load->view('alertaadd');           
-//        }
-//        if($updateok == 'bien') {               
-//            $this->load->view('alertaupdate');           
-//        }
-//        if($deleteok == 'bien') {
-//            $this->load->view('alertadelete');           
-//        }            
-//        /****************************/
-//
-//        $this->load->view('fin');
+        $this->cargaTemplate($strvista); 
+ 
+ /**Código anterior
+  *        
+        //CABECERA        
+        $this->load->view('vhcabecera');
 
+
+        //MENÚ
+        $this->load->model("Modmenu");
+        $this->load->view('vcabmenu'); 
+        $data=$this->Modmenu->mGetMenuItem();                            
+        foreach ($data as $value) {
+            $datos = array('Nombre' => $value['nombre'], 'Url' => $value['url']);                     
+            $this->load->view('velemenu', $datos);
+        };                       
+        $this->load->view('vpiemenu');
+
+
+        //TABLA
+        $this->load->model("Modtabla");
+        $datat= $this->Modtabla->mGetTabla();
+        $this->load->view('tabla/vcabtabla');
+
+        $this->load->view('tabla/vdatoscab');
+
+        foreach ($datat as $value) {
+            $datost = array('Id' => $value['id'], 'Nombre' => $value['nombre'], 'Url' => $value['url']);
+
+            $this->load->view('tabla/vdatos', $datost);
+
+        };  
+        $this->load->view('tabla/vfintabla');
+
+
+        //PIE DE PÁGINA           
+        $this->load->view('vbcierre');
+
+
+        //Alertas
+        $addok = $this->session->flashdata('addok');
+        $updateok = $this->session->flashdata('updateok');
+        $deleteok = $this->session->flashdata('deleteok');
+        if($addok == 'bien') {
+            $this->load->view('alertaadd');           
+        }
+        if($updateok == 'bien') {               
+            $this->load->view('alertaupdate');           
+        }
+        if($deleteok == 'bien') {
+            $this->load->view('alertadelete');           
+        }                  
+
+        $this->load->view('fin');
+*/
     }
 
     ////////////FUNCIONES/////////////
@@ -84,9 +86,10 @@ class Admin extends MY_Controller {
      */
     public function updateTable() {
 
-        
+        //Guardamos los datos del post en un a variable
         $datnew = $this->input->post();
         
+        //Controlamos si viene algún campo vacío
         foreach ($datnew as $value) {
             $estavacio = "";
             if (!empty($value) && isset($value) ) {
@@ -96,9 +99,10 @@ class Admin extends MY_Controller {
                 redirect('admin'); 
             }                   
         }
+        //Si es TRUE llamamos a la función para actualizar
         if($estavacio == TRUE){
-                $this->load->model("Modtabla");
-                $this->Modtabla->mUpdateTabla($datnew);                    
+            $this->load->model("Modtabla");
+            $this->Modtabla->mUpdateTabla($datnew);                    
         }
     }
                       
