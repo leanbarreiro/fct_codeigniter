@@ -15,8 +15,15 @@ class Modmenu extends CI_Model {
      */
     public function mGetMenuItem() {
       
+        //Depende del usuario cargamos diferentes items del menú
+        $usuarioactual = $this->session->user_data['nivel'];
         $this->load->database();
-        $sql = $this->db->query('SELECT nombre, url FROM menu');
+//        $consulta = 'SELECT nombre, url FROM menu';
+        $consulta = 'SELECT nombre, url FROM menu WHERE (acceso LIKE "%%'.$usuarioactual.'%%")
+                                                                    or  (acceso LIKE "%%'.$usuarioactual.'")
+                                                                    or  (acceso LIKE "'.$usuarioactual.'%%")';
+                                             
+         $sql = $this->db->query($consulta);
         
         return $sql->result_array();
         
@@ -24,4 +31,4 @@ class Modmenu extends CI_Model {
     
 }
     
-?>
+

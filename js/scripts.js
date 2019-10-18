@@ -9,7 +9,7 @@ $(document).ready(function() {
         height: 280,
         colNames:['Id','Nombre', 'Url', 'Descripción', 'Acceso'],
         colModel:[
-            {name:'id',index:'id', width:100, align:"right", sorttype:"text", editoptions:{readonly:true,size:30}},
+            {name:'id',index:'id', width:100, align:"right",sorttype:"text", editoptions:{readonly:true,size:30}},
             {name:'nombre',index:'nombre', align:"center", width:200, editable:true, editoptions:{size:30}},
             {name:'url',index:'url', align:"center", width:400, editable:true, editoptions:{size:30}},
             {name:'descripcion',index:'descripcion', align:"center", width:400, editable:true, editoptions:{size:30}},

@@ -75,10 +75,9 @@ footer, header {
 
 .copyrigth {
     font-family: 'Lato', sans-serif;
-    font-size: 15px;
+    font-size: 15px; 
 }
    
-
   @media all and (max-width: 640px) {
   
    #main, #page {
@@ -233,6 +232,12 @@ div .alerta {
 .nomusu {
     font-weight: 900;
     font-size: .9rem;
+    margin: 2px;
+    font-family: 'Lato', sans-serif;
+}
+.nivelusu {
+    font-weight: 900;
+    font-size: .7rem;
     margin: 2px;
     font-family: 'Lato', sans-serif;
 }

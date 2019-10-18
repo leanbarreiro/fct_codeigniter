@@ -23,6 +23,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                <label>Hola, </label>
                 <p class="nomusu"><?php echo $this->session->user_data['first_name'];?></p>
                 <p class="nomusu"><?php echo $this->session->user_data['last_name'];?></p>
+                <p class="nivelusu">Nivel: <span><?php echo $this->session->user_data['nivel'];?></span></p>
                 <a href="http://web/index.php/login"><input type="button" value="Salir" name="Salir" class="btn-small"/></a>
             </div>
         </div>
