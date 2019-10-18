@@ -123,6 +123,7 @@ class Modtablajq extends CI_Model {
      */
     public function delTablaMenu($newd) {
         
+        //Separamos el string que nos llega por el separador ','
         $idsdel = explode(',',$newd);
         
         foreach ($idsdel as $value) {

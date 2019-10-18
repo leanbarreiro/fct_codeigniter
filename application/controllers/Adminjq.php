@@ -41,7 +41,7 @@ class Adminjq extends MY_Controller {
         
         //Comprobamos $_GET['_search'],si es true se realializa una busqueda especifica 
         //ó si es false cargamos la tabla entera
-         if ($search === "true") { 
+        if ($search === "true") { 
             
             $sField = $this->input->get('searchField', TRUE);
             $sString = $this->input->get('searchString', TRUE);
@@ -52,7 +52,7 @@ class Adminjq extends MY_Controller {
             //Calculamos el número de items
             $count = count($sql);
     
-           } elseif ($search === "false") {  
+        } elseif ($search === "false") {  
             
             // Pedimos los datos a la db
             $sql = $this->Modtablajq->getTabla($sidx, $sord, $start, $limite);          
@@ -69,7 +69,7 @@ class Adminjq extends MY_Controller {
         //Si la pagina es mayor al total de las mismas las igualamos.
         if ($pagina > $total_pages) {$pagina = $total_pages;}
 
-        //Se guardan en el objeto $repuesta de tipo "stdClass" los valores para montar la tabla.
+        //Se guardan en el objeto $repuesta de tipo "stdClass" los valores necesarios para montar la tabla.
         $respuesta->page = $pagina;
         $respuesta->total = $total_pages;
         $respuesta->records = $count;
@@ -90,7 +90,7 @@ class Adminjq extends MY_Controller {
     * Busca, añade, modifica y borra.     
     */
     public function gestionTablaMenu() {
-        
+    
        //Recogemos los datos del post usando los filtros XSS 
        $arraypost = $this->input->post(array('id','nombre','url') ,TRUE);
        $oper = $this->input->post('oper', TRUE);

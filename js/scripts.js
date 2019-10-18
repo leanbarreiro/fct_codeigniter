@@ -1,5 +1,6 @@
 
 $(document).ready(function() {
+  
 
     $("#list").jqGrid({
 
@@ -33,5 +34,4 @@ $(document).ready(function() {
         {sopt:['eq','ne','lt','gt','bw','ew','cn'],closeAfterSearch:true}   //opc. de busqueda
     );
     
-
 });
