@@ -49,41 +49,41 @@ class Modtablajq extends CI_Model {
         switch ($sOper) { 
             case 'eq':
                 $sOper = "=";
-                $bandera = true;
+                $flag = true;
                 break;
             case 'ne': 
                 $sOper = "!=";
-                $bandera = true;
+                $flag = true;
                 break;
             case 'lt':
                 $sOper = "<";
-                $bandera = true;
+                $flag = true;
                 break;
             case 'gt':
                 $sOper = ">";
-                $bandera = true;
+                $flag = true;
                 break;
             case 'bw': 
                 $sOper = "LIKE";
-                $bandera = false;
+                $flag = false;
                 $consulta .= $sOper;
                 $consulta .= " '".$sString."%'"; 
                 break;
             case 'ew': 
                 $sOper = "LIKE";
-                $bandera = false;
+                $flag = false;
                 $consulta .= $sOper;
                 $consulta .= " '%".$sString."'"; 
                 break;
             case 'cn': 
                 $sOper = "LIKE";
-                $bandera = false;
+                $flag = false;
                 $consulta .= $sOper;
                 $consulta .= " '%".$sString."%'"; 
                 break;
         }
         
-        if ($bandera === true) {
+        if ($flag === true) {
             $consulta .= $sOper;
             $consulta .= " '".$sString."'"; 
         }
