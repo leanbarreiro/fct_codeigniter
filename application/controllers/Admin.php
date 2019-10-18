@@ -79,7 +79,7 @@ class Admin extends MY_Controller {
     }
 
     ////////////FUNCIONES/////////////
-    /**
+    /** Actualiza la tabla
      * @param 
      * @return 
      *Llama a la función mUpdateTabla() 
@@ -106,7 +106,7 @@ class Admin extends MY_Controller {
         }
     }
                       
-    /**
+    /**Añade en la tabla
      * @param 
      * @return 
      * Añade una fila en la tabla

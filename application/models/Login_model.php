@@ -31,7 +31,8 @@ class Login_model extends CI_Model {
                     "first_name" => $row->first_name,
                     "last_name" => $row->last_name,
                     "email" =>  $row->email,
-                    "password" => $row->password),
+                    "password" => $row->password,
+                    "nivel" => $row->nivel),
                 );
             $this->session->set_userdata($usuactual);
             return TRUE;           

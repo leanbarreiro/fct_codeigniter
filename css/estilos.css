@@ -17,8 +17,8 @@
    padding: 5px;
 /*   padding-left: 2rem;*/
    border-radius: 7pt;
-   -webkit-flex: 1 6 80%;
-           flex: 1 6 80%;
+   -webkit-flex: 1 6 85%;
+           flex: 1 6 85%;
    -webkit-order: 2;
            order: 2;
    display: flex;
@@ -30,8 +30,8 @@
    margin: 4px;
    padding: 5px;
    border-radius: 5pt;
-   -webkit-flex: 1 6 20%;
-           flex: 1 6 20%;
+   -webkit-flex: 1 6 15%;
+           flex: 1 6 15%;
    -webkit-order: 1;
            order: 1;
    }

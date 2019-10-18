@@ -77,7 +77,7 @@ class Adminjq extends MY_Controller {
         foreach ($sql as $key => $row) {
             
             $respuesta->rows[$key]['id'] = $row["id"];
-            $respuesta->rows[$key]['cell'] = array($row["id"],$row["nombre"],$row["url"]);
+            $respuesta->rows[$key]['cell'] = array($row["id"],$row["nombre"],$row["url"],$row['descripcion'],$row['acceso']);
         }
         
        //Códificamos a JSON
@@ -92,7 +92,7 @@ class Adminjq extends MY_Controller {
     public function gestionTablaMenu() {
     
        //Recogemos los datos del post usando los filtros XSS 
-       $arraypost = $this->input->post(array('id','nombre','url') ,TRUE);
+       $arraypost = $this->input->post(array('id','nombre','url','descripcion','acceso') ,TRUE);
        $oper = $this->input->post('oper', TRUE);
    
        //Administra la llamada a las funciones dependiendo del valor del $oper

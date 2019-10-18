@@ -16,7 +16,7 @@ class Modtablajq extends CI_Model {
      */
     public function getTabla($sidx, $sord, $start, $limit) { 
         
-        $q = "SELECT id, nombre, url FROM menu ORDER BY ".$sidx.' '.$sord.' LIMIT '.$start.' , '.$limit.'';
+        $q = "SELECT id, nombre, url, descripcion, acceso FROM menu ORDER BY ".$sidx.' '.$sord.' LIMIT '.$start.' , '.$limit.'';
         $sql = $this->db->query($q);
              
         return $sql->result_array();       
@@ -42,7 +42,7 @@ class Modtablajq extends CI_Model {
     public function getItemsSearch($sField, $sString, $sOper) {       
         
         //Se guarda la consulta en consulta
-        $consulta = 'SELECT id, nombre, url FROM menu WHERE';
+        $consulta = 'SELECT id, nombre, url, descripcion, acceso FROM menu WHERE';
         $consulta .= ' '.(strtolower($sField)).' ';
         
         /*Controlamos el operador que nos envía la tabla*/
@@ -101,7 +101,7 @@ class Modtablajq extends CI_Model {
      */
     public function addTablaMenu($newd) {
 
-        $sql = "INSERT INTO menu (nombre, url) VALUES ( '".$newd["nombre"]."' ,'".$newd["url"]."' )";
+        $sql = "INSERT INTO menu (nombre, url, descripcion, acceso) VALUES ( '".$newd["nombre"]."' ,'".$newd["url"]."','".$newd["descripcion"]."','".$newd["acceso"]."' )";
         $this->db->query($sql);      
     }
     
@@ -112,7 +112,7 @@ class Modtablajq extends CI_Model {
      */
     public function editTablaMenu($newd) {
         
-         $sql = "UPDATE menu SET nombre = '" .$newd["nombre"]. "', url ='" .$newd["url"]. "' Where Id = " .$newd['id'];                
+         $sql = "UPDATE menu SET nombre = '" .$newd["nombre"]. "', url ='" .$newd["url"]. "', descripcion ='" .$newd["descripcion"]. "', acceso ='" .$newd["acceso"]. "' Where Id = " .$newd['id'];                
          $this->db->query($sql);         
     }
     

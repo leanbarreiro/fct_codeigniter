@@ -9,6 +9,7 @@
                     <th>Nombre</th>
                     <th>Apellidos</th>
                     <th>Correo</th>
+                    <th>Nivel</th>
                 </tr>
             </thead>
             <tbody>
@@ -16,6 +17,7 @@
                     <td><?php echo $this->session->user_data['first_name'];?></td>
                     <td><?php echo $this->session->user_data['last_name'];?></td>
                     <td><?php echo $this->session->user_data['email'];?></td>
+                    <td><?php echo $this->session->user_data['nivel'];?></td>
                 </tr>
             </tbody>
         </table>

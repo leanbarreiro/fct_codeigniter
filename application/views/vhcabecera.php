@@ -7,7 +7,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<title>- APP -</title>             
         <link rel="stylesheet" type="text/css" media="screen" href="<?php base_url()?>/css/ui.jqgrid.css" />
         <link rel="stylesheet" type="text/css" media="screen" href="<?php base_url()?>/css/redmond/jquery-ui.css" />
-        <link rel="STYLESHEET" type="text/css" href="<?php base_url()?>/css/estilos.css"/>      
+        <!--<link rel="STYLESHEET" type="text/css" href="<?php base_url()?>/bootstrap-4.3.1/css/bootstrap.min.css"/>-->
+        <!--<link rel="STYLESHEET" type="text/css" href="<?php base_url()?>/css/ui.jqgrid-bootstrap4.css"/>-->
+        
+        <link rel="STYLESHEET" type="text/css" href="<?php base_url()?>/css/estilos.css"/>       
 </head>
 <body>
     <header>
