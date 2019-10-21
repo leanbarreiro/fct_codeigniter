@@ -1,7 +1,7 @@
 
 <section>
     <div class="right">
-        <h1>Servicios</h1>
+        <h2 class="titulo">Servicios</h2>
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse id gravida leo. Class aptent taciti sociosqu ad litora torquent per conubia nostra, 
             per inceptos himenaeos. Aenean id efficitur est. Ut ultricies felis at sodales lacinia. Vestibulum tristique egestas suscipit. Suspendisse eleifend iaculis 
             ex in sollicitudin. Quisque nec mattis massa, malesuada vestibulum lectus. Sed ac maximus ante. Praesent ullamcorper mi convallis blandit sollicitudin. 

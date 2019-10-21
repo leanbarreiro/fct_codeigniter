@@ -5,7 +5,7 @@
         <!--<script src="<?php base_url()?>/bootstrap-4.3.1/js/bootstrap.min.js" type="text/javascript"></script>-->
         <script src="<?php base_url()?>/js/scripts.js"></script>
          <script src="<?php base_url()?>/js/scripts_pruebas.js"></script>
-        <script src="<?php base_url()?>/js/validarformulario.js"></script>
+<!--        <script src="<?php base_url()?>/js/validarformulario.js"></script>-->
         <footer>
             <div class="footer-padre">
                 <div class="footer-content">

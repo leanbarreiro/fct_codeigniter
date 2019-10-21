@@ -2,7 +2,7 @@
 <section>
     <div class="formulario">
         <div class="centra-contenido">
-            <h1 class="titulo">Contacto</h1>
+            <h2 class="titulo" style="margin-left: 20%">Formulario de Contacto</h2>
             <form action="#" method="post" class="form-contacto"> 
                 <label>Nombre y apellido: <span>*</span>
                     <input type="text" name="nombre" placeholder="Nombre y apellido" class="campo-form" required>

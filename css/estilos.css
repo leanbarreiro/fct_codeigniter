@@ -70,17 +70,22 @@ footer, header {
     color: #3dbd99;
 }
 
+footer{
+    display: flex;
+    justify-content: center;
+   background-color: #000000;
+}
 .footer-padre {
     display: flex;
     justify-content: space-around;
     align-items: center;
 }
-.footer-content {
-}
 
 .copyrigth {
     font-family: 'Lato', sans-serif;
-    font-size: 15px; 
+    color: #ffffff;
+    font-size: 18px;
+    align-items: center;
 }
    
   @media all and (max-width: 640px) {
@@ -172,9 +177,10 @@ footer, header {
  h1 {
     font-size: 500%;
 }
- h1.titulo {
-    font-size: 500%;
+ h2.titulo {
+    font-size: 250%;
     margin: 0 25% 5% 25%;
+    text-align:center;
 }
 
 /*Tabla*/
@@ -353,6 +359,15 @@ ui-widget-header {
      background: #A8F3DE;
 }
 
+/**Home**/
+/*.home {
+    display: flex;
+    justify-content: center;
+}
+.home-contenido {
+    align-items: center;
+}*/
+
 /**Contacto**/
 
 .formulario {
@@ -410,6 +425,7 @@ textarea {min-height: 150px!important;}
     display: flex;
 /*    flex-wrap: wrap;*/
     justify-content: space-evenly;
+    margin-bottom: 3rem;
 }
 .tienda-item {
     width: 300px;
