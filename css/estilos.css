@@ -35,15 +35,18 @@
    -webkit-order: 1;
            order: 1;
    }
-
+ 
 footer, header {
      display: block;
      margin: 4px;
      padding: 5px;
      min-height: 80px;
+     border-bottom: 3px solid #e1e1e1;
  }
- 
- 
+ hr {
+     border: 1px solid #e1e1e1;
+ } 
+
 .header-padre {
     display: flex;
     justify-content: space-between;
@@ -66,14 +69,14 @@ footer, header {
 }
 .sublogo {
     font-family: 'Lato', sans-serif;
-    font-size: 20px;
+    font-size: 25px;
     color: #3dbd99;
 }
 
 footer{
     display: flex;
     justify-content: center;
-   background-color: #000000;
+    background-color: #000000;
 }
 .footer-padre {
     display: flex;
@@ -245,14 +248,14 @@ div .alerta {
 
 .nomusu {
     font-weight: 900;
-    font-size: .9rem;
-    margin: 2px;
+    font-size: 1rem;
+    margin: 1px;
     font-family: 'Lato', sans-serif;
 }
 .nivelusu {
     font-weight: 900;
     font-size: .7rem;
-    margin: 2px;
+    margin: 1px;
     font-family: 'Lato', sans-serif;
 }
 
@@ -330,7 +333,7 @@ div .alerta {
     height: 20px;
     width: 100%;
     text-align: center;
-    margin: 0 auto;
+    margin: 1px auto;
     color: #fff;
     font-size: 14px;
 }
@@ -430,6 +433,6 @@ textarea {min-height: 150px!important;}
 .tienda-item {
     width: 300px;
     height: 300px;
-    border: 0.5px solid #000000;
+    border: 2px solid #e1e1e1;
     flex: 0 0 calc(33.3% - 3rem);
 }
