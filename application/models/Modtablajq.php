@@ -72,7 +72,7 @@ class Modtablajq extends CI_Model {
         return $sql->result_array();
     }
     
-    /******TABLA ITEMS DE MENÚ********/
+    /*************TABLA ITEMS DE MENÚ*************/
     
     /** Busqueda de items en db
      * @param String $sField
@@ -174,7 +174,7 @@ class Modtablajq extends CI_Model {
         }
     }
     
-    /**********TABLA DE USUARIOS************/
+    /*************TABLA DE USUARIOS*************/
     
      /** Busqueda de usuarios en db
      * @param String $sField

@@ -22,8 +22,8 @@
    -webkit-order: 2;
            order: 2;
    display: flex;
-/*   justify-content: space-around;*/
-/*   align-items: center;*/
+/*  align-items: center;
+  justify-content: center;*/
    }
    
    #main > nav {
@@ -67,6 +67,7 @@ footer, header {
 .sublogo {
     font-family: 'Lato', sans-serif;
     font-size: 20px;
+    color: #3dbd99;
 }
 
 .footer-padre {
@@ -171,7 +172,10 @@ footer, header {
  h1 {
     font-size: 500%;
 }
-
+ h1.titulo {
+    font-size: 500%;
+    margin: 0 25% 5% 25%;
+}
 
 /*Tabla*/
 table {
@@ -324,7 +328,7 @@ div .alerta {
     color: #fff;
     font-size: 14px;
 }
-.contenedor-form{
+.contenedor-form {
     display: flex;
     justify-content: center;
 }
@@ -347,4 +351,69 @@ ui-widget-header {
 
 .CaptionTD, .DataTD, .navButton, .EditButton, .DelTable > tbody > tr > td {
      background: #A8F3DE;
+}
+
+/**Contacto**/
+
+.formulario {
+/*  display: flex;
+  align-items: center;
+  justify-content: center;*/
+    
+}
+.centra-contenido {
+
+}
+
+.form-contacto {
+    width: 100%;
+/*    max-width: 50rem; */
+    background: #eee; 
+    padding: 25px;
+    margin: 0 25% 0 25%;
+    font-family: 'Lato', sans-serif;
+}
+.campo-form {
+    width:100%; 
+    height:36px; 
+    margin:2px 0 6px; 
+    padding-left:6px; 
+    box-sizing: border-box; 
+    border-radius:3px; 
+    border:0; 
+    font-family: 'Lato', sans-serif; 
+    font-size:1em;
+}
+label span {color: #f00}
+textarea {min-height: 150px!important;}
+.btn-form {
+    display: inline-block;
+    margin-left: 85%;
+    border:0; 
+    background: #3dbd99; 
+    height: 46px; 
+    line-height: 46px; 
+    padding: 0 20px; 
+    border-radius: 3px; 
+    color:#ffffff; 
+    text-decoration: none; 
+    text-transform: uppercase; 
+    letter-spacing: 1px
+}
+
+/**Tienda**/
+.tienda {
+    width: 100%;
+    
+}
+.tienda-contenido {
+    display: flex;
+/*    flex-wrap: wrap;*/
+    justify-content: space-evenly;
+}
+.tienda-item {
+    width: 300px;
+    height: 300px;
+    border: 0.5px solid #000000;
+    flex: 0 0 calc(33.3% - 3rem);
 }

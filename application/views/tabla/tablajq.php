@@ -8,5 +8,6 @@
         <h2>Administración de usuarios</h2>
         <table id="list_users"></table>
         <div id="pager_users"></div>
+        <br><hr>
     </div>
 </section>
