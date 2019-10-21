@@ -2,11 +2,18 @@
 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+/**
+ * Modelo de Micuenta
+ * @package CI_Model
+ * @subpackage Micuenta_model
+ * @author Lebauz
+ */
+
 class Micuenta_model extends CI_Model { 
     
     /**
-     * @param $newpass type String
-     * @return true/false  type boolean
+     * @param String $newpass
+     * @return boolean 
      * Actualiza la contraseña en la db. 
      */
     public function changepass($newpass){

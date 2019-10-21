@@ -1,7 +1,13 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-//class Tienda extends CI_Controller {
+/**
+ * Controlador de Tienda
+ * @package My_Controller
+ * @subpackage Tienda
+ * @author Lebauz
+ */
+
 class Tienda extends MY_Controller {
     
     
@@ -10,11 +16,12 @@ class Tienda extends MY_Controller {
         $str = $this->load->view('vtienda','',TRUE);
         $this->cargaTemplate($str);
 
-//        ///**CABECERA**///       
+/* Código Antiguo
+//        ///CABECERA     
 //        $this->load->view('vhcabecera'); 
 //
 //
-//        ///**MENÚ**///
+//        ///MENÚ/
 //        $this->load->model("Modmenu");
 //        $this->load->view('vcabmenu'); 
 //        $data=$this->Modmenu->mGetMenuItem();
@@ -27,12 +34,12 @@ class Tienda extends MY_Controller {
 //        $this->load->view('vpiemenu');
 //
 //
-//        ///**VISTA MENÚ**///
+//        ///VISTA MENÚ
 //        $this->load->view('vtienda');
 //
 //
-//        ///**PIE DE PÁGINA**///
+//        ///PIE DE PÁGINA
 //        $this->load->view('vbcierre');
-
+*/
     }
 }

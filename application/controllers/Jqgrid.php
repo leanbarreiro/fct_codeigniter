@@ -1,7 +1,13 @@
 <?php
     defined('BASEPATH') OR exit('No direct script access allowed');
 
-    //class Home extends CI_Controller {
+/**
+ * Controlador Jqgrid
+ * @package My_Controller
+ * @subpackage Jqgrid
+ * @author Lebauz
+ */
+    
     class Jqgrid extends MY_Controller { 
 
 

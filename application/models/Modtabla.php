@@ -2,6 +2,13 @@
     
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+/**
+ * Modelo de tabla
+ * @package CI_Model
+ * @subpackage Modtabla
+ * @author Lebauz
+ */
+
 class Modtabla extends CI_Model {
     
     public function __construct() {
@@ -10,7 +17,7 @@ class Modtabla extends CI_Model {
     
     /**Consulta a la db los datos para el menú 
      * @param 
-     * @return $sql->result_array() type Array
+     * @return Array de Strings
      * Consulta a la db los datos para el menú     
      */
     public function mGetTabla() {
@@ -23,7 +30,7 @@ class Modtabla extends CI_Model {
     }
        
     /**Actualiza la tabla (borra y modifica)
-     * @param $newdatos type array
+     * @param Array $newdatos
      * @return 
       * Actualiza la tabla (borra y modifica) 
      */
@@ -77,7 +84,7 @@ class Modtabla extends CI_Model {
         }
        
     /**Realiza el insert en la db 
-     * @param $newd type array
+     * @param Array $newd
      * @return 
       * Realiza el insert en la db 
      */    

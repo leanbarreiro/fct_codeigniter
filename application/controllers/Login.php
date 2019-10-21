@@ -1,7 +1,14 @@
 <?php
 
 defined('BASEPATH') OR exit('No direct script access allowed');
-          
+  
+/**
+ * Controlador de Login
+ * @package CI_Controller
+ * @subpackage Login
+ * @author Lebauz
+ */
+
 class Login extends CI_Controller {
      
     public function index() {
@@ -14,8 +21,6 @@ class Login extends CI_Controller {
         
         
         ///**LOGIN**///
-
-        
         $this->form_validation->set_rules('email', 'Email', 'required');
         $this->form_validation->set_rules('password', 'Password', 'required|callback_verifica');
         

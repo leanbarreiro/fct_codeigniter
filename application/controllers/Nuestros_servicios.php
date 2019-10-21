@@ -1,7 +1,13 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-//class Nuestros_servicios extends CI_Controller {
+/**
+ * Controlador de Servicios
+ * @package My_Controller
+ * @subpackage Nuestros_servicios
+ * @author Lebauz
+ */
+
 class Nuestros_servicios extends MY_Controller {
     
     
@@ -11,12 +17,13 @@ class Nuestros_servicios extends MY_Controller {
 
         $str = $this->load->view('vservicios','',TRUE);
         $this->cargaTemplate($str);
-        
-//        ///**CABECERA**///  
+
+/* Código Antiguo       
+//        ///CABECERA
 //        $this->load->view('vhcabecera');                
 //
 //
-//        ///**MENÚ**///
+//        ///MENÚ
 //        $this->load->model("Modmenu");
 //        $this->load->view('vcabmenu'); 
 //        $data=$this->Modmenu->mGetMenuItem();
@@ -29,12 +36,13 @@ class Nuestros_servicios extends MY_Controller {
 //        $this->load->view('vpiemenu');                
 //
 //
-//        ///**VISTA SERVICIOS**///
+//        ///VISTA SERVICIOS
 //        $this->load->view('vservicios');                
 //
 //
-//        ///**PIE DE PÁGINA**///
+//        ///PIE DE PÁGINA
 //        $this->load->view('vbcierre');  
-
+*/
+        
     }
 }

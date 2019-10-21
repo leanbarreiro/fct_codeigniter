@@ -1,7 +1,13 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-//class Home extends CI_Controller {
+/**
+ * Controlador de Home
+ * @package My_Controller
+ * @subpackage Home
+ * @author Lebauz
+ */
+
 class Home extends MY_Controller { 
    
 

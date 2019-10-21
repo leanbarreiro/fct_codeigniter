@@ -1,7 +1,13 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-//class Contacto extends CI_Controller {
+/**
+ * Controlador de Contacto
+ * @package My_Controller
+ * @subpackage Contacto
+ * @author Lebauz
+ */
+
 class Contacto extends MY_Controller {
     
     
@@ -9,12 +15,13 @@ class Contacto extends MY_Controller {
         
         $str = $this->load->view('vcontacto','',TRUE);
         $this->cargaTemplate($str);
-            
-//        ///**CABECERA**///
+
+/* Código Antiguo
+//        ///
 //        $this->load->view('vhcabecera');
 //        
 //        
-//        ///**MENÚ**///
+//        ///
 //        $this->load->model("Modmenu");
 //        $this->load->view('vcabmenu'); 
 //        $data=$this->Modmenu->mGetMenuItem();
@@ -28,12 +35,12 @@ class Contacto extends MY_Controller {
 //        $this->load->view('vpiemenu'); 
 //        
 //        
-//        ///**VISTA CONTACTO**///
+//        ///
 //        $this->load->view('vcontacto');
 //        
 //        
-//        ///**PIE DE PÁGINA**///
+//        ///
 //        $this->load->view('vbcierre');
-                              
+*/                             
     }
 }

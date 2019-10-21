@@ -48,7 +48,7 @@ footer, header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 20px;
+    margin: 10px;
 }
 .header-content {
     align-items: center;
@@ -56,6 +56,10 @@ footer, header {
     margin-right: 3%;
 }
 
+.link-logo{
+    text-decoration: none;
+    color: #000000;
+}
 .logo {
     font-family: 'Lato', sans-serif;
     font-size: 60px;
@@ -325,11 +329,11 @@ div .alerta {
     justify-content: center;
 }
 
-#pager select {
+#pager select, #pager_users select {
     height: 25px;
     padding: 4px 0 4px 0;
 }
-#pager input {
+#pager input, #pager_users input {
     height: 15px;
     padding: 4px 0 4px 0;
 }

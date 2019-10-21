@@ -1,6 +1,13 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+/**
+ * Controlador de Micuenta
+ * @package My_Controller
+ * @subpackage Micuenta
+ * @author Lebauz
+ */
+
 class Micuenta extends MY_Controller { 
    
 

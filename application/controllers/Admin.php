@@ -1,6 +1,13 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+/**
+ * Controlador principal
+ * @package My_Controller
+ * @subpackage Admin
+ * @author Lebauz
+ */
+
 class Admin extends MY_Controller {
     
     
@@ -79,6 +86,7 @@ class Admin extends MY_Controller {
     }
 
     ////////////FUNCIONES/////////////
+    
     /** Actualiza la tabla
      * @param 
      * @return 
