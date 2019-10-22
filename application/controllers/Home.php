@@ -17,13 +17,21 @@ class Home extends MY_Controller {
 //        $prueba = new Usuario();
 
         $str = $this->load->view('vhome','',TRUE);
-        $this->cargaTemplate($str);
         
-//            ///**CABECERA**///              
+        ///>LOG
+        $datlog = new datos_log($this->session->user_data['email'], 'Login', 'LOGIN', $this->input->get(), $this->input->post());
+        $this->load->model('Log_usuarios_model');
+        $this->Log_usuarios_model->addTablaLog($datlog);
+        
+        
+        $this->cargaTemplate($str);
+ 
+/** Código Antiguo      
+//            //CABECERA              
 //            $this->load->view('vhcabecera');            
 //            
 //            
-//            ///**MENÚ**///
+//            //MENÚ
 //            $this->load->model('Modmenu');
 //            $this->load->view('vcabmenu'); 
 //            $data=$this->Modmenu->mGetMenuItem();
@@ -36,12 +44,13 @@ class Home extends MY_Controller {
 //            $this->load->view('vpiemenu');             
 //            
 //            
-//            ///**VISTA HOME**///
+//            //VISTA HOME
 //            $this->load->view('vhome');            
 //
 //            
-//            ///**PIE DE PÁGINA**///
+//            //*PIE DE PÁGINA
 //            $this->load->view('vbcierre');
-                                   
+**/                                   
     }
+    
 }

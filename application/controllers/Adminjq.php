@@ -87,6 +87,11 @@ class Adminjq extends MY_Controller {
             $respuesta->rows[$key]['cell'] = array($row["id"],$row["nombre"],$row["url"],$row['descripcion'],$row['acceso']);
         }
         
+        ///>LOG
+//        $datlog = new datos_log($this->session->user_data['email'], 'Carga Datos Menú', 'Carga', $this->input->get(), $this->input->post(), fecha_formateada());
+//        $this->load->model('Log_usuarios_model');
+//        $this->Log_usuarios_model->addTablaLog($datlog);
+        
        //Códificamos a JSON
         echo json_encode($respuesta);
     }
@@ -105,13 +110,31 @@ class Adminjq extends MY_Controller {
        //Administra la llamada a las funciones dependiendo del valor del $oper
        switch ($oper) {
            case 'add':
-                $this->Modtablajq->addTablaMenu($arraypost);
+//                $this->Modtablajq->addTablaMenu($arraypost);
+                if ($this->Modtablajq->addTablaMenu($arraypost)) {
+                    ///>LOG
+                    $datlog = new datos_log($this->session->user_data['email'], 'Menú', 'ADD', $this->input->get(), $this->input->post());
+                    $this->load->model('Log_usuarios_model');
+                    $this->Log_usuarios_model->addTablaLog($datlog);
+                }                
                  break;
            case 'edit':
-                $this->Modtablajq->editTablaMenu($arraypost);
+//                $this->Modtablajq->editTablaMenu($arraypost);
+                if ($this->Modtablajq->editTablaMenu($arraypost)) {
+                    ///>LOG
+                    $datlog = new datos_log($this->session->user_data['email'], 'Menú', 'UPDATE', $this->input->get(), $this->input->post());
+                    $this->load->model('Log_usuarios_model');
+                    $this->Log_usuarios_model->addTablaLog($datlog);
+                }   
                  break;
            case 'del':
-                $this->Modtablajq->delTablaMenu($arraypost['id']);
+//                $this->Modtablajq->delTablaMenu($arraypost['id']);
+               if ($this->Modtablajq->delTablaMenu($arraypost['id'])) {
+                    ///>LOG
+                    $datlog = new datos_log($this->session->user_data['email'], 'Menú', 'DELETE', $this->input->get(), $this->input->post());
+                    $this->load->model('Log_usuarios_model');
+                    $this->Log_usuarios_model->addTablaLog($datlog);
+                }  
                  break;
        }
     }
@@ -197,13 +220,31 @@ class Adminjq extends MY_Controller {
        //Administra la llamada a las funciones dependiendo del valor del $oper
        switch ($oper) {
            case 'add':
-                $this->Modtablajq->addTablaUsers($arraypost);
+//                $this->Modtablajq->addTablaUsers($arraypost);
+               if ($this->Modtablajq->addTablaUsers($arraypost)) {
+                    ///>LOG
+                    $datlog = new datos_log($this->session->user_data['email'], 'Usuarios', 'ADD', $this->input->get(), $this->input->post());
+                    $this->load->model('Log_usuarios_model');
+                    $this->Log_usuarios_model->addTablaLog($datlog);
+                } 
                  break;
            case 'edit':
-                $this->Modtablajq->editTablaUsers($arraypost);
+//                $this->Modtablajq->editTablaUsers($arraypost);
+                if ($this->Modtablajq->editTablaUsers($arraypost)) {
+                    ///>LOG
+                    $datlog = new datos_log($this->session->user_data['email'], 'Usuarios', 'UPDATE', $this->input->get(), $this->input->post());
+                    $this->load->model('Log_usuarios_model');
+                    $this->Log_usuarios_model->addTablaLog($datlog);
+                } 
                  break;
            case 'del':
-                $this->Modtablajq->delTablaUsers($arraypost['id']);
+//                $this->Modtablajq->delTablaUsers($arraypost['id']);
+                if ($this->Modtablajq->delTablaUsers($arraypost['id'])) {
+                     ///>LOG
+                     $datlog = new datos_log($this->session->user_data['email'], 'Usuarios', 'DELETE', $this->input->get(), $this->input->post());
+                     $this->load->model('Log_usuarios_model');
+                     $this->Log_usuarios_model->addTablaLog($datlog);
+                 } 
                  break;
        }
 

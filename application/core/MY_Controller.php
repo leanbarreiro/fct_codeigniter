@@ -7,41 +7,42 @@ class MY_CONTROLLER extends CI_Controller {
     public function __construct (){
         parent::__construct ();
       
+        //Carga la libreria session
         $this->load->library('session');
+        //Llama a la función para comprobar si el usuario está logueado
         $this->estalogueado();
      
     }
     
-    /**
+    /**Comprueba si el usuario está logueado
      * @param 
      * @return
      * Comprueba si el usuario está logueado
      */
-    function estalogueado() { //El usuario está o no registrado?
+    function estalogueado() { 
+        
         $CI =& get_instance();
      
         $usuario = $CI->session->userdata('user_data');
-        
-        if(!isset($usuario)) {
-            
+        //Si está vacio redirige al login
+        if(!isset($usuario)) {            
            redirect('login');
         }
     }
     
    
-     /**
-     * @param $vista type string
+     /**Muestra la página actual
+     * @param String $vista
      * @return 
      * Pinta la página actual
      */
-    public function cargaTemplate($vista) {
+    protected function cargaTemplate($vista) {
         
         
-        ///**CABECERA**///              
+        //CABECERA       
         echo $this->load->view('vhcabecera','',true);  
-        
-        
-        ///**MENÚ**///
+                
+        //MENÚ
         $this->load->model('Modmenu');
         echo $this->load->view('vcabmenu','',true); 
         $data=$this->Modmenu->mGetMenuItem();
@@ -55,11 +56,11 @@ class MY_CONTROLLER extends CI_Controller {
         
         
         ///**VISTA A CARGAR**///
+        //
 //        $this->load->view($vista);            
         echo $vista;
             
-
-        ///**PIE DE PÁGINA**///
+        //PIE DE PÁGINA
         echo $this->load->view('vbcierre','',true);
                
         ///**Alertas**///
@@ -88,26 +89,4 @@ class MY_CONTROLLER extends CI_Controller {
         
     }
     
-}
-
-class Usuario {
-       
-//    public function __construct (){
-//                  
-//            $usudatos = array (
-//            "Id" => $_SESSION->session->user_data['id'],
-//            "Nombre" => $_SESSION->session->user_data['first_name'],
-//            "Apellido" => $_SESSION->session->user_data['last_name'],
-//            "Email" => $_SESSION->session->user_data['email'],
-//            "Password" => $_SESSION->session->user_data['password']         
-//        );            
-//    }
-//    
-//    
-//    public function getDatosEmpleado () {
-//        
-// 
-// 
-//        return $usudatos;
-//    }
 }

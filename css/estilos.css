@@ -17,8 +17,8 @@
    padding: 5px;
 /*   padding-left: 2rem;*/
    border-radius: 7pt;
-   -webkit-flex: 1 6 85%;
-           flex: 1 6 85%;
+   -webkit-flex: 1 6 90%;
+           flex: 1 6 90%;
    -webkit-order: 2;
            order: 2;
    display: flex;
@@ -30,8 +30,8 @@
    margin: 4px;
    padding: 5px;
    border-radius: 5pt;
-   -webkit-flex: 1 6 15%;
-           flex: 1 6 15%;
+   -webkit-flex: 1 6 10%;
+           flex: 1 6 10%;
    -webkit-order: 1;
            order: 1;
    }
@@ -143,7 +143,7 @@ footer{
   font-family: 'Lato', sans-serif;
   font-size: 20px;
   width: 200px;
-  padding-left: 2rem;
+  padding-left: 1rem;
 }
 #cssmenu ul a,
 #cssmenu ul a:link,

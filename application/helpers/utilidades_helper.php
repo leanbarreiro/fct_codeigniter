@@ -1,9 +1,29 @@
 <?php
 
-function formato_dates($date) {
+function fecha_formateada() {
     
-    $CI = & get_instance();
-    $date = new DateTime($date);
+    $dactual = getdate();
     
-    return $date->format('d/m/y h:m');
+    if ($dactual['hours'] < 10) {
+        $hora = '0'.$dactual['hours'];
+    } else {
+        $hora = $dactual['hours'];
+    }
+  
+    if ($dactual['minutes'] < 10) {
+        $minutos = '0'.$dactual['minutes'];
+    } else {
+        $minutos = $dactual['minutes'];
+    }
+  
+    if ($dactual['seconds'] < 10) {
+        $segundos = '0'.$dactual['seconds'];
+    } else {
+        $segundos = $dactual['seconds'];
+    }
+  
+    
+    $respuesta = $dactual['mday']."/".$dactual['mon']."/".$dactual['year']." ".$hora.":".$minutos.":".$segundos;
+    
+    return $respuesta;
 }

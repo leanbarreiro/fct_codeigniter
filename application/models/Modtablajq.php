@@ -16,6 +16,7 @@ class Modtablajq extends CI_Model {
         
     }
     
+    
     /** Descarga datos de la tabla Menu
      * @param String $sidx
      * @param String $sord
@@ -144,7 +145,8 @@ class Modtablajq extends CI_Model {
     public function addTablaMenu($newd) {
 
         $sql = "INSERT INTO menu (nombre, url, descripcion, acceso) VALUES ( '".$newd["nombre"]."' ,'".$newd["url"]."','".$newd["descripcion"]."','".$newd["acceso"]."' )";
-        $this->db->query($sql);      
+        $this->db->query($sql);
+        return true;
     }
     
      /** Modifica datos en la db.
@@ -154,8 +156,9 @@ class Modtablajq extends CI_Model {
      */
     public function editTablaMenu($newd) {
         
-         $sql = "UPDATE menu SET nombre = '" .$newd["nombre"]. "', url ='" .$newd["url"]. "', descripcion ='" .$newd["descripcion"]. "', acceso ='" .$newd["acceso"]. "' Where Id = " .$newd['id'];                
-         $this->db->query($sql);         
+        $sql = "UPDATE menu SET nombre = '" .$newd["nombre"]. "', url ='" .$newd["url"]. "', descripcion ='" .$newd["descripcion"]. "', acceso ='" .$newd["acceso"]. "' Where Id = " .$newd['id'];                
+        $this->db->query($sql);
+        return true;         
     }
     
      /** Borra filas en la db.
@@ -172,6 +175,7 @@ class Modtablajq extends CI_Model {
             $sql = 'DELETE FROM menu WHERE id = '.$value;
             $this->db->query($sql);
         }
+        return true;
     }
     
     /*************TABLA DE USUARIOS*************/
@@ -246,7 +250,8 @@ class Modtablajq extends CI_Model {
     public function addTablaUsers($newd) {
 
         $sql = "INSERT INTO usuarios (first_name, last_name, email, nivel) VALUES ( '".$newd["first_name"]."' ,'".$newd["last_name"]."','".$newd["email"]."','".$newd["nivel"]."' )";
-        $this->db->query($sql);      
+        $this->db->query($sql);
+        return true;
     }
     
      /** Modifica datos de usuarios en la db.
@@ -257,7 +262,8 @@ class Modtablajq extends CI_Model {
     public function editTablaUsers($newd) {
         
          $sql = "UPDATE usuarios SET first_name = '" .$newd["first_name"]. "', last_name ='" .$newd["last_name"]. "', email ='" .$newd["email"]. "', nivel ='" .$newd["nivel"]. "' Where user_id = " .$newd['id'];                
-         $this->db->query($sql);         
+         $this->db->query($sql);
+         return true;
     }
     
      /** Borra filas de la tabla usuarios en la db.
@@ -274,6 +280,7 @@ class Modtablajq extends CI_Model {
             $sql = 'DELETE FROM usuarios WHERE user_id = '.$value;
             $this->db->query($sql);
         }
+        return true;
     }  
 } 
 

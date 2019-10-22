@@ -30,7 +30,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 <span>Hola, </span>
                 <p class="nomusu"><?php echo $this->session->user_data['first_name'];?></p>
                 <p class="nomusu"><?php echo $this->session->user_data['last_name'];?></p>
-                <a href="http://web/index.php/login"><input type="button" value="Salir" name="Salir" class="btn-small"/></a>
+                <a href="http://web/index.php/login/log_logout"><input type="button" value="Salir" name="Salir" class="btn-small"/></a>
             </div>
         </div>
     </header>
