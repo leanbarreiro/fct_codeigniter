@@ -56,6 +56,7 @@ class Adminjq extends MY_Controller {
             
             //Pedimos los datos a la db
             $sql = $this->Modtablajq->getItemsSearch($sField,$sString,$sOper);
+            
             //Calculamos el número de items
             $count = count($sql);
     
@@ -86,12 +87,7 @@ class Adminjq extends MY_Controller {
             $respuesta->rows[$key]['id'] = $row["id"];
             $respuesta->rows[$key]['cell'] = array($row["id"],$row["nombre"],$row["url"],$row['descripcion'],$row['acceso']);
         }
-        
-        ///>LOG
-//        $datlog = new datos_log($this->session->user_data['email'], 'Carga Datos Menú', 'Carga', $this->input->get(), $this->input->post(), fecha_formateada());
-//        $this->load->model('Log_usuarios_model');
-//        $this->Log_usuarios_model->addTablaLog($datlog);
-        
+              
        //Códificamos a JSON
         echo json_encode($respuesta);
     }
@@ -200,6 +196,7 @@ class Adminjq extends MY_Controller {
             
             $respuesta->rows[$key]['user_id'] = $row["user_id"];
             $respuesta->rows[$key]['cell'] = array($row["user_id"],$row["first_name"],$row["last_name"],$row['email'],$row['nivel']);
+            $r=0; //REVISAR CRUD USUARIO
         }
         
        //Códificamos a JSON
@@ -213,7 +210,7 @@ class Adminjq extends MY_Controller {
     */
     public function gestionTablaUsers() {
        //Recogemos los datos del post usando los filtros XSS 
-       $arraypost = $this->input->post(array('id','first_name','last_name','email','nivel') ,TRUE);
+       $arraypost = $this->input->post(array('user_id','first_name','last_name','email','nivel') ,TRUE);
        
        $oper = $this->input->post('oper', TRUE);
    

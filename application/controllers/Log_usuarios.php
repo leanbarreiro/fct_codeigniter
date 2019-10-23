@@ -31,64 +31,64 @@ class Log_usuarios extends MY_Controller {
     */
     public function cargarDatosLog() {
                
-//        //Obtenemos las variables del GET usando los filtros XSS Y creamos 
-//        //una instancia del tipo stdClass para la respuesta JSON    
-//        $pagina = $this->input->get('page', TRUE);
-//        $limite = $this->input->get('rows', TRUE);
-//        $sidx = $this->input->get('sidx', TRUE);
-//        $sord = $this->input->get('sord', TRUE);
-//        $search = $this->input->get('_search', TRUE);      
-//        $respuesta = new stdClass();
-//        
-//        //Calculamos valor del inicio de paginación
-//        $start = $limite * $pagina - $limite;
-//    
-//        //Si el índice es false le damos le valor de 1
-//        if (!$sidx) { $limite = 1; }
-//        
-//        //Comprobamos $_GET['_search'],si es true se realializa una busqueda especifica 
-//        //ó si es false cargamos la tabla entera
-//        if ($search === "true") { 
-//            
-//            $sField = $this->input->get('searchField', TRUE);
-//            $sString = $this->input->get('searchString', TRUE);
-//            $sOper = $this->input->get('searchOper', TRUE);
-//            
-//            //Pedimos los datos a la db
-//            $sql = $this->Modtablajq->getItemsSearch($sField,$sString,$sOper);
-//            //Calculamos el número de items
-//            $count = count($sql);
-//    
-//        } elseif ($search === "false") {  
-//            
-//            // Pedimos los datos a la db
-//            $sql = $this->Modtablajq->getTabla($sidx, $sord, $start, $limite);          
-//            //Consultamos el número de items
-//            $numitems = $this->Modtablajq->getNumItems();
-//            $count = $numitems[0]['count'];                                 
-//        } 
-//
-//        //Si el número de registros es mayor a 0 calculamos el número de páginas.
-//        if( $count > 0 ) {          
-//            $total_pages = ceil($count/$limite); 
-//        } else { $total_pages = 0; } 
-//        
-//        //Si la pagina es mayor al total de las mismas las igualamos.
-//        if ($pagina > $total_pages) {$pagina = $total_pages;}
-//
-//        //Se guardan en el objeto $repuesta de tipo "stdClass" los valores necesarios para montar la tabla.
-//        $respuesta->page = $pagina;
-//        $respuesta->total = $total_pages;
-//        $respuesta->records = $count;
-//
-//        foreach ($sql as $key => $row) {
-//            
-//            $respuesta->rows[$key]['id'] = $row["id"];
-//            $respuesta->rows[$key]['cell'] = array($row["id"],$row["nombre"],$row["url"],$row['descripcion'],$row['acceso']);
-//        }
-//        
-//       //Códificamos a JSON
-//        echo json_encode($respuesta);
+        //Obtenemos las variables del GET usando los filtros XSS Y creamos 
+        //una instancia del tipo stdClass para la respuesta JSON    
+        $pagina = $this->input->get('page', TRUE);
+        $limite = $this->input->get('rows', TRUE);
+        $sidx = $this->input->get('sidx', TRUE);
+        $sord = $this->input->get('sord', TRUE);
+        $search = $this->input->get('_search', TRUE);      
+        $respuesta = new stdClass();
+        
+        //Calculamos valor del inicio de paginación
+        $start = $limite * $pagina - $limite;
+    
+        //Si el índice es false le damos le valor de 1
+        if (!$sidx) { $limite = 1; }
+        
+        //Comprobamos $_GET['_search'],si es true se realializa una busqueda especifica 
+        //ó si es false cargamos la tabla entera
+        if ($search === "true") { 
+            
+            $sField = $this->input->get('searchField', TRUE);
+            $sString = $this->input->get('searchString', TRUE);
+            $sOper = $this->input->get('searchOper', TRUE);
+            
+            //Pedimos los datos a la db
+            $sql = $this->Log_usuarios_model->getSearchLog($sField,$sString,$sOper);
+            //Calculamos el número de items
+            $count = count($sql);
+    
+        } elseif ($search === "false") {  
+            
+            // Pedimos los datos a la db
+            $sql = $this->Log_usuarios_model->getTablaLog($sidx, $sord, $start, $limite);          
+            //Consultamos el número de items
+            $numitems = $this->Log_usuarios_model->getNumItemsLog();
+            $count = $numitems[0]['count'];                                 
+        } 
+
+        //Si el número de registros es mayor a 0 calculamos el número de páginas.
+        if( $count > 0 ) {          
+            $total_pages = ceil($count/$limite); 
+        } else { $total_pages = 0; } 
+        
+        //Si la pagina es mayor al total de las mismas las igualamos.
+        if ($pagina > $total_pages) {$pagina = $total_pages;}
+
+        //Se guardan en el objeto $repuesta de tipo "stdClass" los valores necesarios para montar la tabla.
+        $respuesta->page = $pagina;
+        $respuesta->total = $total_pages;
+        $respuesta->records = $count;
+
+        foreach ($sql as $key => $row) {
+            
+            $respuesta->rows[$key]['id'] = $row["id"];
+            $respuesta->rows[$key]['cell'] = array($row["id"],$row["usuario"],$row["seccion"],$row['accion'],$row['respuestaget'],$row['respuestapost'],$row['fecha']);
+        }
+        
+       //Códificamos a JSON
+        echo json_encode($respuesta);
     }
     
     /**Gestiona el crud de la tabla logs.

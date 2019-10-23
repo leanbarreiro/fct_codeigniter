@@ -27,3 +27,12 @@ function fecha_formateada() {
     
     return $respuesta;
 }
+
+function formatear_respuesta($arrayrespuesta) {
+    $strformateado = '';
+        foreach ($arrayrespuesta as $key => $value) {
+            $strformateado .= '<span class="item_array"><b>'.$key.':</b>'.$value.'</span></br>';
+        }
+        return $strformateado;
+    }
+   

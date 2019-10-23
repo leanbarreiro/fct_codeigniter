@@ -26,7 +26,7 @@ class Log_usuarios_model extends CI_Model {
      */
     public function getTablaLog($sidx, $sord, $start, $limit) { 
         
-//        $q = "SELECT id, nombre, url, descripcion, acceso FROM menu ORDER BY ".$sidx.' '.$sord.' LIMIT '.$start.' , '.$limit.'';
+        $q = "SELECT id, usuario, seccion, accion, respuestaget, respuestapost, fecha FROM log ORDER BY ".$sidx.' '.$sord.' LIMIT '.$start.' , '.$limit.'';
         $sql = $this->db->query($q);
              
         return $sql->result_array();       
@@ -39,7 +39,7 @@ class Log_usuarios_model extends CI_Model {
      */
     public function getNumItemsLog() {
 
-//        $sql = $this->db->query('SELECT COUNT(*) AS count FROM menu');
+        $sql = $this->db->query('SELECT COUNT(*) AS count FROM log');
                
         return $sql->result_array();
     }
@@ -56,7 +56,7 @@ class Log_usuarios_model extends CI_Model {
     public function getSearchLog($sField, $sString, $sOper) {       
         
         //Se guarda la consulta en consulta
-//        $consulta = 'SELECT id, nombre, url, descripcion, acceso FROM menu WHERE';
+        $consulta = 'SELECT id, usuario, seccion, accion, respuestaget, respuestapost, fecha FROM log WHERE';
         $consulta .= ' '.(strtolower($sField)).' ';
         
         //Controlamos el operador que nos envía la tabla
@@ -113,13 +113,14 @@ class Log_usuarios_model extends CI_Model {
      * @return 
      * Añade a la db     
      */
+     
     public function addTablaLog($newd) {
-        
+        $rget = '';
         $usu = $newd->__get('usuario');
         $sec = $newd->__get('seccion');
         $acc = $newd->__get('accion');
-        $rget = serialize($newd->__get('respuestaget'));
-        $rpost = serialize($newd->__get('respuestapost')); 
+        $regt = formatear_respuesta($newd->__get('respuestaget'));
+        $rpost = formatear_respuesta($newd->__get('respuestapost'));
         $idusu = "(SELECT user_id FROM usuarios WHERE email = "."'".$usu."'".")";
         
         $sql = "INSERT INTO log (usuario, seccion, accion, respuestaget, respuestapost, id_usuario) VALUES ( '".$usu."' ,'".$sec."','".$acc."','".$rget."','".$rpost."',".$idusu." )";
@@ -134,7 +135,7 @@ class Log_usuarios_model extends CI_Model {
     public function editTablaLog($newd) {
         
 //         $sql = "UPDATE menu SET nombre = '" .$newd["nombre"]. "', url ='" .$newd["url"]. "', descripcion ='" .$newd["descripcion"]. "', acceso ='" .$newd["acceso"]. "' Where Id = " .$newd['id'];                
-         $this->db->query($sql);         
+//         $this->db->query($sql);         
     }
     
      /** Borra filas en la db.
@@ -144,13 +145,13 @@ class Log_usuarios_model extends CI_Model {
      */
     public function delTablaLog($newd) {
         
-        //Separamos el string que nos llega por el separador ','
-        $idsdel = explode(',',$newd);
-        
-        foreach ($idsdel as $value) {
+//        //Separamos el string que nos llega por el separador ','
+//        $idsdel = explode(',',$newd);
+//        
+//        foreach ($idsdel as $value) {
 //            $sql = 'DELETE FROM menu WHERE id = '.$value;
-            $this->db->query($sql);
-        }
+//            $this->db->query($sql);
+//        }
     }
     
 

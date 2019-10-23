@@ -261,7 +261,7 @@ class Modtablajq extends CI_Model {
      */
     public function editTablaUsers($newd) {
         
-         $sql = "UPDATE usuarios SET first_name = '" .$newd["first_name"]. "', last_name ='" .$newd["last_name"]. "', email ='" .$newd["email"]. "', nivel ='" .$newd["nivel"]. "' Where user_id = " .$newd['id'];                
+         $sql = "UPDATE usuarios SET first_name = '" .$newd["first_name"]. "', last_name ='" .$newd["last_name"]. "', email ='" .$newd["email"]. "', nivel ='" .$newd["nivel"]. "' Where user_id = " .$newd['user_id'];                
          $this->db->query($sql);
          return true;
     }

@@ -1,20 +1,21 @@
 
+//*************** Prueba *****************//
 
 jQuery("#list0").jqGrid({
-        datatype: "local",
-        height: 250,
-        colNames:['Inv No','Date', 'Client', 'Amount','Tax','Total','Notes'],
-        colModel:[
-            {name:'id',index:'id', width:60, sorttype:"int"},
-            {name:'invdate',index:'invdate', width:90, sorttype:"date"},
-            {name:'name',index:'name', width:100},
-            {name:'amount',index:'amount', width:80, align:"right",sorttype:"float"},
-            {name:'tax',index:'tax', width:80, align:"right",sorttype:"float"},		
-            {name:'total',index:'total', width:80,align:"right",sorttype:"float"},		
-            {name:'note',index:'note', width:150, sortable:false}		
-        ],
-        multiselect: true,
-        caption: "Manipulando mi array de datos" 
+    datatype: "local",
+    height: 250,
+    colNames:['Inv No','Date', 'Client', 'Amount','Tax','Total','Notes'],
+    colModel:[
+        {name:'id',index:'id', width:60, sorttype:"int"},
+        {name:'invdate',index:'invdate', width:90, sorttype:"date"},
+        {name:'name',index:'name', width:100},
+        {name:'amount',index:'amount', width:80, align:"right",sorttype:"float"},
+        {name:'tax',index:'tax', width:80, align:"right",sorttype:"float"},		
+        {name:'total',index:'total', width:80,align:"right",sorttype:"float"},		
+        {name:'note',index:'note', width:150, sortable:false}		
+    ],
+    multiselect: true,
+    caption: "Manipulando mi array de datos" 
 });
 var mydata = [
     {id:"1",invdate:"2007-10-01",name:"test",note:"note",amount:"200.00",tax:"10.00",total:"210.00"},
@@ -29,4 +30,3 @@ var mydata = [
     ];
 for(var i=0;i<=mydata.length;i++)
     jQuery("#list0").jqGrid('addRowData',i+1,mydata[i]);
-

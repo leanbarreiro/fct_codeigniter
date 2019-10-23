@@ -351,7 +351,7 @@ div .alerta {
     padding: 4px 0 4px 0;
 }
 .ui-jqgrid-titlebar {
-        background: #3dbd99;
+    background: #3dbd99;
 }
 
 ui-widget-header {
@@ -435,4 +435,9 @@ textarea {min-height: 150px!important;}
     height: 300px;
     border: 2px solid #e1e1e1;
     flex: 0 0 calc(33.3% - 3rem);
+}
+
+.item_array {
+    line-height: 3px;
+    margin-left: 10px;
 }
