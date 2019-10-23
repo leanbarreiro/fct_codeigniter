@@ -59,6 +59,10 @@ class Adminjq extends MY_Controller {
             
             //Calculamos el número de items
             $count = count($sql);
+            
+            $datlog = new datos_log('<b>'.$this->session->user_data['email'].'</b>', 'Tabla: "menu"', '<b>SEARCH</b>', $this->input->get(), $this->input->post());
+            $this->load->model('Log_usuarios_model');
+            $this->Log_usuarios_model->addTablaLog($datlog);
     
         } elseif ($search === "false") {  
             
@@ -87,7 +91,7 @@ class Adminjq extends MY_Controller {
             $respuesta->rows[$key]['id'] = $row["id"];
             $respuesta->rows[$key]['cell'] = array($row["id"],$row["nombre"],$row["url"],$row['descripcion'],$row['acceso']);
         }
-              
+                     
        //Códificamos a JSON
         echo json_encode($respuesta);
     }
@@ -109,7 +113,7 @@ class Adminjq extends MY_Controller {
 //                $this->Modtablajq->addTablaMenu($arraypost);
                 if ($this->Modtablajq->addTablaMenu($arraypost)) {
                     ///>LOG
-                    $datlog = new datos_log($this->session->user_data['email'], 'Menú', 'ADD', $this->input->get(), $this->input->post());
+                    $datlog = new datos_log('<b>'.$this->session->user_data['email'].'</b>', 'Tabla: "menu"', '<b>ADD</b>', $this->input->get(), $this->input->post());
                     $this->load->model('Log_usuarios_model');
                     $this->Log_usuarios_model->addTablaLog($datlog);
                 }                
@@ -118,7 +122,7 @@ class Adminjq extends MY_Controller {
 //                $this->Modtablajq->editTablaMenu($arraypost);
                 if ($this->Modtablajq->editTablaMenu($arraypost)) {
                     ///>LOG
-                    $datlog = new datos_log($this->session->user_data['email'], 'Menú', 'UPDATE', $this->input->get(), $this->input->post());
+                    $datlog = new datos_log('<b>'.$this->session->user_data['email'].'</b>', 'Tabla: "menu"', '<b>UPDATE</b>', $this->input->get(), $this->input->post());
                     $this->load->model('Log_usuarios_model');
                     $this->Log_usuarios_model->addTablaLog($datlog);
                 }   
@@ -127,7 +131,7 @@ class Adminjq extends MY_Controller {
 //                $this->Modtablajq->delTablaMenu($arraypost['id']);
                if ($this->Modtablajq->delTablaMenu($arraypost['id'])) {
                     ///>LOG
-                    $datlog = new datos_log($this->session->user_data['email'], 'Menú', 'DELETE', $this->input->get(), $this->input->post());
+                    $datlog = new datos_log('<b>'.$this->session->user_data['email'].'</b>', 'Tabla: "menu"', '<b>DELETE</b>', $this->input->get(), $this->input->post());
                     $this->load->model('Log_usuarios_model');
                     $this->Log_usuarios_model->addTablaLog($datlog);
                 }  
@@ -169,6 +173,10 @@ class Adminjq extends MY_Controller {
             $sql = $this->Modtablajq->getItemsSearchUsers($sField,$sString,$sOper);
             //Calculamos el número de items
             $count = count($sql);
+            
+            $datlog = new datos_log('<b>'.$this->session->user_data['email'].'</b>', 'Tabla: "usuarios"', '<b>SEARCH</b>', $this->input->get(), $this->input->post());
+            $this->load->model('Log_usuarios_model');
+            $this->Log_usuarios_model->addTablaLog($datlog);
     
         } elseif ($search === "false") {  
             
@@ -212,6 +220,7 @@ class Adminjq extends MY_Controller {
        //Recogemos los datos del post usando los filtros XSS 
        $arraypost = $this->input->post(array('user_id','first_name','last_name','email','nivel') ,TRUE);
        
+       $id = $this->input->post('id', TRUE);
        $oper = $this->input->post('oper', TRUE);
    
        //Administra la llamada a las funciones dependiendo del valor del $oper
@@ -220,7 +229,7 @@ class Adminjq extends MY_Controller {
 //                $this->Modtablajq->addTablaUsers($arraypost);
                if ($this->Modtablajq->addTablaUsers($arraypost)) {
                     ///>LOG
-                    $datlog = new datos_log($this->session->user_data['email'], 'Usuarios', 'ADD', $this->input->get(), $this->input->post());
+                    $datlog = new datos_log('<b>'.$this->session->user_data['email'].'</b>', 'Tabla: "usuarios"', '<b>ADD</b>', $this->input->get(), $this->input->post());
                     $this->load->model('Log_usuarios_model');
                     $this->Log_usuarios_model->addTablaLog($datlog);
                 } 
@@ -229,16 +238,16 @@ class Adminjq extends MY_Controller {
 //                $this->Modtablajq->editTablaUsers($arraypost);
                 if ($this->Modtablajq->editTablaUsers($arraypost)) {
                     ///>LOG
-                    $datlog = new datos_log($this->session->user_data['email'], 'Usuarios', 'UPDATE', $this->input->get(), $this->input->post());
+                    $datlog = new datos_log('<b>'.$this->session->user_data['email'].'</b>', 'Tabla: "usuarios"', '<b>UPDATE</b>', $this->input->get(), $this->input->post());
                     $this->load->model('Log_usuarios_model');
                     $this->Log_usuarios_model->addTablaLog($datlog);
                 } 
                  break;
            case 'del':
 //                $this->Modtablajq->delTablaUsers($arraypost['id']);
-                if ($this->Modtablajq->delTablaUsers($arraypost['id'])) {
+                if ($this->Modtablajq->delTablaUsers($id)) {
                      ///>LOG
-                     $datlog = new datos_log($this->session->user_data['email'], 'Usuarios', 'DELETE', $this->input->get(), $this->input->post());
+                     $datlog = new datos_log('<b>'.$this->session->user_data['email'].'</b>', 'Tabla: "usuarios"', '<b>DELETE</b>', $this->input->get(), $this->input->post());
                      $this->load->model('Log_usuarios_model');
                      $this->Log_usuarios_model->addTablaLog($datlog);
                  } 

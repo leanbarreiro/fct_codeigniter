@@ -44,14 +44,14 @@ $(document).ready(function() {
         url: 'adminjq/cargarDatosUsu',
         datatype: 'json',
         height: '100%',
-        colNames:['Id','Nombre', 'Apellidos', 'E-mail', 'Nivel'],
+        colNames:['Id','Nombre', 'Apellidos', 'E-mail', 'Nivel',''],
         colModel:[
-            {name:'user_id',index:'user_id', width:100, align:"right",sorttype:"text", editoptions:{readonly:true,size:30}},
+            {name:'user_id',index:'user_id',key:true, width:100, align:"right",sorttype:"text", editoptions:{readonly:true,size:30}},
             {name:'first_name',index:'first_name', align:"center", width:300, editable:true, editoptions:{size:30}},
             {name:'last_name',index:'last_name', align:"center", width:385, editable:true, editoptions:{size:30}},
             {name:'email',index:'email', align:"center", width:385, editable:true, editoptions:{size:30}},
-            {name:'nivel',index:'nivel', align:"center", width:140, editable:true, editoptions:{size:30}}
-//            {name: 'myac', width:60, fixed:true, sortable:false, resize:false, formatter:'actions',formatoptions:{keys:true}}
+            {name:'nivel',index:'nivel', align:"center", width:140, editable:true, editoptions:{size:30}},
+            {name: 'myac', width:60, fixed:true, sortable:false, resize:false, formatter:'actions',formatoptions:{key:true}}
         ],
         rowNum: 5,
         rowList:[5,10,15],
@@ -67,7 +67,7 @@ $(document).ready(function() {
     
     //Llamamos al 'navigator' y le pasamos las opciones en cada caso especifico
     $("#list_users").jqGrid('navGrid','#pager_users',
-        {edit:false,del:false},                                   //optiones generales
+        {edit:false,del:false},                                             //optiones generales
         {height:290,reloadAfterSubmit:true,closeAfterEdit:false},           //opc. de edición
         {height:290,reloadAfterSubmit:true,closeAfterAdd:true},             //opc. de añadido
         {width: 460,height:260,reloadAfterSubmit:true},                     //opc. de borrado

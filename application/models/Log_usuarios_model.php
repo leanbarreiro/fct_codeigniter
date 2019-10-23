@@ -119,7 +119,7 @@ class Log_usuarios_model extends CI_Model {
         $usu = $newd->__get('usuario');
         $sec = $newd->__get('seccion');
         $acc = $newd->__get('accion');
-        $regt = formatear_respuesta($newd->__get('respuestaget'));
+        $rget = formatear_respuesta($newd->__get('respuestaget'));
         $rpost = formatear_respuesta($newd->__get('respuestapost'));
         $idusu = "(SELECT user_id FROM usuarios WHERE email = "."'".$usu."'".")";
         

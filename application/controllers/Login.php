@@ -60,7 +60,7 @@ class Login extends CI_Controller {
     }
     
     public function log_logout() {
-        $datlog = new datos_log($this->session->user_data['email'], 'Login', 'LOGOUT', $this->input->get(), $this->input->post());
+        $datlog = new datos_log('<b>'.$this->session->user_data['email'].'</b>', 'Login', '<b>LOGOUT</b>', $this->input->get(), $this->input->post());
         $this->load->model('Log_usuarios_model');
         $this->Log_usuarios_model->addTablaLog($datlog);
         redirect('login');

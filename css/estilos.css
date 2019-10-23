@@ -207,7 +207,7 @@ thead {
     color: white;
 }
 
-tr:nth-child(even){background-color: #bdffc9;}
+/*tr:nth-child(even){background-color: #bdffc9;}*/
 
 .cabtab{
     font-weight: bold;
