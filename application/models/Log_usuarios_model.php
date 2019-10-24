@@ -24,9 +24,9 @@ class Log_usuarios_model extends CI_Model {
      * @return Array de Strings
      * Consulta a la db los datos para el menú     
      */
-    public function getTablaLog($sidx, $sord, $start, $limit) { 
+    public function getTablaLogUsuarios($sidx, $sord, $start, $limit) { 
         
-        $q = "SELECT id, usuario, seccion, accion, respuestaget, respuestapost, fecha FROM log ORDER BY ".$sidx.' '.$sord.' LIMIT '.$start.' , '.$limit.'';
+        $q = "SELECT id, usuario, seccion, accion, cambios, fecha FROM log_usuarios ORDER BY ".$sidx.' '.$sord.' LIMIT '.$start.' , '.$limit.'';
         $sql = $this->db->query($q);
              
         return $sql->result_array();       
@@ -37,9 +37,9 @@ class Log_usuarios_model extends CI_Model {
      * @return Array de Strings
      * Consulta a la db el número de items del  menú     
      */
-    public function getNumItemsLog() {
+    public function getNumItemsLogUsuarios() {
 
-        $sql = $this->db->query('SELECT COUNT(*) AS count FROM log');
+        $sql = $this->db->query('SELECT COUNT(*) AS count FROM log_usuarios');
                
         return $sql->result_array();
     }
@@ -53,10 +53,10 @@ class Log_usuarios_model extends CI_Model {
      * @return Array de Strings
      * Consulta a la db un items con ciertas caracteristicas     
      */
-    public function getSearchLog($sField, $sString, $sOper) {       
+    public function getSearchLogUsuarios($sField, $sString, $sOper) {       
         
         //Se guarda la consulta en consulta
-        $consulta = 'SELECT id, usuario, seccion, accion, respuestaget, respuestapost, fecha FROM log WHERE';
+        $consulta = 'SELECT id, usuario, seccion, accion, cambios, fecha FROM log_usuarios WHERE';
         $consulta .= ' '.(strtolower($sField)).' ';
         
         //Controlamos el operador que nos envía la tabla
@@ -114,46 +114,17 @@ class Log_usuarios_model extends CI_Model {
      * Añade a la db     
      */
      
-    public function addTablaLog($newd) {
-        $rget = '';
-        $usu = $newd->__get('usuario');
-        $sec = $newd->__get('seccion');
-        $acc = $newd->__get('accion');
-        $rget = formatear_respuesta($newd->__get('respuestaget'));
-        $rpost = formatear_respuesta($newd->__get('respuestapost'));
-        $idusu = "(SELECT user_id FROM usuarios WHERE email = "."'".$usu."'".")";
+    public function addTablaLogUsuarios($newd, $oldd) {
         
-        $sql = "INSERT INTO log (usuario, seccion, accion, respuestaget, respuestapost, id_usuario) VALUES ( '".$usu."' ,'".$sec."','".$acc."','".$rget."','".$rpost."',".$idusu." )";
+        $usuario = $newd->__get('usuario');
+        $seccion = $newd->__get('seccion');
+        $accion = $newd->__get('accion');
+        $cambios = formatear_respuesta_usuarios($newd->__get('cambios'), $accion, $oldd);
+        
+        $idusuario = "(SELECT user_id FROM usuarios WHERE email = "."'".$usuario."'".")";
+        
+        $sql = "INSERT INTO log_usuarios (usuario, seccion, accion, cambios, id_usuario) VALUES ( '".$usuario."' ,'".$seccion."','".$accion."','".$cambios."',".$idusuario." )";
         $this->db->query($sql);      
     }
-    
-     /** Modifica datos en la db.
-     * @param Array $newd
-     * @return 
-     * Edita en la db     
-     */
-    public function editTablaLog($newd) {
-        
-//         $sql = "UPDATE menu SET nombre = '" .$newd["nombre"]. "', url ='" .$newd["url"]. "', descripcion ='" .$newd["descripcion"]. "', acceso ='" .$newd["acceso"]. "' Where Id = " .$newd['id'];                
-//         $this->db->query($sql);         
-    }
-    
-     /** Borra filas en la db.
-     * @param String $newd
-     * @return 
-     * Separa el string que recibe en un array y lo recorre borrando en la db     
-     */
-    public function delTablaLog($newd) {
-        
-//        //Separamos el string que nos llega por el separador ','
-//        $idsdel = explode(',',$newd);
-//        
-//        foreach ($idsdel as $value) {
-//            $sql = 'DELETE FROM menu WHERE id = '.$value;
-//            $this->db->query($sql);
-//        }
-    }
-    
 
 } 
-

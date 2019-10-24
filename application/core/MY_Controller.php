@@ -56,7 +56,6 @@ class MY_CONTROLLER extends CI_Controller {
         
         
         ///**VISTA A CARGAR**///
-        //
 //        $this->load->view($vista);            
         echo $vista;
             

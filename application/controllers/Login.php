@@ -14,13 +14,13 @@ class Login extends CI_Controller {
     public function index() {
                 
         
-        ///**CARGA DE LIBRERIAS**///
+        //CARGA DE LIBRERIAS
         $this->load->helper('url');
         $this->load->helper('form');
         $this->load->library('form_validation');
         
         
-        ///**LOGIN**///
+        //LOGIN/
         $this->form_validation->set_rules('email', 'Email', 'required');
         $this->form_validation->set_rules('password', 'Password', 'required|callback_verifica');
         
@@ -33,8 +33,9 @@ class Login extends CI_Controller {
     }
     
    
-    ///**FUNCIONES**///
-    /**
+    //FUNCIONES
+    
+    /**Llama a la función login en el modelo para vericar el usuario
      * @param 
      * @return 
      * Llama a la función login en el modelo para vericar el usuario
@@ -42,11 +43,12 @@ class Login extends CI_Controller {
     public function verifica() {    
         $email = $this->input->post('email');
         $password = $this->input->post('password');
-        
-        /**Crear hash de prueba**/
-//        $opciones = ['cost' => 12];
-//        $passhash = password_hash('123456', PASSWORD_DEFAULT, $opciones);
-        /***********************/
+
+/**Hash       
+        //Crear hash de prueba
+        $opciones = ['cost' => 12];
+        $passhash = password_hash('123456', PASSWORD_DEFAULT, $opciones);
+*/
 
         $this->load->model('Login_model');
         if($this->Login_model->login($email, $password)){ 
@@ -59,10 +61,18 @@ class Login extends CI_Controller {
         }
     }
     
+    /**Cierra la sesion
+    * @param 
+    * @return 
+    * Cierra la sesion
+    */
     public function log_logout() {
-        $datlog = new datos_log('<b>'.$this->session->user_data['email'].'</b>', 'Login', '<b>LOGOUT</b>', $this->input->get(), $this->input->post());
+        
+         //LOG - creamos una instancia del objeto 'datos_log' y enviamos los datos a la función de añadir en la tabla.
+        $datlog = new datos_log('<b>'.$this->session->user_data['email'].'</b>', 'Login', '<b>LOGOUT</b>', $this->input->post());
         $this->load->model('Log_usuarios_model');
-        $this->Log_usuarios_model->addTablaLog($datlog);
+        $this->Log_usuarios_model->addTablaLogUsuarios($datlog, "");
+        
         redirect('login');
     }
     

@@ -14,6 +14,7 @@ class Tienda extends MY_Controller {
     public function index() {
           
         $str = $this->load->view('vtienda','',TRUE);
+//        $str = 'vtienda';
         $this->cargaTemplate($str);
 
 /* Código Antiguo

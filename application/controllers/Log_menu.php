@@ -2,25 +2,25 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 /**
- * Controlador del log de acciones de usuario
+ * Controlador del log de tabla "menu"
  * @package My_Controller
- * @subpackage Log_usuarios
+ * @subpackage Log_menu
  * @author Lebauz
  */
 
-class Log_usuarios extends MY_Controller {
+class Log_menu extends MY_Controller {
     
     public function __construct() {
         parent::__construct();
         
         //Carga el modelo
-        $this->load->model("Log_usuarios_model");
+        $this->load->model("Log_menu_model");
     }
 
     public function index() {
         
         //Carga la vista y la enviamos al controlador principal
-        $str = $this->load->view('log_usuarios','',TRUE);
+        $str = $this->load->view('log_menu','',TRUE);
         $this->cargaTemplate($str);
     }
     
@@ -29,7 +29,7 @@ class Log_usuarios extends MY_Controller {
     * @return JSON
     * Pide los datos a la db y los carga en la tabla.     
     */
-    public function cargarDatosLogUsuarios() {
+    public function cargarDatosLogMenu() {
                
         //Obtenemos las variables del GET usando los filtros XSS Y creamos 
         //una instancia del tipo stdClass para la respuesta JSON    
@@ -54,7 +54,7 @@ class Log_usuarios extends MY_Controller {
             $sOper = $this->input->get('searchOper', TRUE);
             
             //Pedimos los datos a la db
-            $sql = $this->Log_usuarios_model->getSearchLogUsuarios($sField,$sString,$sOper);
+            $sql = $this->Log_menu_model->getSearchLogMenu($sField,$sString,$sOper);
             
             //Calculamos el número de items
             $count = count($sql);
@@ -62,9 +62,9 @@ class Log_usuarios extends MY_Controller {
         } elseif ($search === "false") {  
             
             // Pedimos los datos a la db
-            $sql = $this->Log_usuarios_model->getTablaLogUsuarios($sidx, $sord, $start, $limite);          
+            $sql = $this->Log_menu_model->getTablaLogMenu($sidx, $sord, $start, $limite);          
             //Consultamos el número de items
-            $numitems = $this->Log_usuarios_model->getNumItemsLogUsuarios();
+            $numitems = $this->Log_menu_model->getNumItemsLogMenu();
             $count = $numitems[0]['count'];                                 
         } 
 
@@ -96,7 +96,7 @@ class Log_usuarios extends MY_Controller {
     * @return JSON
     * Busca, añade, modifica y borra.     
     */
-    public function gestionTablaLogUsuarios() {
+    public function gestionTablaLogMenu() {
  
 /*
 //       //Recogemos los datos del post usando los filtros XSS 

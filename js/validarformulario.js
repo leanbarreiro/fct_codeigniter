@@ -1,9 +1,9 @@
  
- window.onload = function () {
+$(window).on('load', function() { 
      
     document.formupass.addEventListener('submit',validar);
 
- }
+ })
 function validarInput() {
     
   var text1 = document.getElementById("nomf");

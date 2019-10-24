@@ -1,8 +1,8 @@
 
 <section>
     <div class="right">
-        <h2 class="titulo">Logs de acciones de usuarios</h2>
-        <table id="listlog"></table>
-        <div id="pagerlog"></div>
+        <h2 class="titulo">Action Log - tabla "usuarios"</h2>
+        <table id="listlogusuarios"></table>
+        <div id="pagerlogusuarios"></div>
     </div>
 </section>

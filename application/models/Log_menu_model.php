@@ -9,20 +9,28 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @author Lebauz
  */
 
-class Modtablajq extends CI_Model {
-    protected $tabla = 'menu';
-    protected $fields = ['id', 'nombre', 'url', 'descripcion', 'acceso'];
+class Log_menu_model extends CI_Model {
+    
     public function __construct() {
         parent::__construct();
         
     }
     
-    public function getDatosActuales($id, $tabla) {
-        $q = "SELECT * FROM ".$tabla." WHERE id =".$id;
+    /** Consulta el último id registrado
+    * @param String $sidx
+    * @param String $sord
+    * @param String $start
+    * @param $limit 
+    * @return Array de Strings   
+    */
+    public function getUltimoId($tabla) {
+
+        $q = "SELECT MAX(id) as id FROM ".$tabla;
         $sql = $this->db->query($q);
              
         return $sql->result_array();  
     }
+    
     
     /** Descarga datos de la tabla Menu
      * @param String $sidx
@@ -32,27 +40,27 @@ class Modtablajq extends CI_Model {
      * @return Array de Strings
      * Consulta a la db los datos para el menú     
      */
-    public function getTabla($sidx, $sord, $start, $limit) { 
+    public function getTablaLogMenu($sidx, $sord, $start, $limit) { 
         
-        $q = "SELECT " . join(",",$this->fields) . " FROM $this->tabla WHERE habilitado = 1 ORDER BY ".$sidx.' '.$sord.' LIMIT '.$start.' , '.$limit.'';
+        $q = "SELECT id, usuario, seccion, accion, cambios, fecha FROM log_menu ORDER BY ".$sidx.' '.$sord.' LIMIT '.$start.' , '.$limit.'';
         $sql = $this->db->query($q);
              
         return $sql->result_array();       
     }
-      
+    
      /** Consulta el número de items totales
      * @param 
      * @return Array de Strings
      * Consulta a la db el número de items del  menú     
      */
-    public function getNumItems() {
+    public function getNumItemsLogMenu() {
 
-        $sql = $this->db->query('SELECT COUNT(*) AS count FROM '.$this->tabla.' WHERE habilitado = 1');
+        $sql = $this->db->query('SELECT COUNT(*) AS count FROM log_menu');
                
         return $sql->result_array();
     }
-     
-    /*************TABLA ITEMS DE MENÚ*************/
+      
+    /************* TABLA LOG *************/
     
     /** Busqueda de items en db
      * @param String $sField
@@ -61,10 +69,10 @@ class Modtablajq extends CI_Model {
      * @return Array de Strings
      * Consulta a la db un items con ciertas caracteristicas     
      */
-    public function getItemsSearch($sField, $sString, $sOper) {       
+    public function getSearchLogMenu($sField, $sString, $sOper) {       
         
         //Se guarda la consulta en consulta
-        $consulta = "SELECT " . join(",",$this->fields) . " FROM $this->tabla WHERE";
+        $consulta = 'SELECT id, usuario, seccion, accion, cambios, fecha FROM log_menu WHERE';
         $consulta .= ' '.(strtolower($sField)).' ';
         
         //Controlamos el operador que nos envía la tabla
@@ -116,47 +124,23 @@ class Modtablajq extends CI_Model {
         return $sql->result_array();
     }
     
-     /** Añade un item a la db.
+     /** Añade un registro a la tabla log_menu.
      * @param Array $newd 
      * @return 
      * Añade a la db     
      */
-    public function addTablaMenu($newd) {
+    public function addTablaLogMenu($newd, $oldd) {
+        
+        $usuario = $newd->__get('usuario');
+        $seccion = $newd->__get('seccion');
+        $accion = $newd->__get('accion');   
+        $cambios = formatear_respuesta_menu($newd->__get('cambios'), $accion, $oldd);
+        
+        $idusuario = "(SELECT user_id FROM usuarios WHERE email = "."'".$usuario."'".")";      
+        
+        $sql = "INSERT INTO log_menu (usuario, seccion, accion, cambios, id_usuario) VALUES ( '".$usuario."' ,'".$seccion."','".$accion."','".$cambios."',".$idusuario." )";
+        $this->db->query($sql);      
+    }
+    
 
-        $sql = "INSERT INTO ".$this->tabla." (nombre, url, descripcion, acceso) VALUES ( '".$newd["nombre"]."' ,'".$newd["url"]."','".$newd["descripcion"]."','".$newd["acceso"]."' )";
-        $this->db->query($sql);
-        return true;
-    }
-    
-     /** Modifica datos en la db.
-     * @param Array $newd
-     * @return 
-     * Edita en la db     
-     */
-    public function editTablaMenu($newd) {
-        
-        $sql = "UPDATE ".$this->tabla." SET nombre = '" .$newd["nombre"]. "', url ='" .$newd["url"]. "', descripcion ='" .$newd["descripcion"]. "', acceso ='" .$newd["acceso"]. "' Where Id = " .$newd['id'];                
-        $this->db->query($sql);
-        return true;         
-    }
-    
-     /** Borra filas en la db.
-     * @param String $newd
-     * @return 
-     * Separa el string que recibe en un array y lo recorre borrando en la db     
-     */
-    public function delTablaMenu($newd) {
-        
-        //Separamos el string que nos llega por el separador ','
-        $idsdel = explode(',',$newd);
-        
-        foreach ($idsdel as $value) {
-            $sql = "UPDATE ".$this->tabla." SET habilitado = 0 WHERE id = ".$value;
-//            $sql = 'DELETE FROM menu WHERE id = '.$value;
-            $this->db->query($sql);
-        }
-        return true;
-    }
-    
 } 
-

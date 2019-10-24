@@ -7,18 +7,16 @@ class datos_log {
     protected $usuario;
     protected $seccion;
     protected $accion;
-    protected $respuestaget;
-    protected $respuestapost;
+    protected $cambios;
     protected $fecha;
 
     public function __construct($usuario = NULL, $seccion = NULL, $accion = NULL,
-                                $respuestaget = NULL, $respuestapost = NULL, $fecha = NULL) {
+                                $cambios = NULL, $fecha = NULL) {
         
         $this->usuario = $usuario;
         $this->seccion = $seccion;
         $this->accion = $accion;
-        $this->respuestaget = $respuestaget;
-        $this->respuestapost = $respuestapost;
+        $this->cambios = $cambios;
         $this->fecha = $fecha;     
     }
     
