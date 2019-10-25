@@ -9,12 +9,12 @@ $("#listlogmenu").jqGrid({
     height: '100%',
     colNames:['Id','Usuario', 'Seccion', 'Accion', 'Cambios', 'Fecha'],
     colModel:[
-        {name:'id',index:'id', width:50, align:"center",sorttype:"text", editoptions:{readonly:true,size:30}},
+        {name:'id',index:'id', width:100, align:"center",sorttype:"text", editoptions:{readonly:true,size:30}},
         {name:'usuario',index:'usuario', align:"center", width:300, editable:true, editoptions:{size:30}},
-        {name:'seccion',index:'seccion', align:"center", width:250, editable:true, editoptions:{size:30}},
+        {name:'seccion',index:'seccion', align:"center", width:220, editable:true, editoptions:{size:30}},
         {name:'accion',index:'accion', align:"center", width:100, editable:true, editoptions:{size:30}},
         {name:'cambios',index:'cambios', align:"left", width:600, editable:true, editoptions:{size:30}},
-        {name:'fecha',index:'fecha', align:"center", width:200, editable:true, editoptions:{size:30}}
+        {name:'fecha',index:'fecha', align:"center", width:180, editable:true, editoptions:{size:30}}
     ],
     rowNum: 20,
     rowList:[10,20,30,50],

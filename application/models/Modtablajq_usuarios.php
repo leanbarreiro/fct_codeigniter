@@ -138,10 +138,9 @@ class Modtablajq_usuarios extends CI_Model {
          return true;
     }
     
-     /** Borra filas de la tabla usuarios en la db.
+     /** Desabilita una fila de la tabla usuarios en la db.
      * @param String $newd
-     * @return 
-     * Separa el string que recibe en un array y lo recorre borrando en la db     
+     * @return Boolean
      */
     public function delTablaUsers($newd) {
         

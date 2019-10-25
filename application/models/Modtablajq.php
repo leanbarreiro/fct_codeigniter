@@ -140,10 +140,9 @@ class Modtablajq extends CI_Model {
         return true;         
     }
     
-     /** Borra filas en la db.
+     /**Desabilita la fila en la db.
      * @param String $newd
-     * @return 
-     * Separa el string que recibe en un array y lo recorre borrando en la db     
+     * @return boolean   
      */
     public function delTablaMenu($newd) {
         

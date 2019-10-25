@@ -119,7 +119,7 @@ class Log_usuarios_model extends CI_Model {
         $usuario = $newd->__get('usuario');
         $seccion = $newd->__get('seccion');
         $accion = $newd->__get('accion');
-        $cambios = formatear_respuesta_usuarios($newd->__get('cambios'), $accion, $oldd);
+        $cambios = formatear_respuesta($newd->__get('cambios'), $accion, $oldd);
         
         $idusuario = "(SELECT user_id FROM usuarios WHERE email = "."'".$usuario."'".")";
         

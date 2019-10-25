@@ -7,7 +7,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @subpackage Adminjq
  * @author Lebauz
  */
-
 class Adminjq extends MY_Controller {
     
     public function __construct() {
@@ -61,11 +60,7 @@ class Adminjq extends MY_Controller {
             
             //Calculamos el número de items
             $count = count($sql);
-            
-//            //LOG - creamos una instancia del objeto 'datos_log' y enviamos los datos a la función de añadir en la tabla.
-//            $datlog = new datos_log('<b>'.$this->session->user_data['email'].'</b>', 'Tabla: "menu"', '<b>SEARCH</b>', $this->input->post());
-//            $this->Log_menu_model->addTablaLog($datlog);
-//    
+  
         } elseif ($search === "false") {  
             
             // Pedimos los datos a la db
@@ -108,20 +103,20 @@ class Adminjq extends MY_Controller {
        //Recogemos los datos del post usando los filtros XSS 
        $arraypost = $this->input->post(array('id','nombre','url','descripcion','acceso') ,TRUE);
        $oper = $this->input->post('oper', TRUE);
-   
+       
        //Administra la llamada a las funciones dependiendo del valor del $oper
        switch ($oper) {
            case 'add':
-               
+               //Consultamos el ultimo id insertado
                $ultimoid = $this->Log_menu_model->getUltimoId('menu');
                
                 if ($this->Modtablajq->addTablaMenu($arraypost)) {
                     
                     //LOG - creamos una instancia del objeto 'datos_log' y enviamos los datos a la función de añadir en la tabla.
-                    $datlog = new datos_log('<b>'.$this->session->user_data['email'].'</b>', 'Tabla: "menu"', '<b>ADD</b>', $this->input->post());
+                    $datlog = new datos_log($this->session->user_data['email'], 'Tabla: "menu"', 'ADD', $this->input->post());
                     $this->Log_menu_model->addTablaLogMenu($datlog, $ultimoid);
                 }                
-                 break;
+                break;
            case 'edit':
                
                $arraydatosold = $this->Modtablajq->getDatosActuales($arraypost['id'],'menu');
@@ -129,10 +124,10 @@ class Adminjq extends MY_Controller {
                 if ($this->Modtablajq->editTablaMenu($arraypost)) {
                     
                     //LOG - creamos una instancia del objeto 'datos_log' y enviamos los datos a la función de añadir en la tabla.
-                    $datlog = new datos_log('<b>'.$this->session->user_data['email'].'</b>', 'Tabla: "menu"', '<b>UPDATE</b>', $this->input->post());
+                    $datlog = new datos_log($this->session->user_data['email'], 'Tabla: "menu"', 'UPDATE', $this->input->post());
                     $this->Log_menu_model->addTablaLogMenu($datlog, $arraydatosold);
                 }   
-                 break;
+                break;
            case 'del':
                
                $arraydatosold = $this->Modtablajq->getDatosActuales($arraypost['id'],'menu');
@@ -140,10 +135,10 @@ class Adminjq extends MY_Controller {
                if ($this->Modtablajq->delTablaMenu($arraypost['id'])) {
                    
                     //LOG - creamos una instancia del objeto 'datos_log' y enviamos los datos a la función de añadir en la tabla.
-                    $datlog = new datos_log('<b>'.$this->session->user_data['email'].'</b>', 'Tabla: "menu"', '<b>DELETE</b>', $this->input->post());
+                    $datlog = new datos_log($this->session->user_data['email'], 'Tabla: "menu"', 'DELETE', $this->input->post());
                     $this->Log_menu_model->addTablaLogMenu($datlog, $arraydatosold);
                 }  
-                 break;
+                break;
        }
     }
     
@@ -180,10 +175,6 @@ class Adminjq extends MY_Controller {
             $sql = $this->Modtablajq_usuarios->getItemsSearchUsers($sField,$sString,$sOper);
             //Calculamos el número de items
             $count = count($sql);
-            
-//            //LOG - creamos una instancia del objeto 'datos_log' y enviamos los datos a la función de añadir en la tabla.
-//            $datlog = new datos_log('<b>'.$this->session->user_data['email'].'</b>', 'Tabla: "usuarios"', '<b>SEARCH</b>', $this->input->post());
-//            $this->Log_usuarios_model->addTablaLog($datlog);
     
         } elseif ($search === "false") {  
             
@@ -213,7 +204,7 @@ class Adminjq extends MY_Controller {
             $respuesta->rows[$key]['cell'] = array($row["user_id"],$row["first_name"],$row["last_name"],$row['email'],$row['nivel']);
         }
         
-       //Códificamos a JSON
+        //Códificamos a JSON
         echo json_encode($respuesta);
     }
     
@@ -232,13 +223,13 @@ class Adminjq extends MY_Controller {
        //Administra la llamada a las funciones dependiendo del valor de $oper que viene por POST
        switch ($oper) {
            case 'add':
-               
+               //Consultamos el ultimo id insertado
                $ultimoid = $this->Log_menu_model->getUltimoId('menu');
                
                if ($this->Modtablajq_usuarios->addTablaUsers($arraypost)) {
                    
                     //LOG - creamos una instancia del objeto 'datos_log' y enviamos los datos a la función de añadir en la tabla.
-                    $datlog = new datos_log('<b>'.$this->session->user_data['email'].'</b>', 'Tabla: "usuarios"', '<b>ADD</b>', $this->input->post());
+                    $datlog = new datos_log($this->session->user_data['email'], 'Tabla: "usuarios"', 'ADD', $this->input->post());
                     $this->Log_usuarios_model->addTablaLogUsuarios($datlog, $ultimoid);
                 } 
                 
@@ -250,19 +241,20 @@ class Adminjq extends MY_Controller {
                 if ($this->Modtablajq_usuarios->editTablaUsers($arraypost)) {
                     
                     //LOG - creamos una instancia del objeto 'datos_log' y enviamos los datos a la función de añadir en la tabla.
-                    $datlog = new datos_log('<b>'.$this->session->user_data['email'].'</b>', 'Tabla: "usuarios"', '<b>UPDATE</b>', $this->input->post());
+                    $datlog = new datos_log($this->session->user_data['email'], 'Tabla: "usuarios"', 'UPDATE', $this->input->post());
                     $this->Log_usuarios_model->addTablaLogUsuarios($datlog, $arraydatosold);
                 }
                  
                  break;
            case 'del':
                
-                $arraydatosold = $this->Modtablajq_usuarios->getDatosActuales($arraypost['user_id'],'usuarios');
+                $id_post = $this->input->post('id', TRUE);
+                $arraydatosold = $this->Modtablajq_usuarios->getDatosActuales($id_post,'usuarios');
                
-                if ($this->Modtablajq_usuarios->delTablaUsers($arraypost['id'])) {
+                if ($this->Modtablajq_usuarios->delTablaUsers($id_post)) {
 
                      //LOG - creamos una instancia del objeto 'datos_log' y enviamos los datos a la función de añadir en la tabla.
-                     $datlog = new datos_log('<b>'.$this->session->user_data['email'].'</b>', 'Tabla: "usuarios"', '<b>DELETE</b>', $this->input->post());
+                     $datlog = new datos_log($this->session->user_data['email'], 'Tabla: "usuarios"', 'DELETE', $this->input->post());
                      $this->Log_usuarios_model->addTablaLogUsuarios($datlog, $arraydatosold);
                  }                          
                  break;

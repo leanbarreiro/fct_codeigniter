@@ -55,14 +55,14 @@ class MY_CONTROLLER extends CI_Controller {
         echo $this->load->view('vpiemenu','',true);
         
         
-        ///**VISTA A CARGAR**///
+        //VISTA A CARGAR
 //        $this->load->view($vista);            
         echo $vista;
             
-        //PIE DE PÁGINA
+        //PIE
         echo $this->load->view('vbcierre','',true);
                
-        ///**Alertas**///
+/********************Alertas parte antigua********************/
         $addok = $this->session->flashdata('addok');
         $updateok = $this->session->flashdata('updateok');
         $deleteok = $this->session->flashdata('deleteok');
@@ -82,7 +82,7 @@ class MY_CONTROLLER extends CI_Controller {
         if($repassok == 'bien') {
             $this->load->view('alertapassiguales');           
         }
-        /****************************/
+/*********************************************************/
 
         echo $this->load->view('fin','',true);
         

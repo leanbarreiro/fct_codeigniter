@@ -19,7 +19,7 @@ class Home extends MY_Controller {
         $str = $this->load->view('vhome','',TRUE);
         
         ///>LOG
-        $datlog = new datos_log('<b>'.$this->session->user_data['email'].'</b>', 'Login', '<b>LOGIN</b>', $this->input->post());
+        $datlog = new datos_log($this->session->user_data['email'], 'Login', 'LOGIN', $this->input->post());
         $this->load->model('Log_usuarios_model');
         $this->Log_usuarios_model->addTablaLogUsuarios($datlog, "");
         

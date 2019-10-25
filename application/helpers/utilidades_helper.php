@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * Formatea la hora 
+ * @package 
+ * @subpackage fecha_formateada
+ * @author Lebauz
+ */
 function fecha_formateada() {
     
     $dactual = getdate();
@@ -27,67 +33,50 @@ function fecha_formateada() {
     
     return $respuesta;
 }
-   
-function formatear_respuesta_menu($arrayrespuesta, $accion, $olddatos) {
 
-    $strformateado = '';
-    $accionformateada = substr("$accion", 3, -4);
-    switch ($accionformateada) {
+/**
+ * Formatea la respuesta para la columna "cambios" de los logs
+ * @param Array $arrayrespuesta, String $accion, Array $olddatos
+ * @return String $str
+ * @subpackage formatear_respuesta
+ * @author Lebauz
+ */
+function formatear_respuesta($arrayrespuesta, $accion, $olddatos) {
+
+    $str = '';
+    switch ($accion) {
         case 'ADD':
             foreach ($arrayrespuesta as $key => $value) {
-                        $strformateado .= '<span class="item_array"><b>'.$key.':</b>'.$value.'</span></br>';
-                    }
-            $strformateado .= '<span class="item_array"><b>new id:</b>'.$olddatos[0]['id'].'</span></br>';
-            return $strformateado;
+                if ($key != 'oper' && $key != 'id') { 
+                    $str .= $key.':'.$value.';';
+                }
+            }
+            $str .= 'id:'.$olddatos[0]['id'];
+            return $str;
             break;
         case 'UPDATE':
 
                 $resultado_comparacion = array_diff($arrayrespuesta, $olddatos[0]);
 
-                 foreach ($resultado_comparacion as $key => $value) {
-                        $strformateado .= '<span class="item_array"><b>campo:</b> '.$key.' <b>old:</b> '.$olddatos[0][$key].' <b>new:</b> '.$value.'</span></br>';
+                foreach ($resultado_comparacion as $key => $value) {
+                    if ($key != 'oper' && $key != 'id') { 
+                        $str .= $key.':'.$olddatos[0][$key].'->'.$value.';';
                     }
-                 $strformateado .= '<span class="item_array"><b>id:</b>'.$olddatos[0]['id'].'</span></br>';
-                 return $strformateado;
+                }
+                if (array_key_exists('id', $olddatos[0])) {
+                    $str .= 'id:'.$olddatos[0]['id'];
+                }
+                if (array_key_exists('user_id', $olddatos[0])) {
+                    $str .= 'id:'.$olddatos[0]['user_id'];
+                }             
+                return $str;
 
             break;
         case 'DELETE':
             foreach ($olddatos[0] as $key => $value) {
-                        $strformateado .= '<span class="item_array"><b>'.$key.':</b>'.$value.'</span></br>';
-                    }
-            return $strformateado;
-            break;
-    }
-}
-
-function formatear_respuesta_usuarios($arrayrespuesta, $accion, $olddatos) {
-
-    $strformateado = '';
-    $accionformateada = substr("$accion", 3, -4);
-    switch ($accionformateada) {
-        case 'ADD':
-            foreach ($arrayrespuesta as $key => $value) {
-                        $strformateado .= '<span class="item_array"><b>'.$key.':</b>'.$value.'</span></br>';
-                    }
-            $strformateado .= '<span class="item_array"><b>new id:</b>'.$olddatos[0]['user_id'].'</span></br>';
-            return $strformateado;
-            break;
-        case 'UPDATE':
-
-                $resultado_comparacion = array_diff($arrayrespuesta, $olddatos[0]);
-
-                 foreach ($resultado_comparacion as $key => $value) {
-                        $strformateado .= '<span class="item_array"><b>campo:</b> '.$key.' <b>old:</b> '.$olddatos[0][$key].' <b>new:</b> '.$value.'</span></br>';
-                    }
-                 $strformateado .= '<span class="item_array"><b>id:</b>'.$olddatos[0]['user_id'].'</span></br>';
-                 return $strformateado;
-
-            break;
-        case 'DELETE':
-            foreach ($olddatos[0] as $key => $value) {
-                        $strformateado .= '<span class="item_array"><b>'.$key.':</b>'.$value.'</span></br>';
-                    }
-            return $strformateado;
+                    $str .= $key.':'.$value.';';
+            }
+            return $str;
             break;
     }
 }
