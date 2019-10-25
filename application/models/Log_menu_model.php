@@ -8,12 +8,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @subpackage Modtablajq
  * @author Lebauz
  */
-
 class Log_menu_model extends CI_Model {
     
     public function __construct() {
-        parent::__construct();
-        
+        parent::__construct();       
     }
     
     /** Consulta el último id registrado
@@ -150,6 +148,4 @@ class Log_menu_model extends CI_Model {
         $sql = "INSERT INTO log_menu (usuario, seccion, accion, cambios, id_usuario) VALUES ( '".$usuario."' ,'".$seccion."','".$accion."','".$cambios."',".$idusuario." )";
         $this->db->query($sql);      
     }
-    
-
 } 

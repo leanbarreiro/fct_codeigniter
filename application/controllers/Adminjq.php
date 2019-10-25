@@ -2,7 +2,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 /**
- * Controlador principal con jqgrid
+ * Controlador Admin jqgrid
  * @package My_Controller
  * @subpackage Adminjq
  * @author Lebauz

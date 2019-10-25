@@ -7,7 +7,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @subpackage Log_menu
  * @author Lebauz
  */
-
 class Log_menu extends MY_Controller {
     
     public function __construct() {

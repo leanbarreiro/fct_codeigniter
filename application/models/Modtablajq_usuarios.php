@@ -8,19 +8,24 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @subpackage Modtablajq
  * @author Lebauz
  */
-
 class Modtablajq_usuarios extends CI_Model {
+    
     protected $tabla = 'usuarios';
     protected $fields = ['user_id', 'first_name', 'last_name', 'email', 'nivel'];
+    
     public function __construct() {
-        parent::__construct();
-        
+        parent::__construct();   
     }
     
-    
+     /** Consulta los datos actuales
+     * @param String $id
+     * @param String $tabla
+     * @return Array de Strings
+     */
     public function getDatosActuales($id, $tabla) {
-        $q = "SELECT * FROM ".$tabla." WHERE user_id =".$id;
-        $sql = $this->db->query($q);
+        
+        $consulta = "SELECT * FROM ".$tabla." WHERE user_id =".$id;
+        $sql = $this->db->query($consulta);
              
         return $sql->result_array();  
     }
@@ -35,8 +40,8 @@ class Modtablajq_usuarios extends CI_Model {
      */
     public function getTablaUsers($sidx, $sord, $start, $limit) { 
         
-        $q = "SELECT " . join(",",$this->fields) . " FROM $this->tabla WHERE habilitado = 1 ORDER BY ".$sidx.' '.$sord.' LIMIT '.$start.' , '.$limit.'';
-        $sql = $this->db->query($q);
+        $consulta = "SELECT " . join(",",$this->fields) . " FROM $this->tabla WHERE habilitado = 1 ORDER BY ".$sidx.' '.$sord.' LIMIT '.$start.' , '.$limit.'';
+        $sql = $this->db->query($consulta);
   
         return $sql->result_array();       
     }
@@ -107,8 +112,7 @@ class Modtablajq_usuarios extends CI_Model {
         if ($flag === true) {
             $consulta .= $sOper;
             $consulta .= " '".$sString."'"; 
-        }
-        
+        }        
         //Realiza la consulta     
         $sql = $this->db->query($consulta);
 

@@ -1,6 +1,12 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+/**
+ * Controlador Principal
+ * @package CI_Controller
+ * @subpackage MY_CONTROLLER
+ * @author Lebauz
+ */
 class MY_CONTROLLER extends CI_Controller {
       
     
@@ -11,7 +17,6 @@ class MY_CONTROLLER extends CI_Controller {
         $this->load->library('session');
         //Llama a la función para comprobar si el usuario está logueado
         $this->estalogueado();
-     
     }
     
     /**Comprueba si el usuario está logueado
@@ -29,16 +34,14 @@ class MY_CONTROLLER extends CI_Controller {
            redirect('login');
         }
     }
-    
-   
-     /**Muestra la página actual
-     * @param String $vista
-     * @return 
-     * Pinta la página actual
-     */
+      
+    /**Muestra la página actual
+    * @param String $vista
+    * @return 
+    * Pinta la página actual
+    */
     protected function cargaTemplate($vista) {
-        
-        
+           
         //CABECERA       
         echo $this->load->view('vhcabecera','',true);  
                 

@@ -8,18 +8,24 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @subpackage Modtablajq
  * @author Lebauz
  */
-
 class Modtablajq extends CI_Model {
+    
     protected $tabla = 'menu';
     protected $fields = ['id', 'nombre', 'url', 'descripcion', 'acceso'];
+    
     public function __construct() {
-        parent::__construct();
-        
+        parent::__construct();    
     }
     
+    /** Consulta los datos actuales
+    * @param String $id
+    * @param String $tabla
+    * @return Array de Strings
+    */    
     public function getDatosActuales($id, $tabla) {
-        $q = "SELECT * FROM ".$tabla." WHERE id =".$id;
-        $sql = $this->db->query($q);
+        
+        $consulta = "SELECT * FROM ".$tabla." WHERE id =".$id;
+        $sql = $this->db->query($consulta);
              
         return $sql->result_array();  
     }
@@ -34,8 +40,8 @@ class Modtablajq extends CI_Model {
      */
     public function getTabla($sidx, $sord, $start, $limit) { 
         
-        $q = "SELECT " . join(",",$this->fields) . " FROM $this->tabla WHERE habilitado = 1 ORDER BY ".$sidx.' '.$sord.' LIMIT '.$start.' , '.$limit.'';
-        $sql = $this->db->query($q);
+        $consulta = "SELECT " . join(",",$this->fields) . " FROM $this->tabla WHERE habilitado = 1 ORDER BY ".$sidx.' '.$sord.' LIMIT '.$start.' , '.$limit.'';
+        $sql = $this->db->query($consulta);
              
         return $sql->result_array();       
     }
@@ -67,7 +73,7 @@ class Modtablajq extends CI_Model {
         $consulta = "SELECT " . join(",",$this->fields) . " FROM $this->tabla WHERE";
         $consulta .= ' '.(strtolower($sField)).' ';
         
-        //Controlamos el operador que nos envía la tabla
+        //Controlamos el operador que nos llega por post
         switch ($sOper) { 
             case 'eq':
                 $sOper = "=";

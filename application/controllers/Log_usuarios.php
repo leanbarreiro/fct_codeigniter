@@ -7,7 +7,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @subpackage Log_usuarios
  * @author Lebauz
  */
-
 class Log_usuarios extends MY_Controller {
     
     public function __construct() {
