@@ -30,8 +30,7 @@ class Log_menu extends MY_Controller {
     */
     public function cargarDatosLogMenu() {
                
-        //Obtenemos las variables del GET usando los filtros XSS Y creamos 
-        //una instancia del tipo stdClass para la respuesta JSON    
+        //Obtenemos las variables del GET usando los filtros XSS Y creamos una instancia del tipo stdClass para la respuesta JSON    
         $pagina = $this->input->get('page', TRUE);
         $limite = $this->input->get('rows', TRUE);
         $sidx = $this->input->get('sidx', TRUE);

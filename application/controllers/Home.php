@@ -25,7 +25,7 @@ class Home extends MY_Controller {
         
         
         $this->cargaTemplate($str);
- 
+        
 /** Código Antiguo      
 //            //CABECERA              
 //            $this->load->view('vhcabecera');            

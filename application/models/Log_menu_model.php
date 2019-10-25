@@ -24,9 +24,9 @@ class Log_menu_model extends CI_Model {
     public function getUltimoId($tabla) {
 
         $consulta = "SELECT MAX(id)+1 as id FROM ".$tabla;
-//        $consulta = "select last_insert_id() as id";
+        //        $consulta = "select last_insert_id() as id";
         $sql = $this->db->query($consulta);
-             
+
         return $sql->result_array();  
     }
     

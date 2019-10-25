@@ -29,7 +29,7 @@ $("#listlogmenu").jqGrid({
 //    groupingView : {
 //            groupField : ['usuario']
 //    },
-    caption: "Tabla de Log - Acciones de los Usuarios",
+    caption: 'Tabla de Logs - Acciones de los usuarios sobre la tabla "menu"',
     editurl:"log_menu/gestionTablaLogMenu"
 });
 

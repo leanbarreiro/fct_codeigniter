@@ -56,8 +56,7 @@ class MY_CONTROLLER extends CI_Controller {
             echo $this->load->view('velemenu', $datos, true);
         };  
         echo $this->load->view('vpiemenu','',true);
-        
-        
+             
         //VISTA A CARGAR
 //        $this->load->view($vista);            
         echo $vista;

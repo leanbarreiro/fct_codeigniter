@@ -1,5 +1,5 @@
 <?php
-    
+
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 /**
@@ -40,9 +40,9 @@ class Log_usuarios_model extends CI_Model {
      */
     public function getTablaLogUsuarios($sidx, $sord, $start, $limit) { 
         
-        $consulta = "SELECT id, usuario, seccion, accion, cambios, fecha FROM log_usuarios ORDER BY ".$sidx.' '.$sord.' LIMIT '.$start.' , '.$limit.'';
         //Pedimos los datos junto a una sub-consulta para que nos devuelva el nombre del usuario
-
+        $consulta = "SELECT id, usuario, seccion, accion, cambios, fecha FROM log_usuarios ORDER BY ".$sidx.' '.$sord.' LIMIT '.$start.' , '.$limit.'';
+        
 /**Consulta
         $consulta = "SELECT log_usuarios.id, usuarios.email as usuario, log_usuarios.seccion, log_usuarios.accion, log_usuarios.cambios, log_usuarios.fecha 
                         FROM log_usuarios 
