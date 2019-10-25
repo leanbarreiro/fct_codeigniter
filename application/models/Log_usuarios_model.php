@@ -26,8 +26,13 @@ class Log_usuarios_model extends CI_Model {
      */
     public function getTablaLogUsuarios($sidx, $sord, $start, $limit) { 
         
-        $q = "SELECT id, usuario, seccion, accion, cambios, fecha FROM log_usuarios ORDER BY ".$sidx.' '.$sord.' LIMIT '.$start.' , '.$limit.'';
-        $sql = $this->db->query($q);
+    $consulta = "SELECT id, usuario, seccion, accion, cambios, fecha FROM log_usuarios ORDER BY ".$sidx.' '.$sord.' LIMIT '.$start.' , '.$limit.'';
+        //Pedimos los datos junto a una sub-consulta para que nos devuelva el nombre del usuario
+//        $consulta = "SELECT log_usuarios.id, usuarios.email as usuario, log_usuarios.seccion, log_usuarios.accion, log_usuarios.cambios, log_usuarios.fecha 
+//                        FROM log_usuarios 
+//                        INNER JOIN usuarios ON log_usuarios.id = usuarios.user_id
+//                        ORDER BY ".$sidx.' '.$sord.' LIMIT '.$start.' , '.$limit.'';        
+        $sql = $this->db->query($consulta);
              
         return $sql->result_array();       
     }
