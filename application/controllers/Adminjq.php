@@ -224,7 +224,7 @@ class Adminjq extends MY_Controller {
        switch ($oper) {
            case 'add':
                //Consultamos el ultimo id insertado
-               $ultimoid = $this->Log_menu_model->getUltimoId('menu');
+               $ultimoid = $this->Log_usuarios_model->getUltimoID('usuarios');
                
                if ($this->Modtablajq_usuarios->addTablaUsers($arraypost)) {
                    

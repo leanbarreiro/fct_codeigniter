@@ -25,7 +25,8 @@ class Log_menu_model extends CI_Model {
     */
     public function getUltimoId($tabla) {
 
-        $consulta = "SELECT MAX(id) as id FROM ".$tabla;
+        $consulta = "SELECT MAX(id)+1 as id FROM ".$tabla;
+//        $consulta = "select last_insert_id() as id";
         $sql = $this->db->query($consulta);
              
         return $sql->result_array();  
@@ -41,13 +42,16 @@ class Log_menu_model extends CI_Model {
      * Consulta a la db los datos para el menú     
      */
     public function getTablaLogMenu($sidx, $sord, $start, $limit) { 
-        
+
+        //Pedimos los datos junto a una sub-consulta para que nos devuelva el nombre del usuario        
         $consulta = "SELECT id, usuario, seccion, accion, cambios, fecha FROM log_menu ORDER BY ".$sidx.' '.$sord.' LIMIT '.$start.' , '.$limit.'';
-        //Pedimos los datos junto a una sub-consulta para que nos devuelva el nombre del usuario
-//        $consulta = "SELECT log_menu.id, usuarios.email as usuario, log_menu.seccion, log_menu.accion, log_menu.cambios, log_menu.fecha 
-//                        FROM log_menu 
-//                        INNER JOIN usuarios ON log_menu.id_usuario = usuarios.user_id
-//                        ORDER BY ".$sidx.' '.$sord.' LIMIT '.$start.' , '.$limit.'';
+
+/**Consulta
+        $consulta = "SELECT log_menu.id, usuarios.email as usuario, log_menu.seccion, log_menu.accion, log_menu.cambios, log_menu.fecha 
+                        FROM log_menu 
+                       INNER JOIN usuarios ON log_menu.id_usuario = usuarios.user_id
+                        ORDER BY ".$sidx.' '.$sord.' LIMIT '.$start.' , '.$limit.'';
+ */
         $sql = $this->db->query($consulta);
              
         return $sql->result_array();       

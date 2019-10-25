@@ -63,7 +63,7 @@ class MY_CONTROLLER extends CI_Controller {
         echo $this->load->view('vbcierre','',true);
                
 /********************Alertas parte antigua********************/
-        $addok = $this->session->flashdata('addok');
+        $addok = $this->session->flashdata('addok');                   
         $updateok = $this->session->flashdata('updateok');
         $deleteok = $this->session->flashdata('deleteok');
         $repassok = $this->session->flashdata('repassok');
