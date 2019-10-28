@@ -64,7 +64,7 @@ class MY_CONTROLLER extends CI_Controller {
         //PIE
         echo $this->load->view('vbcierre','',true);
                
-/********************Alertas parte antigua********************/
+/**Alertas parte antigua********************/
         $addok = $this->session->flashdata('addok');                   
         $updateok = $this->session->flashdata('updateok');
         $deleteok = $this->session->flashdata('deleteok');

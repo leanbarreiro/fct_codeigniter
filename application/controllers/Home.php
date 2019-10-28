@@ -9,12 +9,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  */
 
 class Home extends MY_Controller { 
-   
-
+    
 
     public function index() {
-        
-//        $prueba = new Usuario();
+
 
         $str = $this->load->view('vhome','',TRUE);
         
@@ -25,7 +23,7 @@ class Home extends MY_Controller {
         
         
         $this->cargaTemplate($str);
-        
+
 /** Código Antiguo      
 //            //CABECERA              
 //            $this->load->view('vhcabecera');            

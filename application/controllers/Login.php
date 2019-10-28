@@ -8,7 +8,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @subpackage Login
  * @author Lebauz
  */
-
 class Login extends CI_Controller {
      
     public function index() {
@@ -18,7 +17,6 @@ class Login extends CI_Controller {
         $this->load->helper('url');
         $this->load->helper('form');
         $this->load->library('form_validation');
-        
         
         //LOGIN/
         $this->form_validation->set_rules('email', 'Email', 'required');
@@ -31,9 +29,6 @@ class Login extends CI_Controller {
             redirect('home');
         }
     }
-    
-   
-    //FUNCIONES
     
     /**Llama a la función login en el modelo para vericar el usuario
      * @param 

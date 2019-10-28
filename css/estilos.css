@@ -331,7 +331,7 @@ div .alerta {
     border-radius: 2px;
 /*   display: block;*/
     height: 20px;
-    width: 100%;
+    width: 80%;
     text-align: center;
     margin: 1px auto;
     color: #fff;
@@ -383,6 +383,28 @@ ui-widget-header {
 
 }
 
+
+/**Cuenta**/
+.box {
+    width: 100%;
+    
+}
+.contenido-box {
+    display: flex;
+/*    flex-wrap: wrap;*/
+    justify-content: space-evenly;
+    margin-bottom: 3rem;
+}
+
+.box-item {
+    width: 300px;
+    height: 300px;
+    border: 2px solid #e1e1e1;
+    flex: 0 0 calc(33.3% - 3rem);
+    padding: 20px;
+}
+
+/**********/
 .form-contacto {
     width: 100%;
 /*    max-width: 50rem; */
@@ -441,3 +463,51 @@ textarea {min-height: 150px!important;}
     line-height: 3px;
     margin-left: 10px;
 }
+
+/**Ficha de usuario**/
+
+.form-usu {
+    width: 40%;
+    margin-left: 30%;
+    font-size: 1.2rem;
+}
+
+ .wrapper {
+   
+    list-style-type: none;
+    padding: 0;
+    border-radius: 3px;
+  }
+  .form-row {
+    display: flex;
+    justify-content: flex-end;
+    padding: .5em;
+  }
+  .form-row > label {
+    font-family: 'Lato', sans-serif;
+    color: #333;
+    padding: .5em 1em .5em 0;
+    flex: 1;
+  }
+  .form-row > input {
+    flex: 2;
+  }
+  .form-row > input,
+  .form-row > .btn-ficha {
+    padding: .5em;
+  }
+  .form-row > .btn-ficha {
+   
+   display: inline-block;
+    margin-left: 85%;
+    border:0; 
+    background: #3dbd99; 
+    height: 46px; 
+    line-height: 46px; 
+    padding: 0 20px; 
+    border-radius: 3px; 
+    color:#ffffff; 
+    text-decoration: none; 
+    text-transform: uppercase; 
+    letter-spacing: 1px
+  }

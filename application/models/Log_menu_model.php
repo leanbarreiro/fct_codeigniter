@@ -44,12 +44,12 @@ class Log_menu_model extends CI_Model {
         //Pedimos los datos junto a una sub-consulta para que nos devuelva el nombre del usuario        
         $consulta = "SELECT id, usuario, seccion, accion, cambios, fecha FROM log_menu ORDER BY ".$sidx.' '.$sord.' LIMIT '.$start.' , '.$limit.'';
 
-/**Consulta
+/**Consulta 
         $consulta = "SELECT log_menu.id, usuarios.email as usuario, log_menu.seccion, log_menu.accion, log_menu.cambios, log_menu.fecha 
-                        FROM log_menu 
-                       INNER JOIN usuarios ON log_menu.id_usuario = usuarios.user_id
-                        ORDER BY ".$sidx.' '.$sord.' LIMIT '.$start.' , '.$limit.'';
- */
+                       FROM log_menu 
+                       LEFT JOIN usuarios ON log_menu.id_usuario = usuarios.user_id
+                       ORDER BY ".$sidx.' '.$sord.' LIMIT '.$start.' , '.$limit.'';*/
+
         $sql = $this->db->query($consulta);
              
         return $sql->result_array();       
@@ -146,6 +146,7 @@ class Log_menu_model extends CI_Model {
         $idusuario = "(SELECT user_id FROM usuarios WHERE email = "."'".$usuario."'".")";      
         
         $sql = "INSERT INTO log_menu (usuario, seccion, accion, cambios, id_usuario) VALUES ( '".$usuario."' ,'".$seccion."','".$accion."','".$cambios."',".$idusuario." )";
-        $this->db->query($sql);      
+        $this->db->query($sql);
+        
     }
 } 

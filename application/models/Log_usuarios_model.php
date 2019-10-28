@@ -52,7 +52,7 @@ class Log_usuarios_model extends CI_Model {
     
         $sql = $this->db->query($consulta);
              
-        return $sql->result_array();       
+        return $sql->result_array();
     }
     
      /** Consulta el número de items totales

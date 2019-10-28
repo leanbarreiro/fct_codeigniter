@@ -9,15 +9,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @subpackage Login_model
  * @author Lebauz
  */
-
 class Login_model extends CI_Model { 
     
     
-     /**
-     * @param $email, $password type String
-     * @return boolean
-     * Comprueba si el usuario existe en la db 
-     */
+    /** Comprueba si el usuario existe en la db 
+    * @param String $email, 
+    * @param String $password 
+    * @return boolean
+    */
     public function login($email, $password) {
         
         $this->load->database();
@@ -42,6 +41,7 @@ class Login_model extends CI_Model {
                     "email" =>  $row->email,
                     "password" => $row->password,
                     "nivel" => $row->nivel,
+                    "habilitado" => $row->habilitado,
                     "data_login" => getdate()),
                 );
             $this->session->set_userdata($usuactual);
