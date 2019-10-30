@@ -31,7 +31,9 @@ class Login_model extends CI_Model {
 //            $opciones = ['cost' => 12];
 //            $passhash = password_hash($password, PASSWORD_DEFAULT, $opciones);           
             /***********/
-            
+            $timezone= 1;
+            $fecha = gmdate("j/m/Y H:i:s", time() + 3600*($timezone+date("I")));
+      
             //Verifico la contraseña coincide con la de la db
             if(password_verify($password, $row->password)){ 
                 $usuactual = array('user_data'=>array(
@@ -42,7 +44,8 @@ class Login_model extends CI_Model {
                     "password" => $row->password,
                     "nivel" => $row->nivel,
                     "habilitado" => $row->habilitado,
-                    "data_login" => getdate()),
+//                    "data_login" => getdate()),
+                    "data_login" => $fecha),
                 );
             $this->session->set_userdata($usuactual);
             return TRUE;           

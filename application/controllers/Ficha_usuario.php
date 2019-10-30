@@ -73,7 +73,7 @@ class Ficha_usuario extends MY_Controller {
                       
         }
         
-        $this->Ficha_usuario_model->ModificarUsuario($data, $post);
+        $this->Ficha_usuario_model->AddArchivoUsuario($data, $post);
         
         
     }

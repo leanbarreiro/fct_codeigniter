@@ -42,7 +42,7 @@
                 <br><br>
                 <span id="error" style='color:red'></span>
                 <br><br>
-                <input id="btncam" type="submit" value="Cambiar" name="camsubmit" class="btn-small"/>
+                <input id="btncam" type="submit" value="Cambiar" name="camsubmit" class="btn-login"/>
             </form>
         </div>
         </div>

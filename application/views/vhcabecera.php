@@ -23,9 +23,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             </div>
             <div class="header-content">
                 <p class="nivelusu">Rol: <span><?php echo $this->session->user_data['nivel'];?></span></p>
-                <p class="nivelusu">Inicio de sesión: <span><?php if($this->session->user_data['data_login']['hours'] < 10){echo str_pad($this->session->user_data['data_login']['hours'], 2, "0", STR_PAD_LEFT) + 2;} else {echo $this->session->user_data['data_login']['hours']+2;};?>:
-                                                             <?php if($this->session->user_data['data_login']['minutes'] < 10){echo str_pad($this->session->user_data['data_login']['minutes'], 2, "0", STR_PAD_LEFT);} else {echo $this->session->user_data['data_login']['minutes'];};?>:
-                                                            <?php if($this->session->user_data['data_login']['seconds'] < 10){echo str_pad($this->session->user_data['data_login']['seconds'], 2, "0", STR_PAD_LEFT);} else {echo $this->session->user_data['data_login']['seconds'];};?></span></p>
+                <p class="nivelusu">Sesión: <span><?php echo $this->session->user_data['data_login'];?></span></p>
                 <hr> 
                 <span>Hola, </span>
                 <p class="nomusu"><?php echo $this->session->user_data['first_name'];?></p>

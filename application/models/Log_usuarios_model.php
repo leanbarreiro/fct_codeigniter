@@ -146,21 +146,30 @@ class Log_usuarios_model extends CI_Model {
         
         $idusuario = "(SELECT user_id FROM usuarios WHERE email = "."'".$usuario."'".")";
         
-        $sql = "INSERT INTO log_usuarios (usuario, seccion, accion, cambios, id_usuario) VALUES ( '".$usuario."' ,'".$seccion."','".$accion."','".$cambios."',".$idusuario." )";
+        $sql = "INSERT INTO log_usuarios (usuario, seccion, accion, cambios, id_usuario) VALUES ( '".$usuario."' ,'".$seccion."','".$accion."','"
+                                                                                                                    .$cambios."',".$idusuario." )";
         $this->db->query($sql);      
     }
     
+        
+     /** Añade un regitro a la tabla de log del usuario.
+     * @param Object $datalog  datos del log
+     * @param Array $data  datos del archivo
+     * @return .    
+     */
     public function addTablaLogUsuarioFicha($datalog, $data) {
         
         $usuario = $datalog->__get('usuario');
         $seccion = $datalog->__get('seccion');
         $accion = $datalog->__get('accion');
         $datos = $datalog->__get('cambios');
-        $cambios = "id_usu:".$datos['user_id'].">nom_original:".$data['success']['client_name'].">nombre:".$data['success']['file_name'].">ruta:".$data['success']['full_path'];
+        $cambios = "id_usu:".$datos['user_id'].">nom_original:".$data['success']['client_name'].">nombre:"
+                                    .$data['success']['file_name'].">ruta:".$data['success']['full_path'];
         
         $idusuario = "(SELECT user_id FROM usuarios WHERE email = "."'".$usuario."'".")";
         
-        $sql = "INSERT INTO log_usuarios (usuario, seccion, accion, cambios, id_usuario) VALUES ( '".$usuario."' ,'".$seccion."','".$accion."','".$cambios."',".$idusuario." )";
+        $sql = "INSERT INTO log_usuarios (usuario, seccion, accion, cambios, id_usuario) VALUES ( '".$usuario."' ,'".$seccion."','".$accion."','"
+                                                                                                                    .$cambios."',".$idusuario." )";
         $this->db->query($sql);      
     }
     
