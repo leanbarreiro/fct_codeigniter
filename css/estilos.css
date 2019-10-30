@@ -337,16 +337,38 @@ div .alerta {
     color: #fff;
     font-size: 14px;
 }
+
+input[type="file"] {
+    margin-right: 2%;
+    background: #000000;
+    text-decoration: none;
+    border: 0px;
+    border-radius: 2px;
+/*   display: block;*/
+    height: 20px;
+    width: 80%;
+    text-align: center;
+    margin: 1px auto;
+    color: #fff;
+    font-size: 14px;
+}
+
 .contenedor-form {
     display: flex;
     justify-content: center;
 }
 
-#pager select, #pager_users select {
+#pager select, 
+#pager_users select, 
+#pagerlogmenu select, 
+#pagerlogusuarios select {
     height: 25px;
     padding: 4px 0 4px 0;
 }
-#pager input, #pager_users input {
+#pager input, 
+#pager_users input,
+#pagerlogmenu input, 
+#pagerlogusuarios input {
     height: 15px;
     padding: 4px 0 4px 0;
 }
@@ -468,7 +490,7 @@ textarea {min-height: 150px!important;}
 
 .form-usu {
     width: 40%;
-    margin-left: 30%;
+    margin-left: 28%;
     font-size: 1.2rem;
 }
 
@@ -485,12 +507,14 @@ textarea {min-height: 150px!important;}
   }
   .form-row > label {
     font-family: 'Lato', sans-serif;
+    font-weight: bold;
     color: #333;
     padding: .5em 1em .5em 0;
     flex: 1;
   }
   .form-row > input {
     flex: 2;
+    font-size: 1rem;
   }
   .form-row > input,
   .form-row > .btn-ficha {
@@ -510,4 +534,8 @@ textarea {min-height: 150px!important;}
     text-decoration: none; 
     text-transform: uppercase; 
     letter-spacing: 1px
+  }
+  
+  .ficha_title {
+      text-align: center;
   }

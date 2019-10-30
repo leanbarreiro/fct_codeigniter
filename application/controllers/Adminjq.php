@@ -201,7 +201,7 @@ class Adminjq extends MY_Controller {
         foreach ($sql as $key => $row) {
             
             $respuesta->rows[$key]['user_id'] = $row["user_id"];
-            $respuesta->rows[$key]['cell'] = array($row["user_id"],$row["first_name"],$row["last_name"],$row['email'],$row['nivel']);
+            $respuesta->rows[$key]['cell'] = array($row["user_id"],$row["first_name"],$row["last_name"],$row['email'],$row['nivel'],$row['ultimo_archivo_subido']);
         }
         
         //Códificamos a JSON
@@ -217,8 +217,9 @@ class Adminjq extends MY_Controller {
        //Recogemos los datos del post usando los filtros XSS 
        $arraypost = $this->input->post(array('user_id','first_name','last_name','email','nivel') ,TRUE);
        
-//       $id = $this->input->post('user_id', TRUE);
+       $id = $this->input->post('id', TRUE);
        $oper = $this->input->post('oper', TRUE);
+
    
        //Administra la llamada a las funciones dependiendo del valor de $oper que viene por POST
        switch ($oper) {
@@ -236,9 +237,9 @@ class Adminjq extends MY_Controller {
                  break;
            case 'edit':
                
-                $arraydatosold = $this->Modtablajq_usuarios->getDatosActuales($arraypost['user_id'],'usuarios');
+                $arraydatosold = $this->Modtablajq_usuarios->getDatosActuales($id,'usuarios');
                
-                if ($this->Modtablajq_usuarios->editTablaUsers($arraypost)) {
+                if ($this->Modtablajq_usuarios->editTablaUsers($arraypost, $id)) {
                     
                     //LOG - creamos una instancia del objeto 'datos_log' y enviamos los datos a la función de añadir en la tabla.
                     $datlog = new datos_log($this->session->user_data['email'], 'Tabla: "usuarios"', 'UPDATE', $this->input->post());

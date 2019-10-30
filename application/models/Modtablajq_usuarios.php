@@ -11,7 +11,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Modtablajq_usuarios extends CI_Model {
     
     protected $tabla = 'usuarios';
-    protected $fields = ['user_id', 'first_name', 'last_name', 'email', 'nivel'];
+    protected $fields = ['user_id', 'first_name', 'last_name', 'email', 'nivel', 'ultimo_archivo_subido'];
     
     public function __construct() {
         parent::__construct();   
@@ -136,9 +136,9 @@ class Modtablajq_usuarios extends CI_Model {
      * @return 
      * Edita en la db     
      */
-    public function editTablaUsers($newd) {
+    public function editTablaUsers($newd, $id) {
         
-         $sql = "UPDATE ".$this->tabla." SET first_name = '" .$newd["first_name"]. "', last_name ='" .$newd["last_name"]. "', email ='" .$newd["email"]. "', nivel ='" .$newd["nivel"]. "' Where user_id = " .$newd['user_id'];                
+         $sql = "UPDATE ".$this->tabla." SET first_name = '" .$newd["first_name"]. "', last_name ='" .$newd["last_name"]. "', email ='" .$newd["email"]. "', nivel ='" .$newd["nivel"]. "' Where user_id = " .$id;                
          $this->db->query($sql);
          return true;
     }

@@ -59,7 +59,7 @@ function formatear_respuesta($arrayrespuesta, $accion, $olddatos) {
                 $resultado_comparacion = array_diff($arrayrespuesta, $olddatos[0]);
 
                 foreach ($resultado_comparacion as $key => $value) {
-                    if ($key != 'oper' && $key != 'id') { 
+                    if ($key != 'oper' && $key != 'id' && $key != 'submit' ) { 
                         $str .= $key.':'.$olddatos[0][$key].'->'.$value.';';
                     }
                 }
@@ -68,7 +68,10 @@ function formatear_respuesta($arrayrespuesta, $accion, $olddatos) {
                 }
                 if (array_key_exists('user_id', $olddatos[0])) {
                     $str .= 'id:'.$olddatos[0]['user_id'];
-                }             
+                }
+//                if (array_key_exists('archivo', $file)) {
+//                    $str .= 'archivo: '.$file['archivo']['name'];
+//                }
                 return $str;
 
             break;
@@ -80,3 +83,14 @@ function formatear_respuesta($arrayrespuesta, $accion, $olddatos) {
             break;
     }
 }
+
+/**
+ * Genera un string random
+ * @param int $length
+ * @return String 
+ * @subpackage RandomString
+ * @author Lebauz
+ */
+function RandomString($length = 10) { 
+    return substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, $length); 
+} 
