@@ -163,8 +163,8 @@ class Log_usuarios_model extends CI_Model {
         $seccion = $datalog->__get('seccion');
         $accion = $datalog->__get('accion');
         $datos = $datalog->__get('cambios');
-        $cambios = "id_usu:".$datos['user_id'].">nom_original:".$data['success']['client_name'].">nombre:"
-                                    .$data['success']['file_name'].">ruta:".$data['success']['full_path'];
+        $cambios = "id_usu:".$datos['user_id']."||nom_original:".$data['success']['client_name'].">nombre:"
+                                    .$data['success']['file_name']."||ruta:".$data['success']['full_path'];
         
         $idusuario = "(SELECT user_id FROM usuarios WHERE email = "."'".$usuario."'".")";
         

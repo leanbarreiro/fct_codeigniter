@@ -37,7 +37,7 @@
                 </li>
 
                 <li class="form-row">
-                  <input type="submit" value="modificar" name="submit" class="btn-ficha"/>
+                  <input type="submit" value="subir" name="submit" class="btn-ficha"/>
                 </li>
               </ul>
              </form>

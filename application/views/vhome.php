@@ -1,7 +1,7 @@
-<section>
-    <div class="home">
+<section class="home center-h center-v">
+<!--    <div class="home center-h center-v">-->
         <div class="home-contenido">
-            <h1>Home</h1>   
+            <p>Home</p>  
         </div>  
-    </div>
+<!--    </div>-->
 </section>
