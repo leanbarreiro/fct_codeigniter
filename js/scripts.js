@@ -83,5 +83,5 @@ $(document).ready(function() {
             $(location).attr('href','http://web/index.php/ficha_usuario?id='+id);           
         }, 
         position:"last"
-     });
+     }); 
 });

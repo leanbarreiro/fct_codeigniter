@@ -10,7 +10,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <!--<link rel="STYLESHEET" type="text/css" href="<?php base_url()?>/bootstrap-4.3.1/css/bootstrap.min.css"/>-->
         <!--<link rel="STYLESHEET" type="text/css" href="<?php base_url()?>/css/ui.jqgrid-bootstrap4.css"/>-->
         
-        <link rel="STYLESHEET" type="text/css" href="<?php base_url()?>/css/estilos.css"/>       
+        <link rel="STYLESHEET" type="text/css" href="<?php base_url()?>/css/estilos.css"/>
+        
 </head>
 <body>
     <header>

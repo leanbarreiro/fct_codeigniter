@@ -4,6 +4,7 @@
         <script src="<?php base_url()?>/js/jquery.jqGrid.min.js"></script>
         <!--<script src="<?php base_url()?>/bootstrap-4.3.1/js/bootstrap.min.js" type="text/javascript"></script>-->
         <script src="<?php base_url()?>/js/scripts.js"></script>
+        <!--<script src="<?php base_url()?>/js/archivo.js"></script>-->
          <script src="<?php base_url()?>/js/scripts_log_menu.js"></script>
          <script src="<?php base_url()?>/js/scripts_log_usuarios.js"></script>
          <script src="<?php base_url()?>/js/scripts_prueba.js"></script>

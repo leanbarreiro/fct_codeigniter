@@ -71,4 +71,103 @@ class Ficha_usuario_model extends CI_Model {
         
          redirect('adminjq');
     }
-} 
+    
+    
+    /** Consulta el número de usuarios
+     * @param 
+     * @return Array de Strings
+     * Consulta a la db el número de usuarios     
+     */
+    public function getNumItemsFiles($id) {
+
+        $sql = $this->db->query('SELECT COUNT(*) AS count FROM archivo WHERE id_usuario = '.$id);
+              
+        return $sql->result_array();
+    }
+    
+      
+     /** Busqueda de archivos del usuario en db
+     * @param String $sField
+     * @param String $sString
+     * @param String $sOper
+     * @return Array de Strings    
+     */
+    public function getItemsSearchFiles($sField, $sString, $sOper, $id) {       
+        
+        //Se guarda la consulta en consulta
+        $consulta = "SELECT id_archivo, nombre, nombre_origen, tipo, ruta, size, fecha FROM archivo WHERE id_usuario = ".$id." AND ";
+        $consulta .= ' '.(strtolower($sField)).' ';
+        
+        //Controlamos el operador que nos envía la tabla
+        switch ($sOper) { 
+            case 'eq':
+                $sOper = "=";
+                $flag = true;
+                break;
+            case 'ne': 
+                $sOper = "!=";
+                $flag = true;
+                break;
+            case 'lt':
+                $sOper = "<";
+                $flag = true;
+                break;
+            case 'gt':
+                $sOper = ">";
+                $flag = true;
+                break;
+            case 'bw': 
+                $sOper = "LIKE";
+                $flag = false;
+                $consulta .= $sOper;
+                $consulta .= " '".$sString."%'"; 
+                break;
+            case 'ew': 
+                $sOper = "LIKE";
+                $flag = false;
+                $consulta .= $sOper;
+                $consulta .= " '%".$sString."'"; 
+                break;
+            case 'cn': 
+                $sOper = "LIKE";
+                $flag = false;
+                $consulta .= $sOper;
+                $consulta .= " '%".$sString."%'"; 
+                break;
+        }
+        
+        if ($flag === true) {
+            $consulta .= $sOper;
+            $consulta .= " '".$sString."'"; 
+        }        
+        //Realiza la consulta     
+        $sql = $this->db->query($consulta);
+
+        return $sql->result_array();
+    }
+    
+    /** Descarga datos de la tabla Usuarios
+     * @param String $sidx
+     * @param String $sord
+     * @param String $start
+     * @param $limit 
+     * @return Array de Strings
+     * Consulta a la db los datos de los usuarios    
+     */
+    public function getTablaFiles($sidx, $sord, $start, $limit, $id) {
+        
+        $consulta = "SELECT id_archivo, nombre, nombre_origen, tipo, ruta, size, fecha FROM archivo WHERE id_usuario = ".$id.
+                            " ORDER BY ".$sidx.' '.$sord.' LIMIT '.$start.' , '.$limit.'';
+        $sql = $this->db->query($consulta);
+  
+        return $sql->result_array();   
+    }
+    
+    public function getNombreFile($id) {
+        $consulta = "SELECT nombre FROM archivo WHERE id_archivo = ".$id;
+        $sql = $this->db->query($consulta);
+  
+        return $sql->result_array();   
+    }
+
+}

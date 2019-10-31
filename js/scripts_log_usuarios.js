@@ -24,6 +24,7 @@ $("#listlogusuarios").jqGrid({
     rownumbers: true,
     sortorder: "desc",
     forceFit: true,
+//    shrinkToFit: false,
 //    multiselect: true,
 //    grouping:true,
 //    groupingView : {
