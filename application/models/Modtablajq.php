@@ -11,7 +11,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Modtablajq extends CI_Model {
     
     protected $tabla = 'menu';
-    protected $fields = ['id', 'nombre', 'url', 'descripcion', 'acceso'];
+    protected $fields = ['id', 'nombre', 'url', 'descripcion', 'acceso', 'habilitado'];
     
     public function __construct() {
         parent::__construct();    
@@ -24,7 +24,7 @@ class Modtablajq extends CI_Model {
     */    
     public function getDatosActuales($id, $tabla) {
         
-        $consulta = "SELECT * FROM ".$tabla." WHERE id =".$id;
+        $consulta = "SELECT id, nombre, url, descripcion, acceso FROM ".$tabla." WHERE id =".$id;
         $sql = $this->db->query($consulta);
              
         return $sql->result_array();  
@@ -163,5 +163,30 @@ class Modtablajq extends CI_Model {
         return true;
     }
     
+    
+    /**PRUEBA SELECT GENERAL**/
+    public function generalSelect($arrayColumnas, $tabla, $where, $whereContenido, $orderby, $orderbyContenidoArray, $limit, $limitContenidoArray) {
+              
+        $consulta = "SELECT ";
+        $consulta .= join(",",$arrayColumnas);
+        $consulta .= " FROM ";
+        $consulta .= $tabla;
+        if ($where === true) {
+            $consulta .= " WHERE ";
+            $consulta .= $whereContenido;
+        }; 
+        if ($orderby === true) {
+            $consulta .= " ORDER BY ";
+            $consulta .= join(" ",$orderbyContenidoArray);
+        }; 
+        if ($limit === true) {
+            $consulta .= " LIMIT ";
+            $consulta .= join(",",$limitContenidoArray);
+        }; 
+        $consulta .= ";";
+
+        $sql = $this->db->query($consulta);         
+        return $sql->result_array();  
+    }    
 } 
 

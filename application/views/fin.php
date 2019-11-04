@@ -8,6 +8,7 @@
          <script src="<?php base_url()?>/js/scripts_log_menu.js"></script>
          <script src="<?php base_url()?>/js/scripts_log_usuarios.js"></script>
          <script src="<?php base_url()?>/js/scripts_prueba.js"></script>
+         <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <!--        <script src="<?php base_url()?>/js/validarformulario.js"></script>-->
         <footer>
             <div class="footer-padre">

@@ -80,8 +80,14 @@ $(document).ready(function() {
             $('#list_users').find("tbody").find("tr[aria-selected=true]").find("td:first").each(function(){
                 id+=$(this).html()+"\n";
             });
-            $(location).attr('href','http://web/index.php/ficha_usuario?id='+id);           
+            if (id != '') {
+                $(location).attr('href','http://web/index.php/ficha_usuario?id='+id);  
+            } else {
+//                alert("Selecciona un usuario para ver su ficha");
+                swal("Oops!", "Debes selecciona un usuario para ver su ficha!", "info");
+            }
         }, 
         position:"last"
      }); 
 });
+

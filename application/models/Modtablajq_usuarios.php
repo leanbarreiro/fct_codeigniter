@@ -24,7 +24,7 @@ class Modtablajq_usuarios extends CI_Model {
      */
     public function getDatosActuales($id, $tabla) {
         
-        $consulta = "SELECT * FROM ".$tabla." WHERE user_id =".$id;
+        $consulta = "SELECT first_name, last_name, email, nivel FROM ".$tabla." WHERE user_id =".$id;
         $sql = $this->db->query($consulta);
              
         return $sql->result_array();  

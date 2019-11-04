@@ -64,7 +64,19 @@ class Adminjq extends MY_Controller {
         } elseif ($search === "false") {  
             
             // Pedimos los datos a la db
-            $sql = $this->Modtablajq->getTabla($sidx, $sord, $start, $limite);          
+            $sql = $this->Modtablajq->getTabla($sidx, $sord, $start, $limite);
+            
+            /**Uso de la función general de consultas
+            $sql = $this->Modtablajq->generalSelect($colum=['id', 'nombre', 'url', 'descripcion', 'acceso', 'habilitado'], 
+                                                    "menu", 
+                                                    true, 
+                                                    "habilitado = 1", 
+                                                    true, 
+                                                    $order=[$sidx, $sord], 
+                                                    true, 
+                                                    $limit=[$start, $limite]);
+            */
+
             //Consultamos el número de items
             $numitems = $this->Modtablajq->getNumItems();
             $count = $numitems[0]['count'];                                 
@@ -88,7 +100,7 @@ class Adminjq extends MY_Controller {
             $respuesta->rows[$key]['id'] = $row["id"];
             $respuesta->rows[$key]['cell'] = array($row["id"],$row["nombre"],$row["url"],$row['descripcion'],$row['acceso']);
         }
-                     
+          
        //Códificamos a JSON
         echo json_encode($respuesta);
     }
@@ -120,14 +132,19 @@ class Adminjq extends MY_Controller {
            case 'edit':
                
                $arraydatosold = $this->Modtablajq->getDatosActuales($arraypost['id'],'menu');
+               
+               $diferencia = array_diff($arraydatosold[0], $arraypost);
+               
+               if (!empty($diferencia)) {
 
-                if ($this->Modtablajq->editTablaMenu($arraypost)) {
-                    
-                    //LOG - creamos una instancia del objeto 'datos_log' y enviamos los datos a la función de añadir en la tabla.
-                    $datlog = new datos_log($this->session->user_data['email'], 'Tabla: "menu"', 'UPDATE', $this->input->post());
-                    $this->Log_menu_model->addTablaLogMenu($datlog, $arraydatosold);
-                }   
-                break;
+                    if ($this->Modtablajq->editTablaMenu($arraypost)) {
+
+                        //LOG - creamos una instancia del objeto 'datos_log' y enviamos los datos a la función de añadir en la tabla.
+                        $datlog = new datos_log($this->session->user_data['email'], 'Tabla: "menu"', 'UPDATE', $this->input->post());
+                        $this->Log_menu_model->addTablaLogMenu($datlog, $arraydatosold);
+                    } 
+               }
+               break;
            case 'del':
                
                $arraydatosold = $this->Modtablajq->getDatosActuales($arraypost['id'],'menu');
@@ -239,13 +256,17 @@ class Adminjq extends MY_Controller {
                
                 $arraydatosold = $this->Modtablajq_usuarios->getDatosActuales($id,'usuarios');
                
-                if ($this->Modtablajq_usuarios->editTablaUsers($arraypost, $id)) {
-                    
-                    //LOG - creamos una instancia del objeto 'datos_log' y enviamos los datos a la función de añadir en la tabla.
-                    $datlog = new datos_log($this->session->user_data['email'], 'Tabla: "usuarios"', 'UPDATE', $this->input->post());
-                    $this->Log_usuarios_model->addTablaLogUsuarios($datlog, $arraydatosold);
-                }
-                 
+               $diferencia = array_diff($arraydatosold[0], $arraypost);
+               
+               if (!empty($diferencia)) {
+               
+                    if ($this->Modtablajq_usuarios->editTablaUsers($arraypost, $id)) {
+
+                        //LOG - creamos una instancia del objeto 'datos_log' y enviamos los datos a la función de añadir en la tabla.
+                        $datlog = new datos_log($this->session->user_data['email'], 'Tabla: "usuarios"', 'UPDATE', $this->input->post());
+                        $this->Log_usuarios_model->addTablaLogUsuarios($datlog, $arraydatosold);
+                    }
+               }
                  break;
            case 'del':
                

@@ -38,6 +38,12 @@ class Ficha_usuario extends MY_Controller {
         $str =   $this->load->view('ficha_usuario', $datosusu, TRUE);
 
         $this->cargaTemplate($str);
+        
+        //Controlamos si el usuario selecciona un archivo
+        $error = $this->input->get('error');
+        if ($error === 'true') {
+           echo '<script>  swal("Oops!", "Debes selecciona un archivo!", "info"); </script>';
+        }
     }
     
     public function cargar_archivo() {
@@ -64,7 +70,8 @@ class Ficha_usuario extends MY_Controller {
             
             //error
 //            $data['error'] = $this->upload->display_errors();
-            echo $this->upload->display_errors();
+//            echo $this->upload->display_errors();
+            redirect('Ficha_usuario?id='.$post['user_id'].'&error=true');
             
             return;
         } else {

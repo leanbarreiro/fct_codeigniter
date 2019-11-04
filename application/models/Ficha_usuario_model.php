@@ -69,7 +69,7 @@ class Ficha_usuario_model extends CI_Model {
             echo "Error: al intentar guardar en la base de datos";
         }
         
-         redirect('adminjq');
+         redirect('Ficha_usuario?id='.$post['user_id']);
     }
     
     
