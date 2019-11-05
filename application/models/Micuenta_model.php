@@ -3,13 +3,13 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 /**
- * Modelo de Micuenta
+ * Modelo de MiCuenta
  * @package CI_Model
- * @subpackage Micuenta_model
+ * @subpackage MiCuenta_model
  * @author Lebauz
  */
 
-class Micuenta_model extends CI_Model { 
+class MiCuenta_model extends CI_Model { 
     
     /**
      * @param String $newpass

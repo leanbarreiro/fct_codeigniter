@@ -2,13 +2,13 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 /**
- * Controlador de Micuenta
+ * Controlador de MiCuenta
  * @package My_Controller
- * @subpackage Micuenta
+ * @subpackage MiCuenta
  * @author Lebauz
  */
 
-class Micuenta extends MY_Controller { 
+class MiCuenta extends MY_Controller { 
    
 
     public function index() {
@@ -24,7 +24,7 @@ class Micuenta extends MY_Controller {
      */
     public function cambiarpass() {
         
-        $this->load->model('Micuenta_model');
+        $this->load->model('MiCuenta_model');
         
         $datos = $this->input->post();
         
@@ -33,7 +33,7 @@ class Micuenta extends MY_Controller {
                 AND strlen($datos['newpass'])>=6 ) { //Comprobamos que el pass coincida con el campo "repetir" y 
                                                         //que la contraseña nueva no venga vacía y que tenga almenos 8 caracteres.
             $newpass = $datos['newpass'];
-            $this->Micuenta_model->changepass($newpass);                  
+            $this->MiCuenta_model->changepass($newpass);                  
             $this->session->set_flashdata('repassok', 'bien');
             redirect('micuenta');
         } else {
