@@ -1,17 +1,17 @@
 <?php
-    
+
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 /**
  * Modelo de tabla con jqgrid
  * @package CI_Model
- * @subpackage Modtablajq
+ * @subpackage LogMenu_model
  * @author Lebauz
  */
-class Log_menu_model extends CI_Model {
+class LogUsuarios_model extends CI_Model {
     
     public function __construct() {
-        parent::__construct();       
+        parent::__construct();     
     }
     
     /** Consulta el último id registrado
@@ -23,13 +23,12 @@ class Log_menu_model extends CI_Model {
     */
     public function getUltimoId($tabla) {
 
-        $consulta = "SELECT MAX(id)+1 as id FROM ".$tabla;
-        //        $consulta = "select last_insert_id() as id";
+        $consulta = "SELECT MAX(user_id)+1 as id FROM ".$tabla;
+//        $consulta = "select last_insert_id() as id";
         $sql = $this->db->query($consulta);
-
+             
         return $sql->result_array();  
     }
-    
     
     /** Descarga datos de la tabla Menu
      * @param String $sidx
@@ -39,20 +38,21 @@ class Log_menu_model extends CI_Model {
      * @return Array de Strings
      * Consulta a la db los datos para el menú     
      */
-    public function getTablaLogMenu($sidx, $sord, $start, $limit) { 
-
-        //Pedimos los datos junto a una sub-consulta para que nos devuelva el nombre del usuario        
-        $consulta = "SELECT id, usuario, seccion, accion, cambios, fecha FROM log_menu ORDER BY ".$sidx.' '.$sord.' LIMIT '.$start.' , '.$limit.'';
-
-/**Consulta 
-        $consulta = "SELECT log_menu.id, usuarios.email as usuario, log_menu.seccion, log_menu.accion, log_menu.cambios, log_menu.fecha 
-                       FROM log_menu 
-                       LEFT JOIN usuarios ON log_menu.id_usuario = usuarios.user_id
-                       ORDER BY ".$sidx.' '.$sord.' LIMIT '.$start.' , '.$limit.'';*/
-
+    public function getTablaLogUsuarios($sidx, $sord, $start, $limit) { 
+        
+        //Pedimos los datos junto a una sub-consulta para que nos devuelva el nombre del usuario
+        $consulta = "SELECT id, usuario, seccion, accion, cambios, fecha FROM log_usuarios ORDER BY ".$sidx.' '.$sord.' LIMIT '.$start.' , '.$limit.'';
+        
+/**Consulta
+        $consulta = "SELECT log_usuarios.id, usuarios.email as usuario, log_usuarios.seccion, log_usuarios.accion, log_usuarios.cambios, log_usuarios.fecha 
+                        FROM log_usuarios 
+                        INNER JOIN usuarios ON log_usuarios.id = usuarios.user_id
+                        ORDER BY ".$sidx.' '.$sord.' LIMIT '.$start.' , '.$limit.'';
+ */
+    
         $sql = $this->db->query($consulta);
              
-        return $sql->result_array();       
+        return $sql->result_array();
     }
     
      /** Consulta el número de items totales
@@ -60,9 +60,9 @@ class Log_menu_model extends CI_Model {
      * @return Array de Strings
      * Consulta a la db el número de items del  menú     
      */
-    public function getNumItemsLogMenu() {
+    public function getNumItemsLogUsuarios() {
 
-        $sql = $this->db->query('SELECT COUNT(*) AS count FROM log_menu');
+        $sql = $this->db->query('SELECT COUNT(*) AS count FROM log_usuarios');
                
         return $sql->result_array();
     }
@@ -76,10 +76,10 @@ class Log_menu_model extends CI_Model {
      * @return Array de Strings
      * Consulta a la db un items con ciertas caracteristicas     
      */
-    public function getSearchLogMenu($sField, $sString, $sOper) {       
+    public function getSearchLogUsuarios($sField, $sString, $sOper) {       
         
         //Se guarda la consulta en consulta
-        $consulta = 'SELECT id, usuario, seccion, accion, cambios, fecha FROM log_menu WHERE';
+        $consulta = 'SELECT id, usuario, seccion, accion, cambios, fecha FROM log_usuarios WHERE';
         $consulta .= ' '.(strtolower($sField)).' ';
         
         //Controlamos el operador que nos envía la tabla
@@ -131,22 +131,47 @@ class Log_menu_model extends CI_Model {
         return $sql->result_array();
     }
     
-     /** Añade un registro a la tabla log_menu.
+     /** Añade un item a la db.
      * @param Array $newd 
      * @return 
      * Añade a la db     
      */
-    public function addTablaLogMenu($newd, $oldd) {
+     
+    public function addTablaLogUsuarios($newd, $oldd) {
         
         $usuario = $newd->__get('usuario');
         $seccion = $newd->__get('seccion');
-        $accion = $newd->__get('accion');   
+        $accion = $newd->__get('accion');
         $cambios = formatear_respuesta($newd->__get('cambios'), $accion, $oldd);
         
-        $idusuario = "(SELECT user_id FROM usuarios WHERE email = "."'".$usuario."'".")";      
+        $idusuario = "(SELECT user_id FROM usuarios WHERE email = "."'".$usuario."'".")";
         
-        $sql = "INSERT INTO log_menu (usuario, seccion, accion, cambios, id_usuario) VALUES ( '".$usuario."' ,'".$seccion."','".$accion."','".$cambios."',".$idusuario." )";
-        $this->db->query($sql);
-        
+        $sql = "INSERT INTO log_usuarios (usuario, seccion, accion, cambios, id_usuario) VALUES ( '".$usuario."' ,'".$seccion."','".$accion."','"
+                                                                                                                    .$cambios."',".$idusuario." )";
+        $this->db->query($sql);      
     }
+    
+        
+     /** Añade un regitro a la tabla de log del usuario.
+     * @param Object $datalog  datos del log
+     * @param Array $data  datos del archivo
+     * @return .    
+     */
+    public function addTablaLogUsuarioFicha($datalog, $data) {
+        
+        $usuario = $datalog->__get('usuario');
+        $seccion = $datalog->__get('seccion');
+        $accion = $datalog->__get('accion');
+        $datos = $datalog->__get('cambios');
+        $cambios = "id_usu:".$datos['user_id']."||nom_original:".$data['success']['client_name'].">nombre:"
+                                    .$data['success']['file_name']."||ruta:".$data['success']['full_path'];
+        
+        $idusuario = "(SELECT user_id FROM usuarios WHERE email = "."'".$usuario."'".")";
+        
+        $sql = "INSERT INTO log_usuarios (usuario, seccion, accion, cambios, id_usuario) VALUES ( '".$usuario."' ,'".$seccion."','".$accion."','"
+                                                                                                                    .$cambios."',".$idusuario." )";
+        $this->db->query($sql);      
+    }
+    
+
 } 

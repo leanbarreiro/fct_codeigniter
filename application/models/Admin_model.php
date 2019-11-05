@@ -5,11 +5,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 /**
  * Modelo de tabla
  * @package CI_Model
- * @subpackage Modtabla
+ * @subpackage Admin_model
  * @author Lebauz
  */
 
-class Modtabla extends CI_Model {
+class Admin_model extends CI_Model {
     
     public function __construct() {
         parent::__construct();

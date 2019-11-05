@@ -5,10 +5,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 /**
  * Modelo de tabla con jqgrid
  * @package CI_Model
- * @subpackage Modtablajq
+ * @subpackage Usuarios_model
  * @author Lebauz
  */
-class Modtablajq_usuarios extends CI_Model {
+class Usuarios_model extends CI_Model {
     
     protected $tabla = 'usuarios';
     protected $fields = ['user_id', 'first_name', 'last_name', 'email', 'nivel', 'ultimo_archivo_subido'];

@@ -4,10 +4,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 /**
  * Controlador de Ficha de usuario
  * @package My_Controller
- * @subpackage Ficha_usuario
+ * @subpackage FichaUsuario
  * @author Lebauz
  */
-class Ficha_usuario extends MY_Controller {
+class FichaUsuario extends MY_Controller {
     
     
     public function __construct() {
@@ -16,24 +16,21 @@ class Ficha_usuario extends MY_Controller {
         //CARGA DE LIBRERIAS
         $this->load->helper(array('form', 'url'));
         $this->load->library('form_validation');
-        $this->load->model('Ficha_usuario_model');
+        $this->load->model('FichaUsuario_model');
     }
     
-    public function index()	{
+    public function index() {
     
         $id = $this->input->get('id');
 
-        $datos = $this->Ficha_usuario_model->getDatosUsuario($id);
+        $datos = $this->FichaUsuario_model->getDatosUsuario($id);
         
-        $datosusu = array('user_id' => $datos[0]['user_id'], 
+        $datosusu = array(  'user_id' => $datos[0]['user_id'], 
                             'first_name' => $datos[0]['first_name'], 
                             'last_name' => $datos[0]['last_name'],
                             'email' => $datos[0]['email'], 
                             'nivel' => $datos[0]['nivel'], 
-                            'habilitado' => $datos[0]['habilitado']);
-        
-//        $this->cargarRepoUsuario($datosusu['user_id']);
-//       $this->session->set_flashdata('id_usuario', $id );
+                            'habilitado' => $datos[0]['habilitado'] );
             
         $str =   $this->load->view('ficha_usuario', $datosusu, TRUE);
 
@@ -44,19 +41,23 @@ class Ficha_usuario extends MY_Controller {
         if ($error === 'true') {
            echo '<script>  swal("Oops!", "Debes selecciona un archivo!", "info"); </script>';
         }
-    }
+    } 
     
-    public function cargar_archivo() {
+    /**Sube un archivo al servidor en la carpeta updates/id del usuario.
+    * @param
+    * @return 
+    */
+    public function subirArchivo() {
         
         $post = $this->input->post();
         $mi_archivo = 'mi_archivo';
         $config['upload_path'] = 'updates/'.$post['user_id'].'/';
         $config['file_name'] = RandomString();
         $config['allowed_types'] = 'pdf|odt|docx';
-//        $config['remove_spaces']=TRUE;
+        //Removemos espacios que pueda poner el usuario
+        $config['remove_spaces']=TRUE;
         $config['max_size'] = 2048;
 
-        
         $ruta = 'updates/'.$post['user_id'].'/';
         
         if(!file_exists($ruta)){
@@ -71,7 +72,7 @@ class Ficha_usuario extends MY_Controller {
             //error
 //            $data['error'] = $this->upload->display_errors();
 //            echo $this->upload->display_errors();
-            redirect('Ficha_usuario?id='.$post['user_id'].'&error=true');
+            redirect('FichaUsuario?id='.$post['user_id'].'&error=true');
             
             return;
         } else {
@@ -79,9 +80,7 @@ class Ficha_usuario extends MY_Controller {
             $data['success'] = $this->upload->data();
                       
         }
-        
-        $this->Ficha_usuario_model->AddArchivoUsuario($data, $post);
-        
+        $this->FichaUsuario_model->AddArchivoUsuario($data, $post);
     }
     
     /**Carga los datos en la tabla de archivos por usuario.
@@ -115,7 +114,7 @@ class Ficha_usuario extends MY_Controller {
             $sOper = $this->input->get('searchOper', TRUE);
             
             //Pedimos los datos a la db
-            $sql = $this->Ficha_usuario_model->getItemsSearchFiles($sField,$sString,$sOper, $id);
+            $sql = $this->FichaUsuario_model->getItemsSearchFiles($sField,$sString,$sOper, $id);
             //Calculamos el número de items
             $count = count($sql);
 
@@ -123,9 +122,9 @@ class Ficha_usuario extends MY_Controller {
         } elseif ($search === "false") {  
             
             //Pedimos los datos a la db
-            $sql = $this->Ficha_usuario_model->getTablaFiles($sidx, $sord, $start, $limite, $id);          
+            $sql = $this->FichaUsuario_model->getTablaFiles($sidx, $sord, $start, $limite, $id);          
             //Consultamos el número de items
-            $numitems = $this->Ficha_usuario_model->getNumItemsFiles($id);
+            $numitems = $this->FichaUsuario_model->getNumItemsFiles($id);
             $count = $numitems[0]['count'];                                 
         } 
 
@@ -153,12 +152,17 @@ class Ficha_usuario extends MY_Controller {
     
     }
     
+    
+    /**Abre un archivo de tipo pdf en el navegador
+    * @param
+    * @return 
+    */
     public function mostrarPdf() {
         
         $id_archivo = $this->input->get('id', TRUE);
         $idusu = $this->input->get('idusu', TRUE);
         
-        $nombre = $this->Ficha_usuario_model->getNombreFile($id_archivo);
+        $nombre = $this->FichaUsuario_model->getNombreFile($id_archivo);
         $ruta = 'C:/web/updates/'.$idusu.'/'.$nombre[0]['nombre'];
         
         header('Content-type: application/pdf');    

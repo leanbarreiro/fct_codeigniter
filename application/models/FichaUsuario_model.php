@@ -5,18 +5,19 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 /**
  * Modelo de tabla con jqgrid
  * @package CI_Model
- * @subpackage Modtablajq
+ * @subpackage FichaUsuario_model
  * @author Lebauz
  */
-class Ficha_usuario_model extends CI_Model {
+class FichaUsuario_model extends CI_Model {
     
     protected $tabla = 'usuarios';
     protected $fields = ['user_id', 'first_name', 'last_name', 'email', 'nivel', 'habilitado', 'ultimo_archivo_subido'];
      
     public function __construct() {
-        parent::__construct(); 
+        parent::__construct();
+        
         //Cargamos el modelo del log de usuarios
-        $this->load->model('Log_usuarios_model');
+        $this->load->model('LogUsuarios_model');
     }
     
      /** Consulta los datos del usuario
@@ -50,26 +51,25 @@ class Ficha_usuario_model extends CI_Model {
             }
         
 
-/** Update para modificar usuario desde la ficha       
-        $sql_usuarios = "UPDATE ".$this->tabla." SET first_name = '" .$post["first_name"]. "', last_name ='" .$post["last_name"]. 
-            "', email ='" .$post["email"]. "', nivel ='" .$post["nivel"]. "', habilitado ='" .$post["habilitado"]. 
-            "', ultimo_archivo_subido ='" .$data["success"]['client_name']."' Where user_id = " .$post['user_id'];
-**/
+        /** Update para modificar usuario desde la ficha       
+                $sql_usuarios = "UPDATE ".$this->tabla." SET first_name = '" .$post["first_name"]. "', last_name ='" .$post["last_name"]. 
+                    "', email ='" .$post["email"]. "', nivel ='" .$post["nivel"]. "', habilitado ='" .$post["habilitado"]. 
+                    "', ultimo_archivo_subido ='" .$data["success"]['client_name']."' Where user_id = " .$post['user_id'];
+        **/
         
         //Realizamos el update en la tabla de usuarios para registrar el nombre del ultimo archivo subido.
         $sql_usuarios = "UPDATE ".$this->tabla." SET ultimo_archivo_subido ='" .$data["success"]['client_name']."' Where user_id = " .$post['user_id'];
         
         $this->db->query($sql_usuarios);
-        
-        
+
         //LOG - creamos una instancia del objeto 'datos_log' y enviamos los datos a la función de añadir en la tabla.
         $datlog = new datos_log($this->session->user_data['email'], 'Tabla: "usuarios/ficha_usuario"', 'UPDATE', $this->input->post());
-        $this->Log_usuarios_model->addTablaLogUsuarioFicha($datlog, $data);
+        $this->LogUsuarios_model->addTablaLogUsuarioFicha($datlog, $data);
         } else {
             echo "Error: al intentar guardar en la base de datos";
         }
         
-         redirect('Ficha_usuario?id='.$post['user_id']);
+        redirect('FichaUsuario?id='.$post['user_id']);
     }
     
     
@@ -163,6 +163,10 @@ class Ficha_usuario_model extends CI_Model {
         return $sql->result_array();   
     }
     
+     /** Consulta el nombre de un archivo pdf por id
+     * @param String $id
+     * @return Array de Strings   
+     */
     public function getNombreFile($id) {
         $consulta = "SELECT nombre FROM archivo WHERE id_archivo = ".$id;
         $sql = $this->db->query($consulta);

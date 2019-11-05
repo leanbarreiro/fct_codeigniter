@@ -5,10 +5,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 /**
  * Modelo de tabla con jqgrid
  * @package CI_Model
- * @subpackage Modtablajq
+ * @subpackage Adminjq_model
  * @author Lebauz
  */
-class Modtablajq extends CI_Model {
+class Adminjq_model extends CI_Model {
     
     protected $tabla = 'menu';
     protected $fields = ['id', 'nombre', 'url', 'descripcion', 'acceso', 'habilitado'];

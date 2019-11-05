@@ -4,11 +4,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 /**
  * Controlador de Servicios
  * @package My_Controller
- * @subpackage Nuestros_servicios
+ * @subpackage NuestrosServicios
  * @author Lebauz
  */
 
-class Nuestros_servicios extends MY_Controller {
+class NuestrosServicios extends MY_Controller {
     
   
     public function index() {
@@ -23,9 +23,9 @@ class Nuestros_servicios extends MY_Controller {
 //
 //
 //        ///MENÚ
-//        $this->load->model("Modmenu");
+//        $this->load->model("Menu_model");
 //        $this->load->view('vcabmenu'); 
-//        $data=$this->Modmenu->mGetMenuItem();
+//        $data=$this->Menu_model->mGetMenuItem();
 //
 //        foreach ($data as $value) {
 //            $datos = array('Nombre' => $value['nombre'], 'Url' => $value['url']);

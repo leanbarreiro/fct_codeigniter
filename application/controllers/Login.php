@@ -65,8 +65,8 @@ class Login extends CI_Controller {
         
          //LOG - creamos una instancia del objeto 'datos_log' y enviamos los datos a la función de añadir en la tabla.
         $datlog = new datos_log($this->session->user_data['email'], 'Login', 'LOGOUT', $this->input->post());
-        $this->load->model('Log_usuarios_model');
-        $this->Log_usuarios_model->addTablaLogUsuarios($datlog, "");
+        $this->load->model('LogUsuarios_model');
+        $this->LogUsuarios_model->addTablaLogUsuarios($datlog, "");
         
         redirect('login');
     }

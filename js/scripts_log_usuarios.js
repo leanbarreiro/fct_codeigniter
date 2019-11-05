@@ -4,7 +4,7 @@
 /***USUARIOS***/
 $("#listlogusuarios").jqGrid({
 
-    url: 'log_usuarios/cargarDatosLogUsuarios',
+    url: 'logusuarios/cargarDatosLogUsuarios',
     datatype: 'json',
     height: '100%',
     colNames:['Id','Usuario', 'Seccion', 'Accion', 'Cambios', 'Fecha'],

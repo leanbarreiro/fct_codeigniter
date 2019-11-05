@@ -31,7 +31,7 @@ $(document).ready(function() {
     
     //Llamamos al 'navigator' y le pasamos las opciones en cada caso especifico
     $("#list").jqGrid('navGrid','#pager',
-        {edit:false,del:false},                                                                 //optiones generales
+        {edit:false,del:false},                                             //optiones generales
         {height:290,reloadAfterSubmit:true,closeAfterEdit:false},           //opc. de edición
         {height:290,reloadAfterSubmit:true,closeAfterAdd:true},             //opc. de añadido
         {width: 460,height:260,reloadAfterSubmit:true},                     //opc. de borrado
@@ -81,7 +81,7 @@ $(document).ready(function() {
                 id+=$(this).html()+"\n";
             });
             if (id != '') {
-                $(location).attr('href','http://web/index.php/ficha_usuario?id='+id);  
+                $(location).attr('href','http://web/index.php/fichausuario?id='+id);  
             } else {
 //                alert("Selecciona un usuario para ver su ficha");
                 swal("Oops!", "Debes selecciona un usuario para ver su ficha!", "info");

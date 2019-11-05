@@ -5,11 +5,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 /**
  * Modelo del Menú
  * @package CI_Model
- * @subpackage Modmenu
+ * @subpackage Menu_model
  * @author Lebauz
  */
 
-class Modmenu extends CI_Model {
+class Menu_model extends CI_Model {
     
     public function __construct() {
         parent::__construct();

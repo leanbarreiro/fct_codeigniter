@@ -23,9 +23,9 @@ class Tienda extends MY_Controller {
 //
 //
 //        ///MENÚ/
-//        $this->load->model("Modmenu");
+//        $this->load->model("Menu_model");
 //        $this->load->view('vcabmenu'); 
-//        $data=$this->Modmenu->mGetMenuItem();
+//        $data=$this->Menu_model->mGetMenuItem();
 //
 //        foreach ($data as $value) {
 //            $datos = array('Nombre' => $value['nombre'], 'Url' => $value['url']);

@@ -4,7 +4,7 @@
 /***MENU***/
 $("#listlogmenu").jqGrid({
 
-    url: 'log_menu/cargarDatosLogMenu',
+    url: 'logmenu/cargarDatosLogMenu',
     datatype: 'json',
     height: '100%',
     colNames:['Id','Usuario', 'Seccion', 'Accion', 'Cambios', 'Fecha'],

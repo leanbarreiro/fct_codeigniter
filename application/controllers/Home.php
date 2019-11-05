@@ -18,8 +18,8 @@ class Home extends MY_Controller {
         
         ///>LOG
         $datlog = new datos_log($this->session->user_data['email'], 'Login', 'LOGIN', $this->input->post());
-        $this->load->model('Log_usuarios_model');
-        $this->Log_usuarios_model->addTablaLogUsuarios($datlog, "");
+        $this->load->model('LogUsuarios_model');
+        $this->LogUsuarios_model->addTablaLogUsuarios($datlog, "");
         
         
         $this->cargaTemplate($str);
@@ -30,9 +30,9 @@ class Home extends MY_Controller {
 //            
 //            
 //            //MENÚ
-//            $this->load->model('Modmenu');
+//            $this->load->model('Menu_model');
 //            $this->load->view('vcabmenu'); 
-//            $data=$this->Modmenu->mGetMenuItem();
+//            $data=$this->Menu_model->mGetMenuItem();
 //
 //            foreach ($data as $value) {
 //

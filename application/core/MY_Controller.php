@@ -46,9 +46,9 @@ class MY_CONTROLLER extends CI_Controller {
         echo $this->load->view('vhcabecera','',true);  
                 
         //MENÚ
-        $this->load->model('Modmenu');
+        $this->load->model('Menu_model');
         echo $this->load->view('vcabmenu','',true); 
-        $data=$this->Modmenu->mGetMenuItem();
+        $data=$this->Menu_model->mGetMenuItem();
 
         foreach ($data as $value) {
 
@@ -70,19 +70,19 @@ class MY_CONTROLLER extends CI_Controller {
         $deleteok = $this->session->flashdata('deleteok');
         $repassok = $this->session->flashdata('repassok');
         if($addok == 'bien') {
-            $this->load->view('alertaadd');           
+            $this->load->view('alertas/alertaadd');           
         }
         if($updateok == 'bien') {               
-            $this->load->view('alertaupdate');           
+            $this->load->view('alertas/alertaupdate');           
         }
         if($deleteok == 'bien') {
-            $this->load->view('alertadelete');           
+            $this->load->view('alertas/alertadelete');           
         }
         if($repassok == 'mal') {
-            $this->load->view('alertapassdiferentes');           
+            $this->load->view('alertas/alertapassdiferentes');           
         }
         if($repassok == 'bien') {
-            $this->load->view('alertapassiguales');           
+            $this->load->view('alertas/alertapassiguales');           
         }
 /*********************************************************/
 

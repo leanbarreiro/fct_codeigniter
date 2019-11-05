@@ -4,7 +4,7 @@
 document.addEventListener("DOMContentLoaded", function(event) { 
    $("#list_fichausuario").jqGrid({
 
-             url: 'ficha_usuario/cargarRepoUsuario?id=<?php echo($user_id);?>',
+             url: 'fichausuario/cargarRepoUsuario?id=<?php echo($user_id);?>',
              datatype: 'json',
              colNames:['Id','Nombre','Nombre Original', 'Tipo', 'Ruta', 'Tamaño','Fecha', 'Accion'],
              colModel:[
@@ -21,8 +21,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
                  var ids = jQuery("#list_fichausuario").jqGrid('getDataIDs');
                  for (var i = 0; i < ids.length; i++) {
                      var cl =  ids[i]; 
-                     btnfile = '<input class="btn-small" style="height:90%; width:90%;" name="btn'+cl+'" type="submit" value="Abrir" onclick=\"window.location=\'http://web/index.php/ficha_usuario/mostrarPdf?id='+cl+'&idusu=<?php echo($user_id);?>\'\"  />';                              
-//                     btnfile = '<input class="btn-small" style="height:90%; width:90%;" id="" name="'+cl+'" type="button" value="Abrir" onclick=\"<?php //$this->mostrarPdf();?>\"  />';                              
+                     btnfile = '<input class="btn-small" style="height:90%; width:90%;" name="btn'+cl+'" type="submit" value="Abrir" onclick=\"window.location=\'http://web/index.php/fichausuario/mostrarPdf?id='+cl+'&idusu=<?php echo($user_id);?>\'\"  />';                              
                      jQuery("#list_fichausuario").jqGrid('setRowData',ids[i],{accion:btnfile});
                  }
              },
@@ -43,7 +42,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 <section>
    <div class="form-usu">
         <div class="fcontenido">
-             <form action="ficha_usuario/cargar_archivo" method="post" enctype="multipart/form-data">
+             <form action="fichausuario/subirArchivo" method="post" enctype="multipart/form-data">
             <h2 class="ficha_title">Ficha de Usuario</h2>
             <ul class="wrapper">
                 <li class="form-row">
