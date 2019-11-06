@@ -68,7 +68,7 @@ class FichaUsuario_model extends CI_Model {
         } else {
             echo "Error: al intentar guardar en la base de datos";
         }
-        
+        //Una vez guardado redirijimos a la ficha del usuario, pasando por get el id del mismo.
         redirect('FichaUsuario?id='.$post['user_id']);
     }
     
