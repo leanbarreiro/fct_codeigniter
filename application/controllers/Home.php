@@ -7,7 +7,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @subpackage Home
  * @author Lebauz
  */
-
 class Home extends MY_Controller { 
     
 
