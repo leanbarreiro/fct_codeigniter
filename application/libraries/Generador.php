@@ -32,14 +32,14 @@ class Generador {
         $this->prepararDirectorioDeSalida();
         $this->nombreDeLaBaseDeDatos = $nombreDeLaBaseDeDatos;
         $this->bd = new PDO("mysql:host=$host;dbname=$nombreDeLaBaseDeDatos", $usuario, $pass);
-        $this->tablasAIgnorar = [];
+//        $this->tablasAIgnorar = [];
     }
     
-    #Set de tablas a ignorar
-    public function setTablasAIgnorar($tablas) {
-        
-        $this->tablasAIgnorar = $tablas;
-    }
+//    #Set de tablas a ignorar
+//    public function setTablasAIgnorar($tablas) {
+//        
+//        $this->tablasAIgnorar = $tablas;
+//    }
     
     /** Genera las clases
     * @param 
@@ -54,7 +54,7 @@ class Generador {
                 
                 $nombreDelModelo = $this->crearModelo($tabla->nombre);
                 $nombreDelControlador = $this->crearControlador($tabla->nombre, $nombreDelModelo);
-                $this->crearVistaParaMostrarDatos($nombreDelControlador);
+                $this->crearVista($nombreDelControlador);
                 $this->crearVistaDeFormularioParaInsertar($nombreDelControlador);
                 $this->crearVistaDeFormularioParaEditar($nombreDelControlador);
                 echo "OK";
@@ -62,7 +62,7 @@ class Generador {
                 echo "\nIgnorando tabla " . $tabla->nombre;
             }
         }
-    }
+    } /*** FIN generar() ***/
     
     public function crearModelo($nombreDeLaTabla) {
         
@@ -162,7 +162,7 @@ class Generador {
         } else {
             throw new Exception("No se pudo escribir el modelo $nombreDelModelo!");
         }   
-    }
+    } /*** FIN crearModelo() ***/
     
     
     private function crearControlador($nombreDeLaTabla, $nombreDelModelo) {
@@ -184,8 +184,288 @@ class Generador {
                         public function index(){
                             $this->listar(1);
                         }', $nombreDeLaTabla, $nombreDeLaTabla, $nombreDelModelo, $nombreDelModelo);
-  
-    }
+        
+        # Obtener como tabla 
+        $codigo .= sprintf('
+                        public function listar($pagina = 1){
+                            $totalDeFilas = $this->%s->totalDeFilas();
+                            $paginas = ceil( $totalDeFilas / DATOS_MOSTRAR_POR_PAGINA);
+                            $this->load->view("encabezado");
+                            $this->load->view("%s",
+                                [
+                                    "titulo" => "%s",
+                                    "datos" => $this->%s->obtener($pagina),
+                                    "paginaActual" => $pagina,
+                                    "paginas" => $paginas,
+                                ]
+                            );
+                            $this->load->view("pie");
+                        }', $nombreDelModelo, $nombreDeLaTabla, ucfirst($nombreDeLaTabla), $nombreDelModelo);
+
+        # Obtener como JSON
+        $codigo .= sprintf('
+                        public function json($pagina = 1){
+                            echo json_encode($this->%s->obtener($pagina), JSON_NUMERIC_CHECK);
+                        }', $nombreDelModelo);
+
+        $argumentos = "";
+        $argumentosUpdate = "";
+        $arrayUpdate = "";
+        $arrayInsert = "";
+
+        $columnas = $this->obtenerColumnasDeTabla($nombreDeLaTabla);
+        $numeroDeColumnas = count($columnas);
+        foreach ($columnas as $indice => $columna) {
+            $arrayUpdate .= sprintf('$this->input->post("%s")', $columna);
+            if ($columna !== self::NOMBRE_COL_LLAVE_PRIMARIA) {
+                $argumentos .= '$' . $columna;
+                $arrayInsert .= sprintf('$this->input->post("%s")', $columna);
+                if ($indice < $numeroDeColumnas - 1) {
+                    $arrayInsert .= ",
+            ";
+                    $argumentos .= ", ";
+                }
+            }
+            $argumentosUpdate .= '$' . $columna;
+            if ($indice < $numeroDeColumnas - 1) {
+                $argumentosUpdate .= ", ";
+                $arrayUpdate .= ",
+            ";
+            }    
+        }
+        
+        $nombreDeArchivo = $this->directorioDeSalida . "/controllers/" . ucfirst($nombreDeLaTabla) . ".php";
+        $bytesEscritos = file_put_contents($nombreDeArchivo, $codigo);
+        if ($bytesEscritos !== false) {
+            return $nombreDeLaTabla;
+        } else {
+            throw new Exception("¡No se pudo escribir el controlador $nombreDeLaTabla!");
+        }  
+        
+    } /*** FIN crearControlador() ***/
     
+    
+    private function crearVista($nombreDeLaTabla) {
+
+/* VISTA        
+        $codigo = "";
+
+        $codigo .= '
+            <h1 class="is-size-1"><?php echo $titulo; ?></h1>';
+        $codigo .= sprintf('
+            <div class="columns">
+                <div class="column">
+                    <a href="<?php echo base_url() ?>index.php/%s/agregar" class="button is-warning">Agregar</a>
+                </div>
+            </div>',
+            $nombreDeLaTabla);
+
+        $columnas = $this->obtenerColumnasDeTabla($nombreDeLaTabla);
+        $numeroDeColumnas = count($columnas);
+
+        $codigo .= '
+
+            <div class="columns">
+                <div class="column">
+                    <table class="table is-bordered is-hoverable">
+                        <thead>
+                            <tr>';
+
+        $encabezado = "";
+
+        foreach ($columnas as $indice => $columna) {
+            $encabezado .= '
+                                <th>' . $columna . '</th>';
+        }
+        // Agregar edit y delete
+        $encabezado .= '
+                                <th>Editar</th>
+                                <th>Eliminar</th>';
+
+        #Concatenar encabezado
+        $codigo .= $encabezado;
+
+        $codigo .= '        </tr>
+                        <thead>
+                        <tbody>
+                        <?php foreach($datos as $dato){ ?>
+                            <tr>';
+        foreach ($columnas as $indice => $columna) {
+            $codigo .= '
+                                <td>';
+            $codigo .= sprintf('
+                                    <?php echo $dato->%s; ?>
+                                </td>', $columna);
+        }
+
+        #Agregar botones
+        $codigo .= sprintf('
+                                <td>
+                                    <a href="<?php echo base_url() . "index.php/%s/editar/" . $dato->id ?>" class="button">
+                                        <span class="icon">
+                                        <i class="fa fa-edit has-text-info"></i>
+                                        </span>
+                                    </a>
+                                </td>
+                                <td>
+                                    <a href="<?php echo base_url() . "index.php/%s/eliminar/" . $dato->id ?>" class="button">
+                                        <span class="icon">
+                                        <i class="fa fa-trash has-text-danger"></i>
+                                        </span>
+                                    </a>
+                                </td>',
+            $nombreDeLaTabla, $nombreDeLaTabla);
+
+        $codigo .= sprintf('
+                            </tr>
+                        <?php } ?>
+                        </tbody>
+                    </table>
+                    <nav class="pagination is-rounded" role="navigation" aria-label="pagination">
+                        <?php if($paginaActual > 1){ ?>
+                            <a href="<?php echo base_url() ?>index.php/%s/listar/<?php echo $paginaActual - 1 ?>" class="pagination-previous">Anterior</a>
+                        <?php } ?>
+                        <?php if($paginaActual < $paginas){ ?>
+                            <a href="<?php echo base_url() ?>index.php/%s/listar/<?php echo $paginaActual + 1 ?>" class="pagination-next">Siguiente</a>
+                        <?php } ?>
+                        <ul class="pagination-list">
+                            <?php for ($numeroDePagina = 1; $numeroDePagina <= $paginas; $numeroDePagina++) { ?>
+                                <li>
+                                    <a href="<?php echo base_url() ?>index.php/%s/listar/<?php echo $numeroDePagina ?>"
+                                       class="pagination-link <?php echo intval($paginaActual) === intval($numeroDePagina) ? "is-current" : "" ?>"
+                                       aria-label="Ir a la página <?php echo $numeroDePagina ?>">
+                                        <?php echo $numeroDePagina ?>
+                                    </a>
+                                </li>
+                            <?php } ?>
+                        </ul>
+                    </nav>
+                </div>
+            </div>', $nombreDeLaTabla, $nombreDeLaTabla, $nombreDeLaTabla);
+        $codigo = sprintf('
+    %s
+    <div class="columns">
+        <div class="column">
+            <?php if (!empty($this->session->flashdata())): ?>
+                <div class="notification <?php echo $this->session->flashdata("clase") ?>">
+                    <?php echo $this->session->flashdata("mensaje") ?>
+                </div>
+            <?php endif; ?>
+        </div>
+    </div>
+    <div class="columns">
+        <div class="column">
+        %s
+        </div>
+    </div>
+',
+            sprintf('<?php
+%s
+?>', $this->encabezadoVista), $codigo); */
+        
+        $nombreDeArchivo = $this->directorioDeSalida . "/views/" . $nombreDeLaTabla . ".php";
+        $bytesEscritos = file_put_contents($nombreDeArchivo, $codigo);
+        if ($bytesEscritos !== false) {
+            return $nombreDeLaTabla;
+        } else {
+            throw new Exception("¡No se pudo escribir la vista $nombreDeLaTabla!");
+        }
+    } /*** FIN crearVista() ***/
+    
+    
+    private function prepararEncabezados() {
+        $this->encabezadoModelo = sprintf('
+        /*
+            Modelo de CodeIgniter generado por un script programado por %s
+            Fecha y hora de generación: %s
+        */
+
+        ', self::AUTOR, $this->fechaYHora);
+
+        $this->encabezadoControlador = sprintf('
+        /*
+            Controlador de CodeIgniter generado por un script programado por %s
+            Fecha y hora de generación: %s
+        */
+
+        ', self::AUTOR, $this->fechaYHora);
+
+        $this->encabezadoVista = sprintf('
+        /*
+            Vista de CodeIgniter generada por un script programado por %s
+            Fecha y hora de generación: %s
+        */
+
+        ', self::AUTOR, $this->fechaYHora);
+    } /*** FIN prepararEncabezados() ***/
+    
+    
+    private function prepararDirectorioDeSalida() {
+        
+        if (is_dir($this->directorioDeSalida)) {
+            $this->eliminarDirectorioYSuContenido($this->directorioDeSalida);
+        }
+        
+        mkdir($this->directorioDeSalida);
+        mkdir($this->directorioDeSalida . "models");
+        mkdir($this->directorioDeSalida . "controllers");
+        mkdir($this->directorioDeSalida . "views");
+        
+    } /*** FIN prepararDirectorioDeSalida() ***/
+    
+    
+    private function obtenerTablasDeLaBaseDeDatos() {
+        
+        return $this
+            ->bd
+            ->query("SELECT table_name AS nombre FROM information_schema.tables WHERE table_schema = '" . $this->nombreDeLaBaseDeDatos . "';")
+            ->fetchAll(PDO::FETCH_OBJ);       
+    } /*** FIN obtenerTablasDeLaBaseDeDatos() ***/
+
+    
+    private function obtenerColumnasDeTabla($tabla) {
+        
+        return $this
+            ->bd
+            ->query("SELECT COLUMN_NAME AS columna
+                FROM information_schema.columns
+                WHERE table_schema = '" . $this->nombreDeLaBaseDeDatos . "'
+                AND TABLE_NAME = '" . $tabla . "'")
+            ->fetchALL(PDO::FETCH_COLUMN);       
+    } /*** FIN obtenerColumnasDeTabla() ***/
+
+    
+   /* public function obtenerColumnasDeTablaParaFormulario($tabla) {
+        
+        return $this
+            ->bd
+            ->query("SELECT COLUMN_NAME AS columna, DATA_TYPE AS tipoDeDato
+                FROM information_schema.columns WHERE table_schema = '" . $this->nombreDeLaBaseDeDatos . "'
+                AND TABLE_NAME = '$tabla'")
+            ->fetchALL(PDO::FETCH_OBJ);    
+    } /*** FIN obtenerColumnasDeTablaParaFormulario() ***/
+
+    private function eliminarDirectorioYSuContenido($directorio) {
+        
+        if (!file_exists($directorio)) {
+            return true;
+        }
+
+        if (!is_dir($directorio)) {
+            return unlink($directorio);
+        }
+
+        foreach (scandir($directorio) as $elementoActual) {
+            if ($elementoActual == '.' || $elementoActual == '..') {
+                continue;
+            }
+
+            if (!$this->eliminarDirectorioYSuContenido($directorio . DIRECTORY_SEPARATOR . $elementoActual)) {
+                return false;
+            }
+
+        }
+        return rmdir($directorio);
+    } /*** FIN eliminarDirectorioYSuContenido() ***/
     
 }
