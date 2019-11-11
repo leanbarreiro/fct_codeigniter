@@ -16,7 +16,7 @@ class Generador {
     private $encabezadoModelo;
     private $encabezadoControlador;
     private $encabezadoVista;
-    private $tablasAIgnorar;
+//    private $tablasAIgnorar;
     
     #Constantes
     const AUTOR = "lebauz";
@@ -35,35 +35,37 @@ class Generador {
 //        $this->tablasAIgnorar = [];
     }
     
-//    #Set de tablas a ignorar
-//    public function setTablasAIgnorar($tablas) {
-//        
-//        $this->tablasAIgnorar = $tablas;
-//    }
+/*    #Set de tablas a ignorar
+    public function setTablasAIgnorar($tablas) {
+        
+        $this->tablasAIgnorar = $tablas;
+    }*/
     
     /** Genera las clases
     * @param 
-    * @return     
+    * @return  String   
     */
     public function generar() {
         
         $tablas = $this->obtenerTablasDeLaBaseDeDatos();
         
         foreach ($tablas as $tabla) {
-            if (!in_array(strtolower($tabla->nombre), $tabla->tablasAIgnorar)) {
+            if (!in_array(strtolower($tabla->nombre))) { 
                 
                 $nombreDelModelo = $this->crearModelo($tabla->nombre);
                 $nombreDelControlador = $this->crearControlador($tabla->nombre, $nombreDelModelo);
                 $this->crearVista($nombreDelControlador);
-                $this->crearVistaDeFormularioParaInsertar($nombreDelControlador);
-                $this->crearVistaDeFormularioParaEditar($nombreDelControlador);
                 echo "OK";
             } else {
                 echo "\nIgnorando tabla " . $tabla->nombre;
             }
         }
     } /*** FIN generar() ***/
-    
+   
+    /** Crea el modelo
+    * @param String $nombreDeLaTabla
+    * @return  String $nombreDelModelo
+    */
     public function crearModelo($nombreDeLaTabla) {
         
         $nombreDeLaTabla = $nombreDeLaTabla.self::SUBFIJO_MODELO;
@@ -165,6 +167,11 @@ class Generador {
     } /*** FIN crearModelo() ***/
     
     
+    /** Crea el controlador
+    * @param String $nombreDeLaTabla
+    * @param String $nombreDelModelo
+    * @return  String $nombreDeLaTabla
+    */
     private function crearControlador($nombreDeLaTabla, $nombreDelModelo) {
         
         $codigo = sprintf("<?php
@@ -245,6 +252,10 @@ class Generador {
     } /*** FIN crearControlador() ***/
     
     
+    /** Crea la vista
+    * @param String $nombreDeLaTabla
+    * @return  String $nombreDeLaTabla
+    */
     private function crearVista($nombreDeLaTabla) {
 
 /* VISTA        
@@ -373,6 +384,10 @@ class Generador {
     } /*** FIN crearVista() ***/
     
     
+    /** Prepara los encabezados para el modelo, el controlador y la vista 
+    * @param 
+    * @return    
+    */
     private function prepararEncabezados() {
         $this->encabezadoModelo = sprintf('
         /*
@@ -400,6 +415,10 @@ class Generador {
     } /*** FIN prepararEncabezados() ***/
     
     
+    /** Prepara y crea el directorio de salida.
+    * @param 
+    * @return    
+    */
     private function prepararDirectorioDeSalida() {
         
         if (is_dir($this->directorioDeSalida)) {
@@ -414,6 +433,10 @@ class Generador {
     } /*** FIN prepararDirectorioDeSalida() ***/
     
     
+    /** Consulta las tablas de la base de datos.
+    * @param 
+    * @return  Object bd 
+    */
     private function obtenerTablasDeLaBaseDeDatos() {
         
         return $this
@@ -423,6 +446,10 @@ class Generador {
     } /*** FIN obtenerTablasDeLaBaseDeDatos() ***/
 
     
+    /** Consulta las columnas de la tabla.
+    * @param String $tabla
+    * @return  Object bd   
+    */
     private function obtenerColumnasDeTabla($tabla) {
         
         return $this
@@ -445,6 +472,13 @@ class Generador {
             ->fetchALL(PDO::FETCH_OBJ);    
     } /*** FIN obtenerColumnasDeTablaParaFormulario() ***/
 
+    
+    /** Elimina los directorios y su contenido.
+    * @param String $directorio
+    * @return  boolean   
+    * @return  continue  
+    * @return  instruccion rmdir($directorio)  
+    */
     private function eliminarDirectorioYSuContenido($directorio) {
         
         if (!file_exists($directorio)) {
